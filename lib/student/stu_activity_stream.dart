@@ -5,6 +5,7 @@ import 'package:virtulab/functions/auth.dart';
 import 'package:virtulab/functions/database.dart';
 import 'studentNavBar.dart';
 
+//activity
 class MainStudent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
