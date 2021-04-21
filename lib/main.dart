@@ -18,16 +18,15 @@ void main() async {
   await Firebase.initializeApp();
   runApp(VirtuLab());
 }
-
+//push
 
 class VirtuLab extends StatefulWidget {
-
   @override
   _VirtuLabState createState() => _VirtuLabState();
 }
 
 class _VirtuLabState extends State<VirtuLab> {
-  String checker ;
+  String checker;
   userCheck() async {
     SharedPreferences _perf = await SharedPreferences.getInstance();
     final user = _perf.getString('user');
@@ -35,15 +34,16 @@ class _VirtuLabState extends State<VirtuLab> {
       checker = user;
     });
   }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     userCheck();
   }
+
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       // initialRoute: '/',
       routes: <String, WidgetBuilder>{
@@ -51,7 +51,7 @@ class _VirtuLabState extends State<VirtuLab> {
         '/student': (context) => MainStudent(), //student
         '/stu_course': (context) => StuCourseRegister(), //student course select
         '/instructor': (context) => MainInstructor(), //instructor
-        '/admin': (context) => AdminNavBar(),//MainAdmin(), //admin
+        '/admin': (context) => AdminNavBar(), //MainAdmin(), //admin
         '/temp': (context) => TempNaV(), //temporary navigation
         // '/course_page': (context) => StudentCoursePage(),
         // coursesPage[0].route: (context) => Scaffold(
