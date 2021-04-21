@@ -13,21 +13,9 @@ class AdminAccounts extends StatefulWidget {
 }
 
 class _AdminAccounts extends State<AdminAccounts> {
-  List courseName = [
-    "Data Mining",
-    "Data Structure",
-    "Python",
-    "Java",
-    "C++",
-  ];
 
-  List instructorName = [
-    "Mr Ahmed",
-    "Mr Mohamed",
-    "Mr Amr",
-    "Mr Mahmoud",
-    "Mr Abdallah"
-  ];
+
+ List myCourse = [];
 
   Query _courses;
   String _name;
@@ -56,15 +44,15 @@ class _AdminAccounts extends State<AdminAccounts> {
     // debugPrint(' student count is $_studCount');
   }
 
-  studCount(String key) async {
-    DataSnapshot snap =
-        await _courses.reference().child(key).child('studID').once();
-    Map stud = snap.value;
-    setState(() {
-      _studCount = stud.length;
-    });
-    
-  }
+  // studCount(String key) async {
+  //   DataSnapshot snap =
+  //       await _courses.reference().child(key).child('studID').once();
+  //   Map stud = snap.value;
+  //   setState(() {
+  //     _studCount = stud.length;
+  //   });
+  //
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +119,7 @@ class _AdminAccounts extends State<AdminAccounts> {
   }
 
   _courseList({Map course}) {
-    studCount(course['key']);
+    // studCount(course['key']);
     return Container(
       // height: MediaQuery.of(context).size.height * .54,
       child: Padding(
@@ -177,8 +165,10 @@ class _AdminAccounts extends State<AdminAccounts> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => AdminEditAccounts(
+                                  courseName: course['name'],
                                       courseKey: course['key'],
                                       instID: course['instID'],
+
                                     )));
                       },
                     ),

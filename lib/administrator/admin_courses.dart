@@ -28,15 +28,15 @@ class _AdminCourses extends State<AdminCourses> {
         // studCount(null);
   }
 
-  studCount(String key) async {
-    DataSnapshot snap =
-        await _ref.reference().child(key).child('studID').once();
-    Map stud = snap.value;
-    setState(() {
-      _studCount = stud.length;
-    });
-    
-  }
+  // studCount(String key) async {
+  //   DataSnapshot snap =
+  //       await _ref.reference().child(key).child('studID').once();
+  //   Map stud = snap.value;
+  //   setState(() {
+  //     _studCount = stud.length;
+  //   });
+  //
+  // }
 
 // Map myData ;
   // List getAllCourses = [];
@@ -116,7 +116,7 @@ class _AdminCourses extends State<AdminCourses> {
   }
 
   _buildCourses({Map course}) {
-    studCount(course['key']);
+    // studCount(course['key']);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SingleChildScrollView(
@@ -140,10 +140,7 @@ class _AdminCourses extends State<AdminCourses> {
                     CustomText(
                       text: 'Instructor: '+ course['instID'],
                     ),
-                    CustomText(
-                      text: "No.Student : $_studCount",
-                      color: Colors.grey,
-                    )
+
                   ],
                 ),
               ),

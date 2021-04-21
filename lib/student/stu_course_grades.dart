@@ -5,6 +5,8 @@ import 'package:virtulab/functions/auth.dart';
 import 'package:virtulab/functions/database.dart';
 import 'package:virtulab/student/stu_course_contents.dart';
 
+import '../functions/auth.dart';
+
 class CourseGrades extends StatefulWidget {
   final String courseName;
   final String courseID;
@@ -124,7 +126,8 @@ class _CourseGrades extends State<CourseGrades> {
                           color: Colors.deepPurple),
                     ),
                     trailing: Text(
-                        /*gradesList['grade']+*/ '/' +
+                        gradesList['studID'][getCurrentID()]['grade'] == null ? "0"  +  "/" +
+                            gradesList['total_grade'] : gradesList['studID'][getCurrentID()]['grade']  +  "/" +
                             gradesList['total_grade']),
                   ),
                   Divider(thickness: 2),
