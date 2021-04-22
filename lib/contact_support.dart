@@ -1,23 +1,10 @@
 import 'dart:developer';
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:virtulab/functions/auth.dart';
 import 'package:virtulab/functions/database.dart';
-
-_contactSupportMessage(String subject, String message) async {
-  // getCurrentUser();
-  var date = DateTime.now();
-  String formattedDate = DateFormat('DD/MM/YYYY - hh:mm a').format(date);
-  String status = 'new';
-  firebaseref.child('tech_support').push().set({
-    'senderID': getCurrentID(), //'someones id',//id.toString(),
-    'subject': subject,
-    'message': message,
-    'date': formattedDate, //date.toString(),
-    'status': status,
-  });
-}
 
 class ContactSupport extends StatefulWidget {
   @override
@@ -40,6 +27,54 @@ class _ContactSupport extends State<ContactSupport> {
   final _subjectController = TextEditingController();
   final _messageController = TextEditingController();
   final _support = GlobalKey<FormState>();
+  String senderName;
+  String id = getCurrentID();
+
+  @override
+  void initState() {
+    getSenderName();
+    super.initState();
+  }
+
+  getSenderName() async {
+    Map sender;
+    if (auth.currentUser.displayName.length == 6) {
+      await firebaseref
+          .child('instructor')
+          .child(getCurrentID())
+          .once()
+          .then((DataSnapshot snapshot) => {
+                sender = snapshot.value,
+                senderName = sender['fname'] + ' ' + sender['lname'],
+                print(senderName)
+              });
+    } else if (auth.currentUser.displayName.length == 10) {
+      await firebaseref
+          .child('student')
+          .child(getCurrentID())
+          .once()
+          .then((DataSnapshot snapshot) => {
+                sender = snapshot.value,
+                senderName = sender['fname'] + ' ' + sender['lname'],
+                print(senderName)
+              });
+    }
+  }
+
+  _contactSupportMessage(String subject, String message) {
+    // getCurrentUser();
+    var date = DateTime.now();
+    String formattedDate = DateFormat('dd/MM/yyyy - hh:mm a').format(date);
+    String status = 'new';
+    firebaseref.child('tech_support').push().set({
+      'senderID': getCurrentID(), //'someones id',//id.toString(),
+      'senderName': senderName,
+      'subject': subject,
+      'message': message,
+      'date': formattedDate, //date.toString(),
+      'status': status,
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
