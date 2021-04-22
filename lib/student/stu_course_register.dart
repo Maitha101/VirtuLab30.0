@@ -19,8 +19,8 @@ class _StuCourseRegister extends State<StuCourseRegister> {
   Query allCourses;
   Query instName;
   bool _progressController = true;
-  String _name = 'Retrieving..';
-  String _instID;
+  //String _name = 'Retrieving..';
+  //String _instID;
   void initState() {
     super.initState();
     setState(() {
@@ -30,7 +30,7 @@ class _StuCourseRegister extends State<StuCourseRegister> {
     });
     allCourses = firebaseref.child('course').orderByChild('name');
     instName = firebaseref.child('instructor'); //.orderByChild('ID');
-    getInstName(_instID); // is ok only when async?
+    //getInstName(_instID); // is ok only when async?
   }
 
   registerStudent(String courseKey) {
@@ -42,14 +42,14 @@ class _StuCourseRegister extends State<StuCourseRegister> {
         .set(getCurrentID());
   }
 
-  getInstName(String id) async {
-    DataSnapshot snapshot =
-        await firebaseref.child('instructor').child(id).once();
-    Map inst = snapshot.value;
-    setState(() {
-      _name = inst['fname'] + ' ' + inst['lname'];
-    });
-  }
+  // getInstName(String id) async {
+  //   DataSnapshot snapshot =
+  //       await firebaseref.child('instructor').child(id).once();
+  //   Map inst = snapshot.value;
+  //   setState(() {
+  //     _name = inst['fname'] + ' ' + inst['lname'];
+  //   });
+  // }
 
   confirmation(String key) {
     showDialog(
@@ -112,7 +112,8 @@ class _StuCourseRegister extends State<StuCourseRegister> {
               SizedBox(height: 5),
               Text(
                 'Instructor: ' +
-                    _name, //getInstName(courseList['instID']).toString(),
+                    courseList[
+                        'instname'], //getInstName(courseList['instID']).toString(),
                 style: TextStyle(
                   fontSize: 16,
                 ),

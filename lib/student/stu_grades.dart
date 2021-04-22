@@ -51,8 +51,10 @@ class _StudentGrades extends State<StudentGrades> {
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (BuildContext context) =>
-                    CourseGrades(courseName: courseList['name'], courseID: courseList['key'],),
+                builder: (BuildContext context) => CourseGrades(
+                  courseName: courseList['name'],
+                  courseID: courseList['key'],
+                ),
               ),
             ),
             child: Container(
@@ -85,7 +87,7 @@ class _StudentGrades extends State<StudentGrades> {
                                       color: Colors.deepPurple),
                                 ),
                                 Text(
-                                  'Instructor: ' + courseList['instID'],
+                                  'Instructor: ' + courseList['instname'],
                                 ),
                               ],
                             ),

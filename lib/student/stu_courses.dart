@@ -15,25 +15,25 @@ class StudentCourses extends StatefulWidget {
 
 class _StudentCourses extends State<StudentCourses> {
   Query _courses;
-  String _instName = 'Retrieving..';
-  String _instID;
+  //String _instName = 'Retrieving..';
+  //String _instID;
   String _id = getCurrentID();
 
   initState() {
     super.initState();
     _courses =
         firebaseref.child('course').orderByChild('studID/$_id').equalTo(_id);
-    getInstName(_instID);
+    // getInstName(_instID);
   }
 
-  getInstName(String id) async {
-    DataSnapshot snapshot =
-        await firebaseref.child('instructor').child(id).once();
-    Map inst = snapshot.value;
-    setState(() {
-      _instName = inst['fname'] + ' ' + inst['lname'];
-    });
-  }
+  // getInstName(String id) async {
+  //   DataSnapshot snapshot =
+  //       await firebaseref.child('instructor').child(id).once();
+  //   Map inst = snapshot.value;
+  //   setState(() {
+  //     _instName = inst['fname'] + ' ' + inst['lname'];
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -73,8 +73,7 @@ class _StudentCourses extends State<StudentCourses> {
                 context,
                 MaterialPageRoute(
                   builder: (BuildContext context) => StudentCourseContents(
-                      cKey: courseList['key'], //<<-- was missing
-                      courseName: courseList['name']),
+                      cKey: courseList['key'], courseName: courseList['name']),
                 ),
               ),
               child: Container(
