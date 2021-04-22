@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/services.dart';
+import 'package:virtulab/functions/database.dart';
 import 'package:virtulab/instructor/inst_report.dart';
 
 class CaseStudyForm extends StatefulWidget {
@@ -79,7 +80,7 @@ class CaseStudyFormState extends State<CaseStudyForm> {
                       height: 10,
                     ),
                     TextFormField(
-                      validator: (v) => v.isEmpty ? "*Requiredn" : null,
+                      validator: (v) => v.isEmpty ? "*Required" : null,
                       controller: bodyController,
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
@@ -209,6 +210,12 @@ class CaseStudyFormState extends State<CaseStudyForm> {
                                   "question5": question5Controller.text,
                                   "course_id": courseKey,
                                 });
+                                firebaseref
+                                    .child('course')
+                                    .child(courseKey)
+                                    .child('caseStudies')
+                                    .push()
+                                    .set({"csName": titleController.text});
 
                                 Navigator.pop(context);
                                 ScaffoldMessenger.of(this.context).showSnackBar(

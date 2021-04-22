@@ -4,6 +4,7 @@ import 'package:virtulab/change_password.dart';
 import 'package:virtulab/contact_support.dart';
 import 'package:virtulab/functions/database.dart';
 import '../functions/auth.dart';
+import 'inst_contact_support.dart';
 
 class InstSettings extends StatefulWidget {
   @override
@@ -30,7 +31,6 @@ class _InstSettings extends State<InstSettings> {
     setState(() {
       _fullName = inst['fname'] + ' ' + inst['lname'];
     });
-    
   }
 
   bool isSwitched = false;
@@ -206,7 +206,8 @@ class _InstSettings extends State<InstSettings> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) => ContactSupport()),
+                          builder: (BuildContext context) =>
+                              InstContactSupport()),
                     );
                   },
                   child: Padding(

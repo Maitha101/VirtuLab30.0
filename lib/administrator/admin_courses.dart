@@ -3,6 +3,7 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:virtulab/administrator/admin_add_course.dart';
 import 'package:virtulab/administrator/admin_edit_courses.dart';
+import 'package:virtulab/functions/database.dart';
 import 'package:virtulab/widgets/custom_text.dart';
 
 class AdminCourses extends StatefulWidget {
@@ -25,18 +26,18 @@ class _AdminCourses extends State<AdminCourses> {
         .reference()
         .child('course')
         .orderByChild('code');
-        // studCount(null);
+    // studCount(null);
   }
 
-  // studCount(String key) async {
-  //   DataSnapshot snap =
-  //       await _ref.reference().child(key).child('studID').once();
-  //   Map stud = snap.value;
-  //   setState(() {
-  //     _studCount = stud.length;
-  //   });
-  //
-  // }
+  studCount(String key) async {
+    DataSnapshot snap = await firebaseref.child(key).child('studID').once();
+
+    Map stud = snap.value;
+
+    //setState(() {
+    // _studCount = stud.length;
+    //});
+  }
 
 // Map myData ;
   // List getAllCourses = [];
@@ -116,7 +117,7 @@ class _AdminCourses extends State<AdminCourses> {
   }
 
   _buildCourses({Map course}) {
-    // studCount(course['key']);
+    studCount(course['key']);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SingleChildScrollView(
@@ -138,9 +139,8 @@ class _AdminCourses extends State<AdminCourses> {
                       fontWeight: FontWeight.w600,
                     ),
                     CustomText(
-                      text: 'Instructor: '+ course['instID'],
+                      text: course['instname'],
                     ),
-
                   ],
                 ),
               ),

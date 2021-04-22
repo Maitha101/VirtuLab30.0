@@ -18,7 +18,6 @@ void main() async {
   await Firebase.initializeApp();
   runApp(VirtuLab());
 }
-//push
 
 class VirtuLab extends StatefulWidget {
   @override

@@ -105,7 +105,7 @@ class _StudentCourses extends State<StudentCourses> {
                                         color: Colors.deepPurple),
                                   ),
                                   Text(
-                                    'Instructor: ' + _instName,
+                                    'Instructor: ' + courseList['instname'],
                                   ),
                                 ],
                               ),

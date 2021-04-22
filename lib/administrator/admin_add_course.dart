@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:virtulab/functions/database.dart';
 import 'package:virtulab/widgets/custom_text.dart';
@@ -9,14 +10,34 @@ class AdminAddCourse extends StatefulWidget {
 }
 
 class _AdminAddCourseState extends State<AdminAddCourse> {
-  List<String> instructorList = [
-    "101010", "123456", "111222"
-  ];
+  List<String> instructorList = [];
 
   String dropDownValue;
   String courseTitle;
   String description;
   String name;
+
+  void getinstructor() async {
+    firebaseref
+        .child('instructor')
+        .orderByChild('fname')
+        .once()
+        .then((DataSnapshot snapshot) {
+      Map map = snapshot.value;
+      setState(() {
+        map.forEach((key, value) {
+          instructorList
+              .add(value['fname'] + " " + value['lname'] + " " + value['ID']);
+        });
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getinstructor();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +85,6 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
                   name = value;
                 },
               ),
-
               Padding(
                 padding: const EdgeInsets.only(top: 20, bottom: 10),
                 child: CustomText(
@@ -80,12 +100,18 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
                   border: Border.all(color: Colors.grey),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 10,right: 10,top: 5),
+                  padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
                   child: DropdownButton(
                     isExpanded: true,
-                    icon: Icon(Icons.arrow_drop_down,size: 30,),
-                    hint: CustomText(text: "Choose Instructor",),
-                    items: instructorList.map<DropdownMenuItem<String>>((String value) {
+                    icon: Icon(
+                      Icons.arrow_drop_down,
+                      size: 30,
+                    ),
+                    hint: CustomText(
+                      text: "Choose Instructor",
+                    ),
+                    items: instructorList
+                        .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(
@@ -103,7 +129,7 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
                     },
                   ),
                 ),
-              ) ,
+              ),
               Padding(
                 padding: const EdgeInsets.only(top: 20, bottom: 10),
                 child: CustomText(
@@ -130,7 +156,8 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
                     width: 160,
                     child: TextButton(
                         onPressed: () {
-                          addNewCourse(courseTitle, dropDownValue,description,name);
+                          addNewCourse(
+                              courseTitle, dropDownValue, description, name);
                           Navigator.pop(context);
                         },
                         child: Row(
@@ -150,23 +177,41 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
                   ),
                 ),
               ),
-
-
-
             ],
           ),
         ),
       ),
     );
   }
-  addNewCourse( String title, String instructor,String description,String name){
-    firebaseref.child('course').push().set(
-        {
-          'code' : title,
-          'description' : description,
-          'name' : name,
-          'instID' : instructor
-        }
-    );
+
+  /*getinstructorID(String instname) async {
+    String id;
+    await firebaseref
+        .child('instructor')
+        .orderByChild('fname')
+        .equalTo(instname)
+        .once()
+        .then((DataSnapshot snapshot) {
+      Map inst = snapshot.value;
+      inst['key'] = snapshot.key;
+      setState(() {
+        id = inst['key'];
+      });
+    });
+    return id;
+  }*/
+
+  addNewCourse(
+      String title, String instructor, String description, String name) {
+    var inst = instructor.split(" ");
+    String instID = inst[2];
+    String instname = inst[0] + " " + inst[1];
+    firebaseref.child('course').push().set({
+      'code': title,
+      'description': description,
+      'name': name,
+      'instname': instname,
+      'instID': instID
+    });
   }
 }

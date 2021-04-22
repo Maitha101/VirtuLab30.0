@@ -1,6 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
+import 'package:virtulab/functions/database.dart';
 import 'package:virtulab/instructor/inst_experiments.dart';
 import 'inst_step_edit.dart';
 import 'inst_step_form.dart';
@@ -21,6 +22,7 @@ class _InstExperimentsStepList extends State<InstExperimentsStepList> {
   DatabaseReference dbrefrence;
   DataSnapshot snapshot;
   String key;
+  String expName;
 
   @override
   void initState() {
@@ -33,6 +35,15 @@ class _InstExperimentsStepList extends State<InstExperimentsStepList> {
         .child('steps');
     dbrefrence =
         FirebaseDatabase.instance.reference().child('experiment').child(key);
+    getExpName();
+  }
+
+  getExpName() async {
+    DataSnapshot snapshot = await dbrefrence.once();
+    Map experiment = snapshot.value;
+    setState(() {
+      expName = experiment['title'];
+    });
   }
 
   Widget _buildExperimentList({Map step}) {
@@ -201,6 +212,12 @@ class _InstExperimentsStepList extends State<InstExperimentsStepList> {
                           "cID_draft": courseKey + 'false',
                           "draft": 'false',
                         });
+                        firebaseref
+                            .child('course')
+                            .child(courseKey)
+                            .child('experiments')
+                            .push()
+                            .set({"expName": expName});
                         Navigator.of(context)
                             .popUntil((route) => route.isFirst);
                         ScaffoldMessenger.of(this.context).showSnackBar(
@@ -231,6 +248,7 @@ class _InstExperimentsStepList extends State<InstExperimentsStepList> {
                           "cID_draft": courseKey + 'true',
                           "draft": 'true',
                         });
+
                         Navigator.of(context)
                             .popUntil((route) => route.isFirst);
                         ScaffoldMessenger.of(this.context).showSnackBar(

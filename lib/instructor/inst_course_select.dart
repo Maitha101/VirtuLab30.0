@@ -69,7 +69,7 @@ class _InstCourseSelectState extends State<InstCourseSelect> {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    'instructor: ' + course['instID'], //'instructor name',
+                    'instructor: ' + course['instname'], //'instructor name',
                     //course['description'],
                     style: TextStyle(
                         fontSize: 16,
