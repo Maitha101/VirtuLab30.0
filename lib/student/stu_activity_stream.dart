@@ -23,7 +23,7 @@ class ActivityStream extends StatefulWidget {
 
 class _ActivityStream extends State<ActivityStream> {
   Query _courseTitle;
-  String _id = getCurrentID(); //
+  String _id = getCurrentID();
   @override
   void initState() {
     super.initState();
@@ -88,7 +88,7 @@ class _ActivityStream extends State<ActivityStream> {
                                       color: Colors.deepPurple),
                                 ),
                                 Text(
-                                  'Instructor: ' + list['instID'],
+                                  'Instructor: ' + list['instname'],
                                 ),
                                 Text(
                                   'status', //temp

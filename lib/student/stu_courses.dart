@@ -1,11 +1,8 @@
-import 'dart:async';
-
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:virtulab/functions/auth.dart';
 import 'package:virtulab/functions/database.dart';
-import 'package:virtulab/widgets/custom_text.dart';
 import 'stu_course_contents.dart';
 import 'package:virtulab/student/stu_course_register.dart';
 
@@ -21,24 +18,12 @@ class _StudentCourses extends State<StudentCourses> {
   String _instName = 'Retrieving..';
   String _instID;
   String _id = getCurrentID();
-  Map courseCheck;
 
   initState() {
     super.initState();
     _courses =
         firebaseref.child('course').orderByChild('studID/$_id').equalTo(_id);
-    _courses.once().then((DataSnapshot snapshot) => {
-      courseCheck  = snapshot.value,
-    });
-    setState(() {
-      Timer(Duration(seconds: 0), () {
-        setState(() {
-          print("//");
-        });
-      });
-      //
-    });
-    // getInstName(_instID);
+    getInstName(_instID);
   }
 
   getInstName(String id) async {
@@ -59,23 +44,7 @@ class _StudentCourses extends State<StudentCourses> {
         title: Text('Courses'),
         backgroundColor: Colors.deepPurple,
       ),
-      body: courseCheck == null
-          ? Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Center(
-            child: Container(
-              height: 300,
-              width: 300,
-              child: Image.asset("assets/images/empty_placeholder.png"),
-            ),
-          ),
-          CustomText(text: "You Haven`t Registered To Any Courses!",fontSize: 22,
-          fontWeight: FontWeight.w600,)
-        ],
-      ) :
-      FirebaseAnimatedList(
+      body: FirebaseAnimatedList(
         query: _courses,
         defaultChild: Center(child: CircularProgressIndicator()),
         itemBuilder: (BuildContext context, snapshot,
@@ -93,7 +62,7 @@ class _StudentCourses extends State<StudentCourses> {
   Widget _courseList({Map courseList}) {
     // _instID = courseList['instID'];
     print(courseList.length);
-    if (courseList.length == 0) {
+    if (courseList.isEmpty) {
       return Center(child: Text('You are not registered to any course'));
     } else {
       return Column(
