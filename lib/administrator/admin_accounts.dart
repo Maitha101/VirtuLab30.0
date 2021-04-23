@@ -66,31 +66,7 @@ class _AdminAccounts extends State<AdminAccounts> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 30),
-              child: CustomText(
-                text: "Search:",
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: TextFormField(
-                decoration: InputDecoration(
-                    hintText: "type here!",
-                    prefixIcon: Icon(Icons.search),
-                    border: OutlineInputBorder()),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-              child: Container(
-                color: Colors.grey,
-                height: 2,
-                width: double.infinity,
-              ),
-            ),
+            SizedBox(height: 25,),
             Padding(
               padding: const EdgeInsets.only(left: 30, bottom: 8),
               child: CustomText(
@@ -100,7 +76,7 @@ class _AdminAccounts extends State<AdminAccounts> {
               ),
             ),
             Container(
-              height: MediaQuery.of(context).size.height * .50,
+              height: MediaQuery.of(context).size.height * .73,
               child: FirebaseAnimatedList(
                 query: _courses,
                 defaultChild: Center(child: CircularProgressIndicator()),
@@ -142,11 +118,15 @@ class _AdminAccounts extends State<AdminAccounts> {
                         fontSize: 21,
                         fontWeight: FontWeight.w600,
                       ),
-                      CustomText(
-                        text: 'Instructor: '+ course['instID'],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 3),
+                        child: CustomText(
+                          fontSize: 19,
+                          text: 'Instructor: '+ course['instname'],
+                        ),
                       ),
                       CustomText(
-                        text: "No. Students: $_studCount",
+                        text: "Inst ID : " + course['instID'],
                         color: Colors.grey,
                       )
                     ],
