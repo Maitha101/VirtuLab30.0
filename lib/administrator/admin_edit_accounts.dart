@@ -9,8 +9,9 @@ class AdminEditAccounts extends StatefulWidget {
   final String courseKey;
   final String instID;
   final String courseName;
+  final String instName;
 
-  AdminEditAccounts({this.courseKey, this.instID, this.courseName});
+  AdminEditAccounts({this.courseKey, this.instID, this.courseName,this.instName});
 
   @override
   _AdminEditAccountsState createState() => _AdminEditAccountsState();
@@ -119,33 +120,24 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      CustomText(
-                        text: "Inst ID : " + widget.instID,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 15),
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              updateInstDialog();
-                            });
-                          },
-                          child: Column(
-                            children: [
-                              Icon(
-                                Icons.repeat,
-                                color: Colors.white,
-                              ),
-                              CustomText(
-                                text: "Change",
-                                color: Colors.white,
-                              )
-                            ],
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomText(
+                            fontSize: 19,
+                            text: "Inst Name : " + widget.instName,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
                           ),
-                        ),
-                      )
+                          CustomText(
+                            text: "Inst ID : " + widget.instID,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
+
                     ],
                   ),
                 ),

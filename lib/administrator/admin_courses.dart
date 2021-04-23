@@ -112,6 +112,7 @@ class _AdminCourses extends State<AdminCourses> {
                   children: [
                     CustomText(
                       text: course['name'],
+                      color: Colors.deepPurple,
                       fontSize: 21,
                       fontWeight: FontWeight.w600,
                     ),
