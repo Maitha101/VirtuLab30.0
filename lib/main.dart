@@ -12,7 +12,7 @@ import 'student/stu_activity_stream.dart';
 import 'student/stu_course_register.dart';
 import 'instructor/inst_report.dart';
 import 'tempnav.dart';
-
+//testing
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
