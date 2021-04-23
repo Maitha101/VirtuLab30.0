@@ -1,3 +1,4 @@
+
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -7,12 +8,13 @@ import 'package:virtulab/student/stu_caseStudies_list.dart';
 import 'package:virtulab/student/stu_experiments_list.dart';
 import './sign_up.dart';
 import 'administrator/adminNavBar.dart';
+import 'forgot_password.dart';
 import 'functions/auth.dart';
 import 'student/stu_activity_stream.dart';
 import 'student/stu_course_register.dart';
 import 'instructor/inst_report.dart';
 import 'tempnav.dart';
-//testing
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -60,6 +62,7 @@ class _VirtuLabState extends State<VirtuLab> {
         '/experiment_list': (context) => ExperimentsList(),
         '/caseStudy_list': (context) => CaseStudiesList(),
         '/login': (context) => Homepage(),
+        '/forgotPass': (context) => ForgotPassword(),
       },
       title: 'Login',
       home: checker == null ? Homepage() : loginNavigation(),
@@ -156,7 +159,7 @@ class _Homepage extends State<Homepage> {
                 ),
                 //...........................................Email............................................
                 Container(
-                  width: 275,
+                  width: double.infinity,
                   child: TextFormField(
                     controller: _emailController,
                     maxLines: 1,
@@ -168,7 +171,7 @@ class _Homepage extends State<Homepage> {
                     // ],
                     decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'Academic Email'),
+                        labelText: 'Email'),
                   ),
                 ),
 
@@ -177,7 +180,7 @@ class _Homepage extends State<Homepage> {
                 ),
                 // .........................................Password........................................
                 Container(
-                  width: 275,
+                  width: double.infinity,
                   child: TextFormField(
                     controller: _passController,
                     maxLines: 1,
@@ -198,9 +201,17 @@ class _Homepage extends State<Homepage> {
                     ),
                   ),
                 ),
-
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: () { Navigator.pushNamed(context, '/forgotPass');},
+                      child: Text('Forgot Password?'),
+                    ),
+                  ],
+                ),
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
 
                 Container(
@@ -252,3 +263,4 @@ class _Homepage extends State<Homepage> {
     );
   }
 }
+
