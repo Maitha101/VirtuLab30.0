@@ -97,6 +97,7 @@ flutter:
       - assets/images/
       - assets/images/profile_pic.png
       - assets/virtulabDB.db
+      - assets/images/empty_placeholder.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

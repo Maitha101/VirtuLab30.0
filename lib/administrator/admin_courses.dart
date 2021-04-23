@@ -122,6 +122,7 @@ class _AdminCourses extends State<AdminCourses> {
       padding: const EdgeInsets.all(8.0),
       child: SingleChildScrollView(
         child: Container(
+          padding: EdgeInsets.symmetric(vertical: 15),
           decoration: BoxDecoration(
               color: Colors.grey.shade200,
               borderRadius: BorderRadius.circular(10)),

@@ -93,6 +93,7 @@ class _ActivityStream extends State<ActivityStream> {
                                 Text(
                                   'status', //temp
                                 ),
+
                               ],
                             ),
                           ],
