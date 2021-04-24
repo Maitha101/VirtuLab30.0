@@ -112,7 +112,7 @@ class _AdminEditCourseState extends State<AdminEditCourse> {
                         value: value,
                         child: Text(
                           value,
-                          style: TextStyle(fontSize: 24),
+                          style: TextStyle(fontSize: 18),
                         ),
                       );
                     }).toList(),
@@ -151,7 +151,7 @@ class _AdminEditCourseState extends State<AdminEditCourse> {
                     },
                     child: CustomText(
                       text: "Update Course",
-                      fontSize: 25,
+                      fontSize: 20,
                       color: Colors.white,
                     )),
               )
