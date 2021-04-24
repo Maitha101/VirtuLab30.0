@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:virtulab/functions/database.dart';
 import 'package:virtulab/instructor/inst_report.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class CaseStudyForm extends StatefulWidget {
   @override
@@ -12,6 +14,7 @@ class CaseStudyForm extends StatefulWidget {
 
 // this Widget takes cs_questions_dynamicTF.dart for duplicaton
 class CaseStudyFormState extends State<CaseStudyForm> {
+  DateTime _deadline = DateTime.now();
   bool dateCheckBoxValue = false;
   DatabaseReference dbRef;
   bool _loading = false;
@@ -34,6 +37,19 @@ class CaseStudyFormState extends State<CaseStudyForm> {
     dbRef = FirebaseDatabase.instance.reference().child("case_study");
   }
 
+  _datePicker(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: _deadline, // Refer step 1
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2025),
+    );
+    if (picked != null && picked != _deadline)
+      setState(() {
+        _deadline = picked;
+      });
+  }
+
 // ------------------------CASE STUDY FORM -- START ----------------------------
   Widget build(BuildContext context) {
     return _loading
@@ -54,7 +70,7 @@ class CaseStudyFormState extends State<CaseStudyForm> {
                 child: ListView(
                   children: <Widget>[
                     TextFormField(
-                      validator: (v) => v.isEmpty ? "*Required" : null,
+                      validator: (v) => v.isEmpty ? "* Required" : null,
                       controller: titleController,
                       decoration: InputDecoration(
                         hintText: 'Enter the Case Study title here',
@@ -62,7 +78,7 @@ class CaseStudyFormState extends State<CaseStudyForm> {
                     ),
                     TextFormField(
                       controller: discrController,
-                      validator: (v) => v.isEmpty ? "*Required" : null,
+                      validator: (v) => v.isEmpty ? "* Required" : null,
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
                       decoration: InputDecoration(
@@ -80,7 +96,7 @@ class CaseStudyFormState extends State<CaseStudyForm> {
                       height: 10,
                     ),
                     TextFormField(
-                      validator: (v) => v.isEmpty ? "*Required" : null,
+                      validator: (v) => v.isEmpty ? "* Required" : null,
                       controller: bodyController,
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
@@ -103,35 +119,35 @@ class CaseStudyFormState extends State<CaseStudyForm> {
                       height: 10,
                     ),
                     TextFormField(
-                      validator: (v) => v.isEmpty ? "*Required" : null,
+                      validator: (v) => v.isEmpty ? "* Required" : null,
                       controller: question1Controller,
                       decoration: InputDecoration(
                         hintText: 'Question 1',
                       ),
                     ),
                     TextFormField(
-                      validator: (v) => v.isEmpty ? "*Required" : null,
+                      validator: (v) => v.isEmpty ? "* Required" : null,
                       controller: question2Controller,
                       decoration: InputDecoration(
                         hintText: 'Question 2',
                       ),
                     ),
                     TextFormField(
-                      validator: (v) => v.isEmpty ? "*Required" : null,
+                      validator: (v) => v.isEmpty ? "* Required" : null,
                       controller: question3Controller,
                       decoration: InputDecoration(
                         hintText: 'Question 3',
                       ),
                     ),
                     TextFormField(
-                      validator: (v) => v.isEmpty ? "*Required" : null,
+                      validator: (v) => v.isEmpty ? "* Required" : null,
                       controller: question4Controller,
                       decoration: InputDecoration(
                         hintText: 'Question 4',
                       ),
                     ),
                     TextFormField(
-                      validator: (v) => v.isEmpty ? "*Required" : null,
+                      validator: (v) => v.isEmpty ? "* Required" : null,
                       controller: question5Controller,
                       decoration: InputDecoration(
                         hintText: 'Question 5',
@@ -148,7 +164,7 @@ class CaseStudyFormState extends State<CaseStudyForm> {
                       height: 10,
                     ),
                     TextFormField(
-                      validator: (v) => v.isEmpty ? "*Required" : null,
+                      validator: (v) => v.isEmpty ? "* Required" : null,
                       controller: gradeController,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
@@ -170,24 +186,50 @@ class CaseStudyFormState extends State<CaseStudyForm> {
                       },
                     ),
 
-                    //SizedBox(height: 15),
+                    // SizedBox(height: 15),
                     if (!dateCheckBoxValue)
                       Container(
                         height: 40,
                         child: TextFormField(
-                          inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter.allow(RegExp(''))
-                          ],
-                          validator: (v) => v.isEmpty ? "*Required" : null,
+                          // inputFormatters: <TextInputFormatter>[
+                          //   FilteringTextInputFormatter.allow(RegExp(''))
+                          // ],
+                          validator: (v) => v.isEmpty ? "* Required" : null,
+                          
                           controller: deadlineController,
                           keyboardType: TextInputType.datetime,
                           decoration: InputDecoration(
+                            // labelText: 'Deadline',
                             //may use date picker instead ..
-                            hintText: 'Enter the deadline date - DD/MM/YYYY -',
+                            hintText: 'Deadline: -DD/MM/YYYY-',
                           ),
                         ),
                       ),
-                    SizedBox(height: 15),
+                      // Column(
+                      //   children: [
+                      //     Container(
+                      //       padding: EdgeInsets.all(15),
+                      //       decoration: BoxDecoration(
+                      //         borderRadius: BorderRadius.circular(3),
+                      //           border: Border.all(color: Colors.grey)),
+                      //       child: Text(
+                      //         'Deadline:  ' +
+                      //             '${_deadline.toLocal()}'.split(' ')[0],
+                      //       ),
+                      //     ),
+                      //     SizedBox(height: 10),
+                      //     Container(
+                      //       height: 45,
+                      //       width: 170,
+                      //       child: ElevatedButton(
+                      //         onPressed: () => _datePicker(context),
+                      //         child: Text('Select date'),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+
+                    SizedBox(height: 25),
                     Container(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -195,6 +237,7 @@ class CaseStudyFormState extends State<CaseStudyForm> {
                           ElevatedButton(
                             onPressed: () {
                               if (_formkey.currentState.validate()) {
+                                deadlineController.text = _deadline.toIso8601String();
                                 dbRef.push().set({
                                   "title": titleController.text,
                                   "description": discrController.text,

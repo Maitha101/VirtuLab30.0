@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:virtulab/instructor/inst_report.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+
 
 class CaseStudyEditForm extends StatefulWidget {
   final String snapshotKey;
@@ -13,6 +15,7 @@ class CaseStudyEditForm extends StatefulWidget {
 
 // this Widget takes cs_questions_dynamicTF.dart for duplicaton
 class CaseStudyEditFormState extends State<CaseStudyEditForm> {
+  DateTime _deadline = DateTime.now();
   bool dateCheckBoxValue = false;
   DatabaseReference dbRef;
   bool _loading = false;
@@ -85,6 +88,19 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
         "deadline": deadlineController.text,
       });
     }
+  }
+
+  _datePicker(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: _deadline, // Refer step 1
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2025),
+    );
+    if (picked != null && picked != _deadline)
+      setState(() {
+        _deadline = picked;
+      });
   }
 
   _showDeleteDialog() {
@@ -275,10 +291,33 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
                           keyboardType: TextInputType.datetime,
                           decoration: InputDecoration(
                             //may use date picker instead ..
-                            hintText: 'Enter the deadline date -dd/mm/yyyy-',
+                            hintText: 'Deadline: -DD/MM/YYY-',
                           ),
                         ),
                       ),
+                      // Column(
+                      //   children: [
+                      //     Container(
+                      //       padding: EdgeInsets.all(15),
+                      //       decoration: BoxDecoration(
+                      //         borderRadius: BorderRadius.circular(3),
+                      //           border: Border.all(color: Colors.grey)),
+                      //       child: Text(
+                      //         'Deadline:  ' +
+                      //             '${_deadline.toLocal()}'.split(' ')[0],
+                      //       ),
+                      //     ),
+                      //     SizedBox(height: 10),
+                      //     Container(
+                      //       height: 45,
+                      //       width: 170,
+                      //       child: ElevatedButton(
+                      //         onPressed: () => _datePicker(context),
+                      //         child: Text('Select date'),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
                     SizedBox(height: 15),
                     Container(
                       child: Row(
