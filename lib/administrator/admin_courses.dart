@@ -113,7 +113,7 @@ class _AdminCourses extends State<AdminCourses> {
                     CustomText(
                       text: course['name'],
                       color: Colors.deepPurple,
-                      fontSize: 21,
+                      fontSize: 20,
                       fontWeight: FontWeight.w600,
                     ),
                     Padding(
