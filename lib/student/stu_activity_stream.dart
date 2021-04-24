@@ -53,6 +53,8 @@ class _ActivityStream extends State<ActivityStream> {
       ),
     );
   }
+  // activity stream
+
 
   Widget _streamList({Map list}) {
     return Column(
