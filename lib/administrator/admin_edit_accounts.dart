@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:virtulab/administrator/admin_accounts.dart';
 import 'package:virtulab/functions/database.dart';
 import 'package:virtulab/widgets/custom_text.dart';
 
@@ -11,7 +12,8 @@ class AdminEditAccounts extends StatefulWidget {
   final String courseName;
   final String instName;
 
-  AdminEditAccounts({this.courseKey, this.instID, this.courseName,this.instName});
+  AdminEditAccounts(
+      {this.courseKey, this.instID, this.courseName, this.instName});
 
   @override
   _AdminEditAccountsState createState() => _AdminEditAccountsState();
@@ -21,6 +23,7 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
   int length = 0;
 
   List studentKey = [];
+  List allStudents = [];
   List studentNameList = [];
   TextEditingController _instController;
   final _formKey = GlobalKey<FormState>();
@@ -60,6 +63,21 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
     return studentName;
   }
 
+  void getAllStudents() async {
+    firebaseref
+        .child('student')
+        .orderByChild('fname')
+        .once()
+        .then((DataSnapshot snapshot) {
+      Map map = snapshot.value;
+      setState(() {
+        map.forEach((key, value) {
+          allStudents.add(value['ID']);
+        });
+      });
+    });
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -67,7 +85,7 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
     _instController = TextEditingController();
     _instController.text = widget.instID;
     getStudentList();
-
+    getAllStudents();
     setState(() {
       Timer(Duration(seconds: 1), () {
         setState(() {
@@ -85,7 +103,7 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
       floatingActionButton: FloatingActionButton.extended(
         icon: Icon(Icons.add),
         onPressed: () {
-          print(auth.currentUser.uid);
+          allStudentsDialog();
         },
         backgroundColor: Colors.amber,
         label: CustomText(
@@ -142,7 +160,6 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
-
                       )
                     ],
                   ),
@@ -369,5 +386,111 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
         .child(widget.courseKey)
         .update(inst)
         .then((value) => {Navigator.pop(context)});
+  }
+
+  allStudentsDialog() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            child: Container(
+              height: MediaQuery.of(context).size.height * .6,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: CustomText(
+                      text: "Students List",
+                      fontSize: 21,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.height * .4,
+                    child: ListView.builder(
+                        itemCount: allStudents.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                _showAddStudentDialog(index);
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(15),
+                                decoration: BoxDecoration(
+                                    color: Colors.grey.shade200,
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: CustomText(
+                                  text: "Student ${index + 1} : " +
+                                      allStudents[index],
+                                  fontSize: 21,
+                                ),
+                              ),
+                            ),
+                          );
+                        }),
+                  ),
+                  Container(
+                    width: 150,
+                    decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(20)),
+                    child: TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: CustomText(
+                          text: "Cancel",
+                          fontSize: 21,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        )),
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  _showAddStudentDialog(int index) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Add Student'),
+            content: Text('Are you sure you want to Add ?'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('Cancel')),
+              TextButton(
+                  onPressed: () {
+                    firebaseref
+                        .child('course')
+                        .child(widget.courseKey)
+                        .child('studID')
+                        .child(allStudents[index])
+                        .set(allStudents[index])
+                        .then((value) => {Navigator.pop(context)});
+                    ScaffoldMessenger.of(this.context).showSnackBar(
+                      SnackBar(
+                        duration: Duration(seconds: 1),
+                        content: CustomText(
+                          text: 'Student Added Successfully',
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                        backgroundColor: Colors.deepPurple, //change?
+                      ),
+                    );
+                  },
+                  child: Text('Add'))
+            ],
+          );
+        });
   }
 }

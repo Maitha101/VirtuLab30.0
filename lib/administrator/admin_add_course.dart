@@ -118,9 +118,20 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
-                        child: Text(
-                          value,
-                          style: TextStyle(fontSize: 24),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.grey.shade300,
+                                borderRadius: BorderRadius.circular(20)),
+
+                            width: MediaQuery.of(context).size.width *.8,
+                            padding: EdgeInsets.only(top: 6,bottom: 6,left: 15),
+                            child: Text(
+                              value,
+                              style: TextStyle(fontSize: 24),
+                            ),
+                          ),
                         ),
                       );
                     }).toList(),
