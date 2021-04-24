@@ -14,6 +14,9 @@ class CaseStudyForm extends StatefulWidget {
 
 // this Widget takes cs_questions_dynamicTF.dart for duplicaton
 class CaseStudyFormState extends State<CaseStudyForm> {
+  TextStyle _fieldInfo = TextStyle(
+      fontWeight: FontWeight.bold, fontSize: 16, color: Colors.deepPurple);
+
   DateTime _deadline = DateTime.now();
   bool dateCheckBoxValue = false;
   DatabaseReference dbRef;
@@ -69,6 +72,7 @@ class CaseStudyFormState extends State<CaseStudyForm> {
                 ),
                 child: ListView(
                   children: <Widget>[
+                    Text('Title', style: _fieldInfo,),
                     TextFormField(
                       validator: (v) => v.isEmpty ? "* Required" : null,
                       controller: titleController,
@@ -76,6 +80,8 @@ class CaseStudyFormState extends State<CaseStudyForm> {
                         hintText: 'Enter the Case Study title here',
                       ),
                     ),
+                    SizedBox(height:30),
+                    Text('Description', style: _fieldInfo,),
                     TextFormField(
                       controller: discrController,
                       validator: (v) => v.isEmpty ? "* Required" : null,
@@ -93,8 +99,9 @@ class CaseStudyFormState extends State<CaseStudyForm> {
                       thickness: 3,
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
+                    Text('Body', style: _fieldInfo,),
                     TextFormField(
                       validator: (v) => v.isEmpty ? "* Required" : null,
                       controller: bodyController,
@@ -108,7 +115,7 @@ class CaseStudyFormState extends State<CaseStudyForm> {
                       height: 20,
                     ),
                     Text(
-                      'Questions:',
+                      'Questions',
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.deepPurple,
@@ -163,6 +170,7 @@ class CaseStudyFormState extends State<CaseStudyForm> {
                     SizedBox(
                       height: 10,
                     ),
+                    Text('Grade', style: _fieldInfo,),
                     TextFormField(
                       validator: (v) => v.isEmpty ? "* Required" : null,
                       controller: gradeController,
@@ -172,9 +180,9 @@ class CaseStudyFormState extends State<CaseStudyForm> {
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 30,
                     ),
-
+                    Text('Deadline', style: _fieldInfo,),
                     CheckboxListTile(
                       title: Text('No Deadline'),
                       controlAffinity: ListTileControlAffinity.leading,

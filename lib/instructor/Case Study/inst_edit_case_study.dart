@@ -261,6 +261,7 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
                     SizedBox(
                       height: 10,
                     ),
+                    Text('Grade', style: _fieldInfo,),
                     TextFormField(
                       validator: (v) => v.isEmpty ? "Grade" : null,
                       controller: gradeController,
@@ -270,9 +271,9 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 30,
                     ),
-
+                    Text('Deadline', style: _fieldInfo,),
                     CheckboxListTile(
                       title: Text('No Deadline'),
                       controlAffinity: ListTileControlAffinity.leading,
