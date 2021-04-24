@@ -38,23 +38,21 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
     });
     getStudentDetails();
   }
-  getStudentDetails()  {
+
+  getStudentDetails() {
     String studentName;
     Map student;
     print(studentKey.length);
-    for(int x =0 ; x < studentKey.length ;x ++){
-      DatabaseReference _data =   firebaseref.child("student").child(studentKey[x]);
+    for (int x = 0; x < studentKey.length; x++) {
+      DatabaseReference _data =
+          firebaseref.child("student").child(studentKey[x]);
       _data.once().then((DataSnapshot snapshot) => {
-        student = snapshot.value,
-
-        studentName = student['fname'] +" "+ student['lname'],
-        setState(() {
-          studentNameList.add(studentName);
-        }),
-
-
-      });
-
+            student = snapshot.value,
+            studentName = student['fname'] + " " + student['lname'],
+            setState(() {
+              studentNameList.add(studentName);
+            }),
+          });
     }
     print(studentNameList.length);
 
@@ -82,7 +80,6 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         icon: Icon(Icons.add),
@@ -108,9 +105,15 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
         child: Column(
           children: [
             Padding(
+                padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                child: Text(
+                  'Instructor ID:',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                )),
+            Padding(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
               child: Container(
-                height: 70,
+                height: 80,
                 decoration: BoxDecoration(
                     color: Colors.blueAccent,
                     borderRadius: BorderRadius.circular(15)),
@@ -120,7 +123,7 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CustomText(
-                        text: "Inst ID : " + widget.instID,
+                        text: widget.instID,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
@@ -136,6 +139,7 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
                             children: [
                               Icon(
                                 Icons.repeat,
+                                size: 30,
                                 color: Colors.white,
                               ),
                               CustomText(
@@ -159,6 +163,12 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
                 width: double.infinity,
               ),
             ),
+            Padding(
+                padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                child: Text(
+                  'Students:',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                )),
             Padding(
               padding: const EdgeInsets.only(top: 20, left: 25, right: 25),
               child: Container(
@@ -193,7 +203,7 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     CustomText(
-                                      text: "Student : " + studentKey[index],
+                                      text: studentKey[index],
                                       fontSize: 20,
                                     ),
                                     Padding(
@@ -258,7 +268,8 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
                       child: TextFormField(
                         style: TextStyle(fontSize: 19),
                         controller: _instController,
-                        validator: (v)=> v.length != 6 ? "Invalid Instructor ID" : null,
+                        validator: (v) =>
+                            v.length != 6 ? "Invalid Instructor ID" : null,
                         decoration: InputDecoration(
                             hintText: "Enter Instructor ID",
                             prefixIcon: Icon(Icons.edit)),
@@ -283,7 +294,7 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
                               borderRadius: BorderRadius.circular(10)),
                           child: TextButton(
                               onPressed: () {
-                                if(_formKey.currentState.validate()){
+                                if (_formKey.currentState.validate()) {
                                   updateInst();
                                   Navigator.pop(context);
                                 }
@@ -296,7 +307,8 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
                                       color: Colors.white,
                                       fontSize: 20,
                                     ),
-                                    backgroundColor: Colors.deepPurple, //change?
+                                    backgroundColor:
+                                        Colors.deepPurple, //change?
                                   ),
                                 );
                               },
@@ -335,10 +347,8 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
                         .child(widget.courseKey)
                         .child('studID')
                         .child(studentKey[index])
-                        .remove().then((value) => {
-                          Navigator.pop(context)
-                    }
-                        );
+                        .remove()
+                        .then((value) => {Navigator.pop(context)});
                     ScaffoldMessenger.of(this.context).showSnackBar(
                       SnackBar(
                         duration: Duration(seconds: 1),
@@ -366,6 +376,4 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
         .update(inst)
         .then((value) => {Navigator.pop(context)});
   }
-  
-
 }

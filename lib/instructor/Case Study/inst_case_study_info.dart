@@ -12,6 +12,7 @@ class CaseStudyDetail extends StatefulWidget {
 class _CaseStudyDetailState extends State<CaseStudyDetail> {
   var title;
   var count = 0;
+  TextStyle _fieldInfo = TextStyle(fontWeight: FontWeight.bold,fontSize: 16, color: Colors.deepPurple);
   TextEditingController titleController,
       bodyController,
       discrController,
@@ -99,10 +100,13 @@ class _CaseStudyDetailState extends State<CaseStudyDetail> {
           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
           child: ListView(
             children: [
+              Text('Title', style: _fieldInfo,),
               TextFormField(
                 readOnly: true,
                 controller: titleController,
               ),
+              SizedBox(height:30),
+              Text('Description', style: _fieldInfo,),
               TextFormField(
                 readOnly: true,
                 controller: discrController,
@@ -120,8 +124,9 @@ class _CaseStudyDetailState extends State<CaseStudyDetail> {
                 thickness: 3,
               ),
               SizedBox(
-                height: 10,
+                height: 20,
               ),
+              Text('Body', style: _fieldInfo,),
               TextFormField(
                 readOnly: true,
                 controller: bodyController,
@@ -135,12 +140,8 @@ class _CaseStudyDetailState extends State<CaseStudyDetail> {
                 height: 20,
               ),
               Text(
-                'Options:',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.deepPurple,
-                  fontWeight: FontWeight.bold,
-                ),
+                'Options',
+                style: _fieldInfo
               ),
               SizedBox(
                 height: 10,
@@ -190,20 +191,23 @@ class _CaseStudyDetailState extends State<CaseStudyDetail> {
               SizedBox(
                 height: 10,
               ),
+              Text('Grade', style: _fieldInfo,),
               TextFormField(
                 readOnly: true,
                 controller: gradeController,
                 keyboardType: TextInputType.number,
               ),
               SizedBox(
-                height: 10,
+                height: 30,
               ),
+              Text('Deadline', style: _fieldInfo,),
               Container(
                 height: 40,
                 child: TextFormField(
                   readOnly: true,
                   controller: deadlineController,
                   keyboardType: TextInputType.datetime,
+                  decoration: InputDecoration(hintText: 'No deadline set'),
                 ),
               ),
               SizedBox(height: 15),

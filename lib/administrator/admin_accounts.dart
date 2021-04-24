@@ -13,9 +13,7 @@ class AdminAccounts extends StatefulWidget {
 }
 
 class _AdminAccounts extends State<AdminAccounts> {
-
-
- List myCourse = [];
+  List myCourse = [];
 
   Query _courses;
   String _name;
@@ -66,7 +64,9 @@ class _AdminAccounts extends State<AdminAccounts> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 25,),
+            SizedBox(
+              height: 25,
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 30, bottom: 8),
               child: CustomText(
@@ -105,56 +105,59 @@ class _AdminAccounts extends State<AdminAccounts> {
             decoration: BoxDecoration(
                 color: Colors.grey.shade200,
                 borderRadius: BorderRadius.circular(10)),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, top: 5, bottom: 5),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomText(
-                        text: course['name'],
-                        fontSize: 21,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 3),
-                        child: CustomText(
-                          fontSize: 19,
-                          text: 'Instructor: '+ course['instname'],
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomText(
+                          text: course['name'],
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 4),
+                          child: CustomText(
+                            fontSize: 16,
+                            text: course['instname'],
+                          ),
+                        ),
+                        CustomText(
+                          text: "ID: " + course['instID'],
+                          fontSize: 16,
+                          color: Colors.grey,
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: 5),
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: Icon(
+                          Icons.arrow_forward_ios,
+                          size: 30,
+                          color: Colors.grey,
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AdminEditAccounts(
+                                        courseName: course['name'],
+                                        courseKey: course['key'],
+                                        instID: course['instID'],
+                                      )));
+                        },
                       ),
-                      CustomText(
-                        text: "Inst ID : " + course['instID'],
-                        color: Colors.grey,
-                      )
                     ],
                   ),
-                ),
-                Row(
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.arrow_forward_ios,
-                        size: 33,
-                        color: Colors.grey,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AdminEditAccounts(
-                                  courseName: course['name'],
-                                      courseKey: course['key'],
-                                      instID: course['instID'],
-
-                                    )));
-                      },
-                    ),
-                  ],
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

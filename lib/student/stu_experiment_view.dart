@@ -155,210 +155,219 @@ class _ExperimentTileState extends State<ExperimentTile> {
   String optionSelected = "";
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Step: " + widget.stepModel.stepNumber,
-            style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.deepPurple),
-          ),
-          SizedBox(
-            height: 4,
-          ),
-          Text(
-            widget.stepModel.description,
-            style: TextStyle(fontSize: 16),
-          ),
-          SizedBox(
-            height: 4,
-          ),
-          Container(
-            alignment: Alignment.center,
-            child: Text(
-              widget.stepModel.question,
+    return 
+    Padding(
+      padding: EdgeInsets.all(10),
+          child: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height:10),
+            Text(
+              "Step: " + widget.stepModel.stepNumber,
               style: TextStyle(
-                fontSize: 16,
-                color: Colors.purple[900],
-                fontWeight: FontWeight.bold,
-              ),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.deepPurple),
             ),
-          ),
-          SizedBox(
-            height: 4,
-          ),
-          InkWell(
-            onTap: () {
-              // is question attempted ?
-              if (!widget.stepModel.attempted) {
-                //no
-                //is ans correct?
-                if (widget.stepModel.option1 ==
-                    widget.stepModel.correctOption) {
-                  //correct
-                  optionSelected = widget.stepModel.option1;
-                  widget.stepModel.attempted = true;
-                  setState(() {});
-                } else {
-                  //incorrect
-                  optionSelected = widget.stepModel.option1;
-                  widget.stepModel.attempted = true;
-                  setState(() {});
-                }
-              }
-            },
-            child: ExperimentOptionTile(
-              correctAnswer: widget.stepModel.correctOption,
-              optionName: widget.stepModel.option1,
-              option: "a",
-              optionSelected: optionSelected,
+            SizedBox(
+              height: 20,
             ),
-          ),
-          SizedBox(
-            height: 4,
-          ),
-          InkWell(
-            onTap: () {
-              // is question attempted ?
-              if (!widget.stepModel.attempted) {
-                //no
-                //is ans correct?
-                if (widget.stepModel.option2 ==
-                    widget.stepModel.correctOption) {
-                  //correct
-                  optionSelected = widget.stepModel.option2;
-                  widget.stepModel.attempted = true;
-                  setState(() {});
-                } else {
-                  //incorrect
-                  optionSelected = widget.stepModel.option2;
-                  widget.stepModel.attempted = true;
-                  setState(() {});
-                }
-              }
-            },
-            child: ExperimentOptionTile(
-              correctAnswer: widget.stepModel.correctOption,
-              optionName: widget.stepModel.option2,
-              option: "b",
-              optionSelected: optionSelected,
+            Text(
+              'Description: ' + widget.stepModel.description,
+              style: TextStyle(
+                  fontSize: 16,
+                  fontStyle: FontStyle.italic,
+                  color: Colors.grey[600]),
             ),
-          ),
-          SizedBox(
-            height: 4,
-          ),
-          InkWell(
-            onTap: () {
-              // is question attempted ?
-              if (!widget.stepModel.attempted) {
-                //no
-                //is ans correct?
-                if (widget.stepModel.option3 ==
-                    widget.stepModel.correctOption) {
-                  //correct
-                  optionSelected = widget.stepModel.option3;
-                  widget.stepModel.attempted = true;
-                  setState(() {});
-                } else {
-                  //incorrect
-                  optionSelected = widget.stepModel.option3;
-                  widget.stepModel.attempted = true;
-                  setState(() {});
-                }
-              }
-            },
-            child: ExperimentOptionTile(
-              correctAnswer: widget.stepModel.correctOption,
-              optionName: widget.stepModel.option3,
-              option: "c",
-              optionSelected: optionSelected,
+            SizedBox(
+              height: 25,
             ),
-          ),
-          SizedBox(
-            height: 4,
-          ),
-          InkWell(
-            onTap: () {
-              // is question attempted ?
-              if (!widget.stepModel.attempted) {
-                //no
-                //is ans correct?
-                if (widget.stepModel.option4 ==
-                    widget.stepModel.correctOption) {
-                  //correct
-                  optionSelected = widget.stepModel.option4;
-                  widget.stepModel.attempted = true;
-                  setState(() {});
-                } else {
-                  //incorrect
-                  optionSelected = widget.stepModel.option4;
-                  widget.stepModel.attempted = true;
-                  setState(() {});
-                }
-              }
-            },
-            child: ExperimentOptionTile(
-              correctAnswer: widget.stepModel.correctOption,
-              optionName: widget.stepModel.option4,
-              option: "d",
-              optionSelected: optionSelected,
-            ),
-          ),
-          SizedBox(
-            height: 4,
-          ),
-          InkWell(
-            onTap: () {
-              // is question attempted ?
-              if (!widget.stepModel.attempted) {
-                //no
-                //is ans correct?
-                if (widget.stepModel.option5 ==
-                    widget.stepModel.correctOption) {
-                  //correct
-                  optionSelected = widget.stepModel.option5;
-                  widget.stepModel.attempted = true;
-                  setState(() {});
-                } else {
-                  //incorrect
-                  optionSelected = widget.stepModel.option5;
-                  widget.stepModel.attempted = true;
-                  setState(() {});
-                }
-              }
-            },
-            child: ExperimentOptionTile(
-              correctAnswer: widget.stepModel.correctOption,
-              optionName: widget.stepModel.option5,
-              option: "e",
-              optionSelected: optionSelected,
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          if (widget.stepModel.attempted)
             Container(
-              width: MediaQuery.of(context).size.width,
-              height: 30,
+              alignment: Alignment.center,
               child: Text(
-                optionSelected == widget.stepModel.correctOption
-                    ? widget.stepModel.correctFeedback
-                    : widget.stepModel.incorrectFeedback,
+                widget.stepModel.question,
                 style: TextStyle(
-                    color: Colors.deepPurple,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14),
+                  fontSize: 16,
+                  color: Colors.purple[900],
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          Divider(
-            color: Colors.yellow[700],
-            thickness: 3,
-          ),
-        ],
+            SizedBox(
+              height: 10,
+            ),
+            InkWell(
+              onTap: () {
+                // is question attempted ?
+                if (!widget.stepModel.attempted) {
+                  //no
+                  //is ans correct?
+                  if (widget.stepModel.option1 ==
+                      widget.stepModel.correctOption) {
+                    //correct
+                    optionSelected = widget.stepModel.option1;
+                    widget.stepModel.attempted = true;
+                    setState(() {});
+                  } else {
+                    //incorrect
+                    optionSelected = widget.stepModel.option1;
+                    widget.stepModel.attempted = true;
+                    setState(() {});
+                  }
+                }
+              },
+              child: 
+              ExperimentOptionTile(
+                correctAnswer: widget.stepModel.correctOption,
+                optionName: widget.stepModel.option1,
+                option: "a",
+                optionSelected: optionSelected,
+              ),
+            ),
+            SizedBox(
+              height: 4,
+            ),
+            InkWell(
+              onTap: () {
+                // is question attempted ?
+                if (!widget.stepModel.attempted) {
+                  //no
+                  //is ans correct?
+                  if (widget.stepModel.option2 ==
+                      widget.stepModel.correctOption) {
+                    //correct
+                    optionSelected = widget.stepModel.option2;
+                    widget.stepModel.attempted = true;
+                    setState(() {});
+                  } else {
+                    //incorrect
+                    optionSelected = widget.stepModel.option2;
+                    widget.stepModel.attempted = true;
+                    setState(() {});
+                  }
+                }
+              },
+              child: ExperimentOptionTile(
+                correctAnswer: widget.stepModel.correctOption,
+                optionName: widget.stepModel.option2,
+                option: "b",
+                optionSelected: optionSelected,
+              ),
+            ),
+            SizedBox(
+              height: 4,
+            ),
+            InkWell(
+              onTap: () {
+                // is question attempted ?
+                if (!widget.stepModel.attempted) {
+                  //no
+                  //is ans correct?
+                  if (widget.stepModel.option3 ==
+                      widget.stepModel.correctOption) {
+                    //correct
+                    optionSelected = widget.stepModel.option3;
+                    widget.stepModel.attempted = true;
+                    setState(() {});
+                  } else {
+                    //incorrect
+                    optionSelected = widget.stepModel.option3;
+                    widget.stepModel.attempted = true;
+                    setState(() {});
+                  }
+                }
+              },
+              child: ExperimentOptionTile(
+                correctAnswer: widget.stepModel.correctOption,
+                optionName: widget.stepModel.option3,
+                option: "c",
+                optionSelected: optionSelected,
+              ),
+            ),
+            SizedBox(
+              height: 4,
+            ),
+            InkWell(
+              onTap: () {
+                // is question attempted ?
+                if (!widget.stepModel.attempted) {
+                  //no
+                  //is ans correct?
+                  if (widget.stepModel.option4 ==
+                      widget.stepModel.correctOption) {
+                    //correct
+                    optionSelected = widget.stepModel.option4;
+                    widget.stepModel.attempted = true;
+                    setState(() {});
+                  } else {
+                    //incorrect
+                    optionSelected = widget.stepModel.option4;
+                    widget.stepModel.attempted = true;
+                    setState(() {});
+                  }
+                }
+              },
+              child: ExperimentOptionTile(
+                correctAnswer: widget.stepModel.correctOption,
+                optionName: widget.stepModel.option4,
+                option: "d",
+                optionSelected: optionSelected,
+              ),
+            ),
+            SizedBox(
+              height: 4,
+            ),
+            InkWell(
+              onTap: () {
+                // is question attempted ?
+                if (!widget.stepModel.attempted) {
+                  //no
+                  //is ans correct?
+                  if (widget.stepModel.option5 ==
+                      widget.stepModel.correctOption) {
+                    //correct
+                    optionSelected = widget.stepModel.option5;
+                    widget.stepModel.attempted = true;
+                    setState(() {});
+                  } else {
+                    //incorrect
+                    optionSelected = widget.stepModel.option5;
+                    widget.stepModel.attempted = true;
+                    setState(() {});
+                  }
+                }
+              },
+              child: ExperimentOptionTile(
+                correctAnswer: widget.stepModel.correctOption,
+                optionName: widget.stepModel.option5,
+                option: "e",
+                optionSelected: optionSelected,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            if (widget.stepModel.attempted)
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: 30,
+                child: Text(
+                  optionSelected == widget.stepModel.correctOption
+                      ? widget.stepModel.correctFeedback
+                      : widget.stepModel.incorrectFeedback,
+                  style: TextStyle(
+                      color: Colors.deepPurple,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14),
+                ),
+              ),
+            Divider(
+              color: Colors.yellow[700],
+              thickness: 3,
+            ),
+          ],
+        ),
       ),
     );
   }

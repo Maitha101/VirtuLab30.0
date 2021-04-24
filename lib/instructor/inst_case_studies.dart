@@ -41,8 +41,8 @@ class _InstCaseStudies extends State<InstCaseStudies> {
     return InkWell(
         child: Container(
           margin: EdgeInsets.symmetric(vertical: 10),
-          padding: EdgeInsets.all(10),
-          height: 90,
+          padding: EdgeInsets.fromLTRB(10, 25, 10, 25),
+          // height: 90,
           decoration: BoxDecoration(
             color: Colors.white,
             boxShadow: [
@@ -68,12 +68,14 @@ class _InstCaseStudies extends State<InstCaseStudies> {
                   SizedBox(
                     width: 10,
                   ),
-                  Text(
-                    "Case Study: " + caseStudy['title'],
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black87),
+                  Flexible(
+                    child: Text(
+                      caseStudy['title'],
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black87),
+                    ),
                   ),
                   SizedBox(
                     width: 10,

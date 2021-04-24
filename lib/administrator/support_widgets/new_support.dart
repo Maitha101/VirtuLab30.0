@@ -31,14 +31,14 @@ class _NewTSMessage extends State<NewTSMessage> {
                 title: Text(
                   message['subject'],
                   style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      height: 1,
+                      // height: 1,
                       color: Colors.deepPurple),
                 ),
                 subtitle: Text(
                   'From: ' + message['senderID'],
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(color: Colors.grey,),
                 ),
                 leading: Icon(
                   Icons.account_circle,
@@ -58,6 +58,7 @@ class _NewTSMessage extends State<NewTSMessage> {
                                     textAlign: TextAlign.right,
                                   )),
                             ]),
+                            SizedBox(height:20),
                         Text(message['message']),
                         Divider(
                           thickness: 1,

@@ -33,68 +33,82 @@ class _ExperimentsList extends State<ExperimentsList> {
   }
 
   Widget _buildExperimentList({Map experiment}) {
-    return Card(
-      child: InkWell(
-        onTap: () {}, // Navigate when tapped
-        child: Padding(
-          padding: const EdgeInsets.all(25.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              // Column(
-              //   crossAxisAlignment: CrossAxisAlignment.start,
-              //   children: <Widget>[
-              //Multiple texts in a widget
-              Column(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
+      children: [
+        Card(
+          child: InkWell(
+            onTap: () {}, // Navigate when tapped
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
+              color: Colors.white,
+              // padding: const EdgeInsets.all(25.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Icon(Icons.thermostat_rounded),
-                      SizedBox(width: 10),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            experiment['title'],
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                height: 2,
-                                color: Colors.deepPurple),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // Column(
+                        //   children: [
+                        Icon(Icons.thermostat_rounded),
+
+                        SizedBox(width: 15),
+                        Flexible(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                experiment['title'],
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    height: 2,
+                                    color: Colors.deepPurple),
+                              ),
+                              // Text('attempted: true ?'),
+                            ],
                           ),
-                          Text('attempted: true ?'),
-                        ],
-                      ),
-                    ],
+                        ),
+
+                        SizedBox(width: 15),
+                        // ],),
+                        ElevatedButton(
+                          onPressed: () => {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ExperimentView(
+                                  expKey: experiment['key'],
+                                  expName: experiment['title'],
+                                ),
+                              ),
+                            ),
+                          },
+                          child: Text('Start'),
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.amber)),
+                          // color: Colors.amber,
+                        ),
+
+                        //   ],
+                        // ),
+                        // SizedBox(
+                        //   width: 90,
+                        // ),
+                      ],
+                    ),
                   ),
                 ],
               ),
-              // SizedBox(
-              //   width: 90,
-              // ),
-              ElevatedButton(
-                onPressed: () => {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ExperimentView(
-                        expKey: experiment['key'],
-                        expName: experiment['title'],
-                      ),
-                    ),
-                  ),
-                },
-                child: Text('Start'),
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.amber)),
-                // color: Colors.amber,
-              ),
-            ],
+            ),
           ),
         ),
-      ),
+      ],
     );
   }
 

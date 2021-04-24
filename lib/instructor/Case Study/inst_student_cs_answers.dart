@@ -36,7 +36,6 @@ class _CsStudentAnswers extends State<CsStudentAnswers> {
   String _ans4;
   String _ans5;
   String _date;
-  
 
   final _gradeForm = GlobalKey<FormState>();
   final _gradeController = TextEditingController();
@@ -81,7 +80,6 @@ class _CsStudentAnswers extends State<CsStudentAnswers> {
       _ans4 = ans['answer4'];
       _ans5 = ans['answer5'];
       _date = ans['date'];
-      
     });
   }
 
@@ -98,7 +96,7 @@ class _CsStudentAnswers extends State<CsStudentAnswers> {
     _q5 = csInfo['question5'];
     _totalGrade = csInfo['total_grade'];
     _deadline = csInfo['deadline'];
-    if(_deadline == ""){
+    if (_deadline == "") {
       _deadline = 'No deadline set';
     }
   }
@@ -116,201 +114,205 @@ class _CsStudentAnswers extends State<CsStudentAnswers> {
         backgroundColor: Colors.deepPurple,
       ),
       body: Container(
-      child: Padding(
-        padding: EdgeInsets.all(25),
-        child: SingleChildScrollView(
-          child: Form(
-            key: _gradeForm,
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        _title,
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.deepPurple),
+        child: Padding(
+          padding: EdgeInsets.all(25),
+          child: SingleChildScrollView(
+            child: Form(
+              key: _gradeForm,
+              child: Column(
+                // mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            _title,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.deepPurple),
+                          ),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                  child: Text('$_description'),
-                ),
-                Divider(color: Colors.grey),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                  child: Text('$_body'),
-                ),
-                Divider(color: Colors.grey),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                      child: Text('1. $_q1', style: _questionStyle),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                      child: Text(_ans1, style: _answerStyle),
-                    ),
-                  ],
-                ),
-                Divider(color: Colors.grey),
-                // Text(_ans1, style: _answerStyle),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                      child: Text('2. $_q2', style: _questionStyle),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                      child: Text(_ans2, style: _answerStyle),
-                    ),
-                  ],
-                ),
-                Divider(color: Colors.grey),
-                // Text(_ans2, style: _answerStyle),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                      child: Text('3. $_q3', style: _questionStyle),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                      child: Text(_ans3, style: _answerStyle),
-                    ),
-                  ],
-                ),
-                Divider(color: Colors.grey),
-                // Text(_ans3, style: _answerStyle),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                      child: Text('4. $_q4', style: _questionStyle),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                      child: Text(_ans4, style: _answerStyle),
-                    ),
-                  ],
-                ),
-                Divider(color: Colors.grey),
-                // Text(_ans4, style: _answerStyle),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                      child: Text('5. $_q5', style: _questionStyle),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                      child: Text(_ans5, style: _answerStyle),
-                    ),
-                  ],
-                ),
-                Divider(color: Colors.grey),
-                // Text(_ans5, style: _answerStyle),
-                // SizedBox(
-                //   height: 20,
-                // ),
-                Container(
-                  // decoration:
-                  //     BoxDecoration(border: Border.all(color: Colors.grey),borderRadius: BorderRadius.all(Radius.circular(10))),
-                  child: Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
-                              child: Text(
-                                'Student: ' + widget.studKey,
-                                style: TextStyle(fontStyle: FontStyle.italic),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
-                              child: Text(
-                                'Submitted at: ' + _date,
-                                style: TextStyle(fontStyle: FontStyle.italic),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
-                              child: Text(
-                                'Deadline: ' + _deadline,
-                                style: TextStyle(fontStyle: FontStyle.italic),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                    ],
                   ),
-                ),
-
-                Divider(color: Colors.grey),
-                Column(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                    child: Text('$_description'),
+                  ),
+                  Divider(color: Colors.grey),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                    child: Text('$_body'),
+                  ),
+                  Divider(color: Colors.grey),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                        child: Text(
-                          'Grade',
-                          style: _questionStyle,
-                        ),
+                        padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                        child: Text('1. $_q1', style: _questionStyle),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                        child: Text(_ans1, style: _answerStyle),
+                      ),
+                    ],
+                  ),
+                  Divider(color: Colors.grey),
+                  // Text(_ans1, style: _answerStyle),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                        child: Text('2. $_q2', style: _questionStyle),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                        child: Text(_ans2, style: _answerStyle),
+                      ),
+                    ],
+                  ),
+                  Divider(color: Colors.grey),
+                  // Text(_ans2, style: _answerStyle),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                        child: Text('3. $_q3', style: _questionStyle),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                        child: Text(_ans3, style: _answerStyle),
+                      ),
+                    ],
+                  ),
+                  Divider(color: Colors.grey),
+                  // Text(_ans3, style: _answerStyle),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                        child: Text('4. $_q4', style: _questionStyle),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                        child: Text(_ans4, style: _answerStyle),
+                      ),
+                    ],
+                  ),
+                  Divider(color: Colors.grey),
+                  // Text(_ans4, style: _answerStyle),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                        child: Text('5. $_q5', style: _questionStyle),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                        child: Text(_ans5, style: _answerStyle),
+                      ),
+                    ],
+                  ),
+                  Divider(color: Colors.grey),
+                  // Text(_ans5, style: _answerStyle),
+                  // SizedBox(
+                  //   height: 20,
+                  // ),
+                  Container(
+                    // decoration:
+                    //     BoxDecoration(border: Border.all(color: Colors.grey),borderRadius: BorderRadius.all(Radius.circular(10))),
+                    child: Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Column(
                         children: [
-                          Container(
-                            width: 70,
-                            child: TextFormField(
-                              textAlign: TextAlign.center,
-                              controller: _gradeController,
-                              validator: (value) => _validateGrade(value),
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'[0-9]'))
-                              ],
-                              decoration:
-                                  InputDecoration(border: OutlineInputBorder()),
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+                                child: Text(
+                                  'Student: ' + widget.studKey,
+                                  style: TextStyle(fontStyle: FontStyle.italic),
+                                ),
+                              ),
+                            ],
                           ),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
-                            child: Text('/ $_totalGrade', style: _answerStyle),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+                                child: Text(
+                                  'Submitted at: ' + _date,
+                                  style: TextStyle(fontStyle: FontStyle.italic),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+                                child: Text(
+                                  'Deadline: ' + _deadline,
+                                  style: TextStyle(fontStyle: FontStyle.italic),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
+                    ),
+                  ),
+
+                  Divider(color: Colors.grey),
+                  Column(
+                      // crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                          child: Text(
+                            'Grade',
+                            style: _questionStyle,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 70,
+                              child: TextFormField(
+                                textAlign: TextAlign.center,
+                                controller: _gradeController,
+                                validator: (value) => _validateGrade(value),
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]'))
+                                ],
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder()),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                              child:
+                                  Text('/ $_totalGrade', style: _answerStyle),
+                            ),
+                          ],
+                        ),
                         Padding(
                           padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
                           child: Container(

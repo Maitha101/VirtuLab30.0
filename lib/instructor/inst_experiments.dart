@@ -53,8 +53,8 @@ class _InstExperiments extends State<InstExperiments> {
             ],
           ),
           margin: EdgeInsets.symmetric(vertical: 5),
-          padding: EdgeInsets.all(10),
-          height: 90,
+          padding: EdgeInsets.fromLTRB(10, 25, 10, 25),
+          // height: 90,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,12 +70,14 @@ class _InstExperiments extends State<InstExperiments> {
                   SizedBox(
                     width: 10,
                   ),
-                  Text(
-                    "Experiment: " + experiment['title'],
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black87),
+                  Flexible(
+                    child: Text(
+                      experiment['title'],
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black87),
+                    ),
                   ),
                   SizedBox(
                     width: 10,

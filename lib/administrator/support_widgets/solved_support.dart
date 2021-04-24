@@ -35,9 +35,9 @@ class _SolvedTSMessage extends State<SolvedTSMessage> {
                   title: Text(
                     message['subject'],
                     style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        height: 1,
+                        // height: 1,
                         color: Colors.deepPurple),
                   ),
                   subtitle: Text(
@@ -55,13 +55,15 @@ class _SolvedTSMessage extends State<SolvedTSMessage> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 Container(
-                                    padding: EdgeInsets.all(10),
-                                    child: Text(
-                                      message['date'],
-                                      style: TextStyle(color: Colors.grey),
-                                      textAlign: TextAlign.right,
-                                    )),
+                                  padding: EdgeInsets.all(10),
+                                  child: Text(
+                                    message['date'],
+                                    style: TextStyle(color: Colors.grey),
+                                    textAlign: TextAlign.right,
+                                  ),
+                                ),
                               ]),
+                          SizedBox(height: 20),
                           Text(message['message']),
                           Divider(
                             thickness: 1,

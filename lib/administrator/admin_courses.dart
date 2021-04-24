@@ -65,11 +65,13 @@ class _AdminCourses extends State<AdminCourses> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 25,),
+            SizedBox(
+              height: 25,
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 30, bottom: 10),
               child: CustomText(
-                text: "Courses :",
+                text: "Courses:",
                 fontWeight: FontWeight.bold,
                 fontSize: 22,
               ),
@@ -98,68 +100,78 @@ class _AdminCourses extends State<AdminCourses> {
       padding: const EdgeInsets.all(8.0),
       child: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 15),
+          // padding: EdgeInsets.symmetric(vertical: 15),
           decoration: BoxDecoration(
               color: Colors.grey.shade200,
               borderRadius: BorderRadius.circular(10)),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20, top: 5, bottom: 5),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      text: course['name'],
-                      fontSize: 21,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4),
-                      child: CustomText(
-                        fontSize: 19,
-                        text: course['instname'],
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomText(
+                        text: course['name'],
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
-                    ),
-                    CustomText(text: course['instID'],)
-                  ],
-                ),
-              ),
-              Row(
-                children: [
-                  IconButton(
-                      icon: Icon(
-                        Icons.edit,
-                        size: 33,
-                        color: Colors.blue,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: CustomText(
+                          fontSize: 16,
+                          text: course['instname'],
+                        ),
                       ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AdminEditCourse(
-                                      courseKey: course['key'],
-                                    )));
-                      }),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      right: 20,
-                    ),
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.delete,
-                        size: 33,
-                        color: Colors.red,
-                      ),
-                      onPressed: () {
-                        _showDeleteDialog(course: course);
-                      },
-                    ),
+                      CustomText(
+                          fontSize: 16,
+                          text: 'ID: ' + course['instID'],
+                          color: Colors.grey)
+                    ],
                   ),
-                ],
-              )
-            ],
+                ),
+                SizedBox(width: 5),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(
+                            icon: Icon(
+                              Icons.edit,
+                              size: 30,
+                              color: Colors.blue,
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AdminEditCourse(
+                                            courseKey: course['key'],
+                                          )));
+                            }),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            right: 20,
+                          ),
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.delete,
+                              size: 30,
+                              color: Colors.red,
+                            ),
+                            onPressed: () {
+                              _showDeleteDialog(course: course);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

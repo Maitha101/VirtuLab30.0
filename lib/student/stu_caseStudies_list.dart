@@ -64,30 +64,34 @@ class _CaseStudiesList extends State<CaseStudiesList> {
                 children: [
                   Padding(
                     padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                    child: Row(
+                    child:
+                        // Row(
+
+                        //   children: [
+                        Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.description_sharp,
-                            ),
-                            SizedBox(width: 20),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  caseStudy['title'],
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      height: 2,
-                                      color: Colors.deepPurple),
-                                ),
-                              ],
-                            ),
-                          ],
+                        Icon(
+                          Icons.description_sharp,
                         ),
+                        SizedBox(width: 15),
+                        Flexible(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                caseStudy['title'],
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    height: 2,
+                                    color: Colors.deepPurple),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(width:15),
                         ElevatedButton(
                             onPressed: () => {
                                   Navigator.push(
@@ -107,6 +111,9 @@ class _CaseStudiesList extends State<CaseStudiesList> {
                                         Colors.amber))),
                       ],
                     ),
+
+                    //   ],
+                    // ),
                   ),
                   SizedBox(height: 5),
                 ],

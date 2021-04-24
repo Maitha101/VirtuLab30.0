@@ -76,7 +76,8 @@ class _CaseStudyView extends State<CaseStudyView> {
         automaticallyImplyLeading: false,
         title: Text(
           widget.caseStudyName,
-          style: TextStyle(fontSize: 22),
+          
+          style: TextStyle(fontSize: 20),
         ),
         backgroundColor: Colors.deepPurple,
       ),
@@ -100,18 +101,20 @@ class _CaseStudyView extends State<CaseStudyView> {
                             children: <Widget>[
                               Text(
                                 title == null ? "title" : title,
+                                textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize: 21,
+                                    fontSize: 20,
                                     fontWeight: FontWeight.bold,
-                                    height: 2,
+                                    // height: 1,
                                     color: Colors.deepPurple),
                               ),
                               Divider(),
+                              SizedBox(height:20),
                               Text(
                                 'Description:',
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 21),
+                                    fontWeight: FontWeight.bold, fontSize: 18),
                               ),
                               Container(
                                 padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
@@ -119,22 +122,23 @@ class _CaseStudyView extends State<CaseStudyView> {
                                   description == null
                                       ? "description"
                                       : description,
-                                  style: TextStyle(fontSize: 19),
+                                  style: TextStyle(fontSize: 16),
                                   textAlign: TextAlign.left,
                                   maxLines: null,
                                 ),
                               ),
+                              SizedBox(height:20),
                               Text(
                                 'Case Study:',
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
-                                    fontSize: 21, fontWeight: FontWeight.bold),
+                                    fontSize: 18, fontWeight: FontWeight.bold),
                               ),
                               Container(
                                 padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
                                 child: Text(
                                   body == null ? "body" : body,
-                                  style: TextStyle(fontSize: 19),
+                                  style: TextStyle(fontSize: 16),
                                   textAlign: TextAlign.left,
                                   maxLines: null,
                                 ),
@@ -144,19 +148,19 @@ class _CaseStudyView extends State<CaseStudyView> {
                                 'Questions:',
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
-                                    fontSize: 21, fontWeight: FontWeight.bold),
+                                    fontSize: 18, fontWeight: FontWeight.bold),
                               ),
                               Container(
-                                  padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                  padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Text(
                                         question1 == null
-                                            ? '1/ ' + "Q1"
-                                            : '1/ ' + question1,
-                                        style: TextStyle(fontSize: 19),
+                                            ? '1. ' + "Q1"
+                                            : '1. ' + question1,
+                                        style: TextStyle(fontSize: 16),
                                         textAlign: TextAlign.left,
                                         maxLines: null,
                                       ),
@@ -174,16 +178,16 @@ class _CaseStudyView extends State<CaseStudyView> {
                                 ),
                               ),
                               Container(
-                                  padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                  padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Text(
                                         question2 == null
-                                            ? '2/ ' + "Q2"
-                                            : '2/ ' + question2,
-                                        style: TextStyle(fontSize: 19),
+                                            ? '2. ' + "Q2"
+                                            : '2. ' + question2,
+                                        style: TextStyle(fontSize: 16),
                                         textAlign: TextAlign.left,
                                         maxLines: null,
                                       ),
@@ -201,16 +205,16 @@ class _CaseStudyView extends State<CaseStudyView> {
                                 ),
                               ),
                               Container(
-                                  padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                  padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Text(
                                         question3 == null
-                                            ? '3/ ' + "Q3"
-                                            : '3/ ' + question3,
-                                        style: TextStyle(fontSize: 19),
+                                            ? '3. ' + "Q3"
+                                            : '3. ' + question3,
+                                        style: TextStyle(fontSize: 16),
                                         textAlign: TextAlign.left,
                                         maxLines: null,
                                       ),
@@ -228,16 +232,16 @@ class _CaseStudyView extends State<CaseStudyView> {
                                 ),
                               ),
                               Container(
-                                  padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                  padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Text(
                                         question4 == null
-                                            ? '4/ ' + "Q4"
-                                            : '4/ ' + question4,
-                                        style: TextStyle(fontSize: 19),
+                                            ? '4. ' + "Q4"
+                                            : '4. ' + question4,
+                                        style: TextStyle(fontSize: 16),
                                         textAlign: TextAlign.left,
                                         maxLines: null,
                                       ),
@@ -255,17 +259,17 @@ class _CaseStudyView extends State<CaseStudyView> {
                                 ),
                               ),
                               Container(
-                                  padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                  padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Text(
                                         question5 == null
-                                            ? '5/ ' + "Q5"
-                                            : '5/ ' + question5,
+                                            ? '5. ' + "Q5"
+                                            : '5. ' + question5,
                                         textAlign: TextAlign.left,
-                                        style: TextStyle(fontSize: 19),
+                                        style: TextStyle(fontSize: 16),
                                         maxLines: null,
                                       ),
                                     ],
@@ -281,6 +285,7 @@ class _CaseStudyView extends State<CaseStudyView> {
                                   labelText: 'Write Your Answer Here',
                                 ),
                               ),
+                              SizedBox(height:30),
                               Align(
                                 alignment: Alignment.centerRight,
                                 child: Container(
@@ -294,7 +299,7 @@ class _CaseStudyView extends State<CaseStudyView> {
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           30)),
-                                              width: 100,
+                                              width: 130,
                                               child: TextButton(
                                                 onPressed: () {
                                                   var date = DateTime.now();
