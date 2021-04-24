@@ -40,7 +40,7 @@ class _SignUp extends State<SignUp> {
       return '* Required';
     }
     //length
-    if (id.length != 10 && id.length != 6 && id.length !=4) {
+    if (id.length != 10 && id.length != 6 && id.length != 4) {
       return 'Invalid ID';
     }
 
@@ -234,8 +234,7 @@ class _SignUp extends State<SignUp> {
                   keyboardType: TextInputType.emailAddress,
                   controller: _emailController,
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Academic Email'),
+                      border: OutlineInputBorder(), labelText: 'Email'),
                 ),
               ),
               SizedBox(
@@ -334,7 +333,7 @@ class _SignUp extends State<SignUp> {
                           _passController.text,
                           context,
                         );
-                        
+
                         // } on HttpException catch (error) {
                         //   var errorMessage = 'Sign up Failed';
                         //   if (error.message.contains('EMAIL_EXISTS')){
