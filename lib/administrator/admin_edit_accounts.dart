@@ -19,12 +19,26 @@ class AdminEditAccounts extends StatefulWidget {
 
 class _AdminEditAccountsState extends State<AdminEditAccounts> {
   int length = 0;
-
+  List<String> allStudents = [];
   List studentKey = [];
   List studentNameList = [];
   TextEditingController _instController;
   final _formKey = GlobalKey<FormState>();
-
+  void getAllStudents() async {
+    firebaseref
+        .child('student')
+        .orderByChild('fname')
+        .once()
+        .then((DataSnapshot snapshot) {
+      Map map = snapshot.value;
+      setState(() {
+        map.forEach((key, value) {
+          allStudents
+              .add(value['fname'] + " " + value['lname'] + " : " + value['ID']);
+        });
+      });
+    });
+  }
   getStudentList() {
     DatabaseReference _data = firebaseref
         .reference()
@@ -69,6 +83,8 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
     _instController = TextEditingController();
     _instController.text = widget.instID;
     getStudentList();
+    getAllStudents();
+
 
     setState(() {
       Timer(Duration(seconds: 1), () {
@@ -88,7 +104,7 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
       floatingActionButton: FloatingActionButton.extended(
         icon: Icon(Icons.add),
         onPressed: () {
-          print(auth.currentUser.uid);
+          studentDialog();
         },
         backgroundColor: Colors.amber,
         label: CustomText(
@@ -359,5 +375,61 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
         .then((value) => {Navigator.pop(context)});
   }
   
+ studentDialog(){
+    showDialog(context: context, builder: (context){
+      return Dialog(
+        child: Container(
+          height: MediaQuery.of(context).size.height *.6,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: CustomText(text: "Student List",
+                fontSize: 22,
+                fontWeight: FontWeight.bold,),
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height * .43,
+                child: ListView.builder(
+                  itemCount: allStudents.length,
+                    itemBuilder: (context,index){
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                      onTap: (){
 
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 15,horizontal: 5),
+                        color: Colors.yellowAccent,
+                        child: Text(
+                          allStudents[index],
+                          style: TextStyle(
+                            fontSize: 20
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+              ),
+              Container(
+                width: 120,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(15)
+                ),
+                child: TextButton(onPressed: (){
+                  Navigator.pop(context);
+                }, child: CustomText(
+                  text: "OK",
+                  color: Colors.white,
+                )),
+              )
+            ],
+          ),
+        ),
+      );
+    });
+ }
 }

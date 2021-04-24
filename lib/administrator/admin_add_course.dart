@@ -18,7 +18,7 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
   String name;
   final _formKey = GlobalKey<FormState>();
 
-  void getinstructor() async {
+  void getInstructor() async {
     firebaseref
         .child('instructor')
         .orderByChild('fname')
@@ -37,7 +37,7 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
   @override
   void initState() {
     super.initState();
-    getinstructor();
+    getInstructor();
   }
 
   @override
