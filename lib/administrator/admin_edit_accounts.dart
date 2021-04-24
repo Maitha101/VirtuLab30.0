@@ -9,8 +9,9 @@ class AdminEditAccounts extends StatefulWidget {
   final String courseKey;
   final String instID;
   final String courseName;
+  final String instName;
 
-  AdminEditAccounts({this.courseKey, this.instID, this.courseName});
+  AdminEditAccounts({this.courseKey, this.instID, this.courseName,this.instName});
 
   @override
   _AdminEditAccountsState createState() => _AdminEditAccountsState();
@@ -107,7 +108,7 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
             Padding(
                 padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
                 child: Text(
-                  'Instructor ID:',
+                  'Instructor:',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 )),
             Padding(
@@ -120,35 +121,28 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CustomText(
-                        text: widget.instID,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomText(
+                            text: widget.instName,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                          CustomText(
+                            text: "ID: " + widget.instID,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ],
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              updateInstDialog();
-                            });
-                          },
-                          child: Column(
-                            children: [
-                              Icon(
-                                Icons.repeat,
-                                size: 30,
-                                color: Colors.white,
-                              ),
-                              CustomText(
-                                text: "Change",
-                                color: Colors.white,
-                              )
-                            ],
-                          ),
-                        ),
+
                       )
                     ],
                   ),

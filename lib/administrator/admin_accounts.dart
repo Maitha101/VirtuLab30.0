@@ -151,6 +151,7 @@ class _AdminAccounts extends State<AdminAccounts> {
                                         courseName: course['name'],
                                         courseKey: course['key'],
                                         instID: course['instID'],
+                                    instName: course['instname'],
                                       )));
                         },
                       ),

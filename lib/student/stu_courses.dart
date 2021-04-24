@@ -23,7 +23,6 @@ class _StudentCourses extends State<StudentCourses> {
     super.initState();
     _courses =
         firebaseref.child('course').orderByChild('studID/$_id').equalTo(_id);
-    getInstName(_instID);
   }
 
   getInstName(String id) async {
