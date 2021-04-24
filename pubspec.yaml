@@ -24,7 +24,10 @@ dependencies:
   flutter:
     sdk: flutter
   # dio: ^3.0.10
+
   flappy_search_bar: ^1.7.2
+  
+  flutter_datetime_picker: ^1.5.1
 
   flutter_password_strength: ^0.1.6
   http: ^0.13.1

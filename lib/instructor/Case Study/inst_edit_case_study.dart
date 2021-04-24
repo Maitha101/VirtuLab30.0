@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:virtulab/instructor/inst_report.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class CaseStudyEditForm extends StatefulWidget {
   final String snapshotKey;
@@ -13,6 +14,10 @@ class CaseStudyEditForm extends StatefulWidget {
 
 // this Widget takes cs_questions_dynamicTF.dart for duplicaton
 class CaseStudyEditFormState extends State<CaseStudyEditForm> {
+  TextStyle _fieldInfo = TextStyle(
+      fontWeight: FontWeight.bold, fontSize: 16, color: Colors.deepPurple);
+
+  DateTime _deadline = DateTime.now();
   bool dateCheckBoxValue = false;
   DatabaseReference dbRef;
   bool _loading = false;
@@ -87,6 +92,19 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
     }
   }
 
+  _datePicker(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: _deadline, // Refer step 1
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2025),
+    );
+    if (picked != null && picked != _deadline)
+      setState(() {
+        _deadline = picked;
+      });
+  }
+
   _showDeleteDialog() {
     showDialog(
         context: context,
@@ -148,6 +166,7 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
                 ),
                 child: ListView(
                   children: <Widget>[
+                    Text('Title', style: _fieldInfo,),
                     TextFormField(
                       validator: (v) => v.isEmpty ? "Enter title" : null,
                       controller: titleController,
@@ -155,6 +174,8 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
                         hintText: 'Enter the Case Study title here',
                       ),
                     ),
+                    SizedBox(height:30),
+                    Text('Description', style: _fieldInfo,),
                     TextFormField(
                       controller: discrController,
                       validator: (v) => v.isEmpty ? "enter description" : null,
@@ -172,8 +193,9 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
                       thickness: 3,
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
+                    Text('Body', style: _fieldInfo,),
                     TextFormField(
                       validator: (v) => v.isEmpty ? "enter question" : null,
                       controller: bodyController,
@@ -187,13 +209,10 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
                       height: 20,
                     ),
                     Text(
-                      'Questions:',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.deepPurple,
-                        fontWeight: FontWeight.bold,
+                      'Questions',
+                      style: _fieldInfo
                       ),
-                    ),
+                    
                     SizedBox(
                       height: 10,
                     ),
@@ -243,7 +262,7 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
                       height: 10,
                     ),
                     TextFormField(
-                      validator: (v) => v.isEmpty ? "enter Grade" : null,
+                      validator: (v) => v.isEmpty ? "Grade" : null,
                       controller: gradeController,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
@@ -275,10 +294,33 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
                           keyboardType: TextInputType.datetime,
                           decoration: InputDecoration(
                             //may use date picker instead ..
-                            hintText: 'Enter the deadline date -dd/mm/yyyy-',
+                            hintText: 'Deadline: -DD/MM/YYY-',
                           ),
                         ),
                       ),
+                    // Column(
+                    //   children: [
+                    //     Container(
+                    //       padding: EdgeInsets.all(15),
+                    //       decoration: BoxDecoration(
+                    //         borderRadius: BorderRadius.circular(3),
+                    //           border: Border.all(color: Colors.grey)),
+                    //       child: Text(
+                    //         'Deadline:  ' +
+                    //             '${_deadline.toLocal()}'.split(' ')[0],
+                    //       ),
+                    //     ),
+                    //     SizedBox(height: 10),
+                    //     Container(
+                    //       height: 45,
+                    //       width: 170,
+                    //       child: ElevatedButton(
+                    //         onPressed: () => _datePicker(context),
+                    //         child: Text('Select date'),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                     SizedBox(height: 15),
                     Container(
                       child: Row(

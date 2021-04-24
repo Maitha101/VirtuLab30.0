@@ -140,7 +140,7 @@ class _CaseStudyDetailState extends State<CaseStudyDetail> {
                 height: 20,
               ),
               Text(
-                'Options',
+                'Questions',
                 style: _fieldInfo
               ),
               SizedBox(
