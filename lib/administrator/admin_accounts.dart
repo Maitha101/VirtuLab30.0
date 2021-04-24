@@ -39,18 +39,7 @@ class _AdminAccounts extends State<AdminAccounts> {
     DataSnapshot snap = await _courses.reference().child('studID').once();
     Map stud = snap.value;
     _studCount = stud.length;
-    // debugPrint(' student count is $_studCount');
   }
-
-  // studCount(String key) async {
-  //   DataSnapshot snap =
-  //       await _courses.reference().child(key).child('studID').once();
-  //   Map stud = snap.value;
-  //   setState(() {
-  //     _studCount = stud.length;
-  //   });
-  //
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -96,11 +85,22 @@ class _AdminAccounts extends State<AdminAccounts> {
 
   _courseList({Map course}) {
     // studCount(course['key']);
-    return Container(
-      // height: MediaQuery.of(context).size.height * .54,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => AdminEditAccounts(
+                  courseName: course['name'],
+                  courseKey: course['key'],
+                  instID: course['instID'],
+                  instName: course['instname'],
+                )));
+      },
+      child: Container(
+        // height: MediaQuery.of(context).size.height * .54,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
           child: Container(
             decoration: BoxDecoration(
                 color: Colors.grey.shade200,
@@ -116,7 +116,8 @@ class _AdminAccounts extends State<AdminAccounts> {
                       children: [
                         CustomText(
                           text: course['name'],
-                          fontSize: 18,
+                          fontSize: 19,
+                          color: Colors.deepPurple,
                           fontWeight: FontWeight.bold,
                         ),
                         Padding(
@@ -144,15 +145,7 @@ class _AdminAccounts extends State<AdminAccounts> {
                           color: Colors.grey,
                         ),
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => AdminEditAccounts(
-                                        courseName: course['name'],
-                                        courseKey: course['key'],
-                                        instID: course['instID'],
-                                    instName: course['instname'],
-                                      )));
+
                         },
                       ),
                     ],

@@ -52,7 +52,7 @@ class _AdminCourses extends State<AdminCourses> {
         },
         backgroundColor: Colors.amber,
         label: Text(
-          "Add New Course",
+          "Create New Course",
           style: TextStyle(color: Colors.white),
         ),
       ),
@@ -97,7 +97,7 @@ class _AdminCourses extends State<AdminCourses> {
   _buildCourses({Map course}) {
     studCount(course['key']);
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(10.0),
       child: SingleChildScrollView(
         child: Container(
           // padding: EdgeInsets.symmetric(vertical: 15),
@@ -116,6 +116,7 @@ class _AdminCourses extends State<AdminCourses> {
                       CustomText(
                         text: course['name'],
                         fontSize: 18,
+                        color: Colors.deepPurple,
                         fontWeight: FontWeight.bold,
                       ),
                       Padding(
@@ -204,115 +205,3 @@ class _AdminCourses extends State<AdminCourses> {
         });
   }
 }
-
-// getCourses() async {
-//   final courses = await firebaseref
-//       .reference()
-//       .child("course")
-//       .once()
-//       .then((DataSnapshot data) {
-//     Map<dynamic, dynamic> courseValue1 = data.value;
-//     // courseValue1['key'] = data.key;
-//     courseValue1.forEach((key, value) {
-//       getAllCourses.add({
-//         'key' : courseValue1.keys,
-//         'code': courseValue1[key]['code'],
-//         'description': courseValue1[key]['description'],
-//         'name': courseValue1[key]['name'],
-//         'instID': courseValue1[key]['instID']
-//       });
-//           print(courseValue1.keys);
-//     });
-//   });
-//
-//   return getAllCourses;
-// }
-
-// deleteCourse() async {
-//
-//  await firebaseref.reference().child("course").child('key').remove();
-// }
-
-//   _buildCourseItems(){
-//     return ListView.builder(
-//         itemCount: getAllCourses.length,
-//         itemBuilder: (context, index) {
-//           return Padding(
-//             padding: const EdgeInsets.all(8.0),
-//             child: Container(
-//               decoration: BoxDecoration(
-//                   color: Colors.grey.shade200,
-//                   borderRadius: BorderRadius.circular(10)),
-//               child: Row(
-//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                 children: [
-//                   Padding(
-//                     padding: const EdgeInsets.only(
-//                         left: 20, top: 5, bottom: 5),
-//                     child: Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: [
-//                         CustomText(
-//                           text: getAllCourses[index]['name'],
-//                           fontSize: 21,
-//                           fontWeight: FontWeight.w600,
-//                         ),
-//                         CustomText(
-//                           text: getAllCourses[index]['instID'],
-//                         ),
-//                         CustomText(
-//                           text: "No.Student : 32",
-//                           color: Colors.grey,
-//                         )
-//                       ],
-//                     ),
-//                   ),
-//                   Row(
-//                     children: [
-//                       IconButton(
-//                           icon: Icon(
-//                             Icons.edit,
-//                             size: 33,
-//                             color: Colors.blue,
-//                           ),
-//                           onPressed: () {}),
-//                       Padding(
-//                         padding: const EdgeInsets.only(
-//                           right: 20,
-//                         ),
-//                         child: IconButton(
-//                           icon: Icon(
-//                             Icons.delete,
-//                             size: 33,
-//                             color: Colors.red,
-//                           ),
-//                           onPressed: () {
-//                             deleteCourse();
-//                           },
-//                         ),
-//                       ),
-//                     ],
-//                   )
-//                 ],
-//               ),
-//             ),
-//           );
-//         });
-//   }
-// }
-
-// class Courses {
-//   String name;
-//   String instID;
-//   String code;
-//   String description;
-//
-//   Courses({this.name, this.description, this.code, this.instID});
-//
-//   Courses.fromJson(DataSnapshot json) {
-//     code = json.value['code'];
-//     description = json.value['description'];
-//     instID = json.value['instID'];
-//     name = json.value['name'];
-//   }
-// }
