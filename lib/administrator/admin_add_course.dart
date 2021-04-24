@@ -16,8 +16,9 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
   String courseTitle;
   String description;
   String name;
+  final _formKey = GlobalKey<FormState>();
 
-  void getinstructor() async {
+  void getInstructor() async {
     firebaseref
         .child('instructor')
         .orderByChild('fname')
@@ -36,7 +37,7 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
   @override
   void initState() {
     super.initState();
-    getinstructor();
+    getInstructor();
   }
 
   @override
@@ -58,7 +59,7 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 15, bottom: 10),
+                padding: const EdgeInsets.only(top: 30, bottom: 10),
                 child: CustomText(
                   text: "Course Code :",
                   fontSize: 21,
@@ -72,7 +73,7 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
                 },
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 20, bottom: 10),
+                padding: const EdgeInsets.only(top: 30, bottom: 10),
                 child: CustomText(
                   text: "Name :",
                   fontSize: 21,
@@ -86,7 +87,7 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
                 },
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 20, bottom: 10),
+                padding: const EdgeInsets.only(top: 30, bottom: 10),
                 child: CustomText(
                   text: "Assign Instructor :",
                   fontWeight: FontWeight.bold,
@@ -130,24 +131,11 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20, bottom: 10),
-                child: CustomText(
-                  text: "Description :",
-                  fontSize: 21,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              CustomTextFormField(
-                hintText: "Description",
-                onChange: (value) {
-                  description = value;
-                },
-              ),
+
               Align(
                 alignment: Alignment.topRight,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 30),
+                  padding: const EdgeInsets.only(top: 50),
                   child: Container(
                     decoration: BoxDecoration(
                         color: Colors.blue,
