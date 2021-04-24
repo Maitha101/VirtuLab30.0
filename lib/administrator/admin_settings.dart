@@ -20,7 +20,6 @@ class _AdminSettings extends State<AdminSettings> {
   String _fullName = 'Retrieving..';
   initState() {
     super.initState();
-
     getFullName();
   }
 
@@ -39,7 +38,7 @@ class _AdminSettings extends State<AdminSettings> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Admin Settings'),
+        title: Text('Settings'),
         backgroundColor: Colors.deepPurple,
       ),
       body: Center(

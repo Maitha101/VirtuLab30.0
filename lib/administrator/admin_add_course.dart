@@ -14,7 +14,7 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
 
   String dropDownValue;
   String courseTitle;
-  String description;
+
   String name;
   final _formKey = GlobalKey<FormState>();
 
@@ -61,8 +61,9 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
               Padding(
                 padding: const EdgeInsets.only(top: 30, bottom: 10),
                 child: CustomText(
-                  text: "Course Code :",
+                  text: "Course Code:",
                   fontSize: 21,
+                  color: Colors.deepPurple,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -75,13 +76,14 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
               Padding(
                 padding: const EdgeInsets.only(top: 30, bottom: 10),
                 child: CustomText(
-                  text: "Name :",
+                  text: "Course Name:",
+                  color: Colors.deepPurple,
                   fontSize: 21,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               CustomTextFormField(
-                hintText: "Name",
+                hintText: "Course Name",
                 onChange: (value) {
                   name = value;
                 },
@@ -89,8 +91,9 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
               Padding(
                 padding: const EdgeInsets.only(top: 30, bottom: 10),
                 child: CustomText(
-                  text: "Assign Instructor :",
+                  text: "Assign Instructor:",
                   fontWeight: FontWeight.bold,
+                  color: Colors.deepPurple,
                   fontSize: 21,
                 ),
               ),
@@ -145,7 +148,7 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
                     child: TextButton(
                         onPressed: () {
                           addNewCourse(
-                              courseTitle, dropDownValue, description, name);
+                              courseTitle, dropDownValue, name);
                           Navigator.pop(context);
                         },
                         child: Row(
@@ -172,31 +175,14 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
     );
   }
 
-  /*getinstructorID(String instname) async {
-    String id;
-    await firebaseref
-        .child('instructor')
-        .orderByChild('fname')
-        .equalTo(instname)
-        .once()
-        .then((DataSnapshot snapshot) {
-      Map inst = snapshot.value;
-      inst['key'] = snapshot.key;
-      setState(() {
-        id = inst['key'];
-      });
-    });
-    return id;
-  }*/
 
   addNewCourse(
-      String title, String instructor, String description, String name) {
+      String title, String instructor, String name) {
     var inst = instructor.split(" ");
     String instID = inst[2];
     String instname = inst[0] + " " + inst[1];
     firebaseref.child('course').push().set({
       'code': title,
-      'description': description,
       'name': name,
       'instname': instname,
       'instID': instID

@@ -126,6 +126,7 @@ class _CourseGrades extends State<CourseGrades> {
                           color: Colors.deepPurple),
                     ),
                     trailing: Text(
+
                         gradesList['studID'][getCurrentID()]['grade'] == null ? "0"  +  "/" +
                             gradesList['total_grade'] : gradesList['studID'][getCurrentID()]['grade']  +  "/" +
                             gradesList['total_grade']),

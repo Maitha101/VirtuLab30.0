@@ -16,8 +16,8 @@ class _AdminEditCourseState extends State<AdminEditCourse> {
   String dropDownValue;
   TextEditingController _nameController,
       _instIDController,
-      _codeController,
-      _descController;
+      _codeController;
+
   DatabaseReference _ref;
 
   @override
@@ -25,7 +25,7 @@ class _AdminEditCourseState extends State<AdminEditCourse> {
     super.initState();
     _nameController = TextEditingController();
     _codeController = TextEditingController();
-    _descController = TextEditingController();
+
     _instIDController = TextEditingController();
     _ref = FirebaseDatabase.instance.reference().child('course');
     getCourseDetails();
@@ -64,7 +64,12 @@ class _AdminEditCourseState extends State<AdminEditCourse> {
         padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 30),
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              CustomText(text: "Edit Course Code:",
+              fontSize: 21,
+                color: Colors.deepPurple,
+              fontWeight: FontWeight.bold,),
               TextFormField(
                 style: TextStyle(fontSize: 19),
                 controller: _codeController,
@@ -78,8 +83,12 @@ class _AdminEditCourseState extends State<AdminEditCourse> {
                     )),
               ),
               SizedBox(
-                height: 20,
+                height: 40,
               ),
+              CustomText(text: "Edit Course Name:",
+                fontSize: 21,
+                color: Colors.deepPurple,
+                fontWeight: FontWeight.bold,),
               TextFormField(
                 style: TextStyle(fontSize: 19),
                 controller: _nameController,
@@ -87,7 +96,14 @@ class _AdminEditCourseState extends State<AdminEditCourse> {
                     hintText: "Course Name", prefixIcon: Icon(Icons.edit)),
               ),
               SizedBox(
-                height: 20,
+                height: 40,
+              ),
+              CustomText(text: "Assign New Instructor:",
+                fontSize: 21,
+                color: Colors.deepPurple,
+                fontWeight: FontWeight.bold,),
+              SizedBox(
+                height: 15,
               ),
               Container(
                 width: double.infinity,
@@ -129,31 +145,28 @@ class _AdminEditCourseState extends State<AdminEditCourse> {
               SizedBox(
                 height: 20,
               ),
-              TextFormField(
-                style: TextStyle(fontSize: 19),
-                controller: _descController,
-                decoration: InputDecoration(
-                    hintText: "Course Description",
-                    prefixIcon: Icon(Icons.edit)),
-              ),
+
               SizedBox(
-                height: 60,
+                height: 40,
               ),
-              Container(
-                decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(20)),
-                height: 50,
-                width: 200,
-                child: TextButton(
-                    onPressed: () {
-                      saveCourse(dropDownValue);
-                    },
-                    child: CustomText(
-                      text: "Update Course",
-                      fontSize: 20,
-                      color: Colors.white,
-                    )),
+              Align(
+                alignment: Alignment.center,
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(20)),
+                  height: 60,
+                  width: 200,
+                  child: TextButton(
+                      onPressed: () {
+                        saveCourse(dropDownValue);
+                      },
+                      child: CustomText(
+                        text: "Update Course",
+                        fontSize: 20,
+                        color: Colors.white,
+                      )),
+                ),
               )
             ],
           ),
@@ -168,7 +181,7 @@ class _AdminEditCourseState extends State<AdminEditCourse> {
     _instIDController.text = course['instID'];
     _nameController.text = course['name'];
     _codeController.text = course['code'];
-    _descController.text = course['description'];
+
   }
 
   saveCourse(String instructor) {
@@ -179,14 +192,12 @@ class _AdminEditCourseState extends State<AdminEditCourse> {
     String instname = instfname + " " + instlname;
     String name = _nameController.text;
     String code = _codeController.text;
-    String description = _descController.text;
 
     Map<String, String> course = {
       'instID': instID,
       'instname': instname,
       'name': name,
       'code': code,
-      'description': description
     };
     _ref
         .child(widget.courseKey)
