@@ -211,7 +211,8 @@ class _ActivityStream extends State<ActivityStream> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomText(
-          text: experiment['expName'],
+          text: experiment['expName'] + " Added Successfully!!",
+          fontSize: 16,
         )
       ],
     );
