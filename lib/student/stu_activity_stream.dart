@@ -41,8 +41,10 @@ class _ActivityStream extends State<ActivityStream> {
         backgroundColor: Colors.deepPurple,
       ),
       body: FirebaseAnimatedList(
-
-        query: firebaseref.child('course').orderByChild('studID/$_id').equalTo(_id),
+        query: firebaseref
+            .child('course')
+            .orderByChild('studID/$_id')
+            .equalTo(_id),
         defaultChild: Center(child: CircularProgressIndicator()),
         itemBuilder: (BuildContext context, snapshot,
             Animation<double> animation, int index) {
@@ -54,7 +56,6 @@ class _ActivityStream extends State<ActivityStream> {
     );
   }
   // activity stream
-
 
   Widget _streamList({Map list}) {
     return Column(
@@ -97,60 +98,83 @@ class _ActivityStream extends State<ActivityStream> {
                                   Text(
                                     'Instructor: ' + list['instname'],
                                     style: TextStyle(
-                                      fontSize: 18
-                                    ),
+                                        fontSize: 18,
+                                        fontStyle: FontStyle.italic),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(vertical: 3),
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 3),
                                     child: CustomText(
-                                      text: "CaseStudies",
-                                      color: Colors.blue,
+                                      text: "Case Studies:",
+                                      color: Colors.grey,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 19,
+                                      fontSize: 18,
                                     ),
                                   ),
-                                 Container(
-                                   height: 50,
-                                   width: MediaQuery.of(context).size.width * .7,
-                                   child: FirebaseAnimatedList(
-                                     reverse: true,
-                                       query: firebaseref.child('course').child(list['key']).child('caseStudies').orderByChild('csName'),
-                                       itemBuilder: (BuildContext context, snapshot,
-                                       Animation<double> animation, int index){
-                                         Map caseStudy = snapshot.value;
-                                         caseStudy['key'] = snapshot.key;
-                                         return caseStudyList(caseStudy: caseStudy,index: index);
-                                       }),
-                                 ),
-                                 SizedBox(height: 5,),
+                                  Container(
+                                    height: 50,
+                                    width:
+                                        MediaQuery.of(context).size.width * .7,
+                                    child: FirebaseAnimatedList(
+                                        reverse: true,
+                                        query: firebaseref
+                                            .child('course')
+                                            .child(list['key'])
+                                            .child('caseStudies')
+                                            .orderByChild('csName'),
+                                        itemBuilder: (BuildContext context,
+                                            snapshot,
+                                            Animation<double> animation,
+                                            int index) {
+                                          Map caseStudy = snapshot.value;
+                                          caseStudy['key'] = snapshot.key;
+                                          return caseStudyList(
+                                              caseStudy: caseStudy,
+                                              index: index);
+                                        }),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(vertical: 3),
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 3),
                                     child: CustomText(
-                                      text: "Experiments",
-                                      color: Colors.red,
+                                      text: "Experiments:",
+                                      color: Colors.grey,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 19,
+                                      fontSize: 18,
                                     ),
                                   ),
-                                 Container(
-                                   height: 50,
-                                   width: MediaQuery.of(context).size.width * .7,
-                                   child: FirebaseAnimatedList(
-                                     reverse: true,
-                                       query: firebaseref.child('course').child(list['key']).child('experiments').orderByChild('expName'),
-                                       itemBuilder: (BuildContext context, snapshot,
-                                       Animation<double> animation, int index){
-                                         Map caseStudy = snapshot.value;
-                                         caseStudy['key'] = snapshot.key;
-                                         return experimentList(experiment: caseStudy,);
-                                       }),
-                                 ),
-
+                                  Container(
+                                    height: 50,
+                                    width:
+                                        MediaQuery.of(context).size.width * .7,
+                                    child: FirebaseAnimatedList(
+                                        reverse: true,
+                                        query: firebaseref
+                                            .child('course')
+                                            .child(list['key'])
+                                            .child('experiments')
+                                            .orderByChild('expName'),
+                                        itemBuilder: (BuildContext context,
+                                            snapshot,
+                                            Animation<double> animation,
+                                            int index) {
+                                          Map caseStudy = snapshot.value;
+                                          caseStudy['key'] = snapshot.key;
+                                          return experimentList(
+                                            experiment: caseStudy,
+                                          );
+                                        }),
+                                  ),
                                 ],
                               ),
                             ],
                           ),
-
                         ],
                       ),
                     ),
@@ -164,30 +188,32 @@ class _ActivityStream extends State<ActivityStream> {
       ],
     );
   }
-  caseStudyList({Map caseStudy , int index}){
+
+  caseStudyList({Map caseStudy, int index}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 2),
           child: CustomText(
-            text: caseStudy['csName'] + " Added Successfully",
+            text: caseStudy['csName'] + " Added Successfully!!",
+            fontSize: 16,
+
             // color: index == 0 ? Colors.deepOrange : Colors.green,
           ),
         )
       ],
     );
   }
-  experimentList({Map experiment}){
+
+  experimentList({Map experiment}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomText(
           text: experiment['expName'],
         )
-
       ],
     );
   }
 }
-
