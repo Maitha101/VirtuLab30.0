@@ -44,28 +44,34 @@ class _CaseStudyView extends State<CaseStudyView> {
     _ref = FirebaseDatabase.instance.reference().child('case_study');
     getCaseStudyDetails();
     caseStudyInfo = firebaseref.child('case_study');
-    caseStudyInfo.once().then((DataSnapshot snap) {
-      var keys = snap.value.keys;
-      var data = snap.value;
-      caseStudyList.clear();
-      for (var key in keys) {
-        CaseStudyModel csList = new CaseStudyModel(
-          data[key]['title'],
-          data[key]['description'],
-          data[key]['body'],
-          data[key]['question1'],
-          data[key]['question2'],
-          data[key]['question3'],
-          data[key]['question4'],
-          data[key]['question5'],
-        );
-        caseStudyList.add(csList);
-      }
+  // exception handel
+    try{
+      caseStudyInfo.once().then((DataSnapshot snap) {
+        var keys = snap.value.keys;
+        var data = snap.value;
+        caseStudyList.clear();
+        for (var key in keys) {
+          CaseStudyModel csList = new CaseStudyModel(
+            data[key]['title'],
+            data[key]['description'],
+            data[key]['body'],
+            data[key]['question1'],
+            data[key]['question2'],
+            data[key]['question3'],
+            data[key]['question4'],
+            data[key]['question5'],
+          );
+          caseStudyList.add(csList);
+        }
 
-      setState(() {
-        print('Length : $caseStudyList.length');
+        setState(() {
+          print('Length : $caseStudyList.length');
+        });
       });
-    });
+    }
+    catch(e){
+      print(e.toString());
+    }
   }
 
   @override
@@ -364,17 +370,23 @@ class _CaseStudyView extends State<CaseStudyView> {
       ),
     );
   }
-
+// exception handel
   getCaseStudyDetails() async {
-    DataSnapshot snapshot = await _ref.child(widget.csKey).once();
-    Map caseStudy = snapshot.value;
-    title = caseStudy['title'];
-    description = caseStudy['description'];
-    body = caseStudy['body'];
-    question1 = caseStudy['question1'];
-    question2 = caseStudy['question2'];
-    question3 = caseStudy['question3'];
-    question4 = caseStudy['question4'];
-    question5 = caseStudy['question5'];
+
+    try{
+      DataSnapshot snapshot = await _ref.child(widget.csKey).once();
+      Map caseStudy = snapshot.value;
+      title = caseStudy['title'];
+      description = caseStudy['description'];
+      body = caseStudy['body'];
+      question1 = caseStudy['question1'];
+      question2 = caseStudy['question2'];
+      question3 = caseStudy['question3'];
+      question4 = caseStudy['question4'];
+      question5 = caseStudy['question5'];
+    }
+    catch(e){
+      print(e.toString());
+    }
   }
 }

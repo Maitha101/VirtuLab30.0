@@ -22,14 +22,19 @@ class _InstSettings extends State<InstSettings> {
     //     firebaseref.child('instructor').child(_studID).orderByChild(_studID);
     getFullName();
   }
-
+  // exception handel
   getFullName() async {
-    DataSnapshot snapshot =
-        await firebaseref.child('instructor').child(getCurrentID()).once();
-    Map inst = snapshot.value;
-    setState(() {
-      _fullName = inst['fname'] + ' ' + inst['lname'];
-    });
+    try{
+      DataSnapshot snapshot =
+      await firebaseref.child('instructor').child(getCurrentID()).once();
+      Map inst = snapshot.value;
+      setState(() {
+        _fullName = inst['fname'] + ' ' + inst['lname'];
+      });
+    }
+    catch(e){
+      print(e.toString());
+    }
   }
 
   bool isSwitched = false;

@@ -49,15 +49,27 @@ class _CsStudentAnswers extends State<CsStudentAnswers> {
     _date = 'Retrieving..';
 
     debugPrint(widget.studKey);
-    _studAns = firebaseref
-        .child('case_study')
-        .child(widget.csKey)
-        .child('studID')
-        .child(widget.studKey);
+
+    // exception handel
+    try{
+      _studAns = firebaseref
+          .child('case_study')
+          .child(widget.csKey)
+          .child('studID')
+          .child(widget.studKey);
+    }
+    catch(e){
+      print(e.toString());
+    }
     // .orderByChild('studID/$_id')
     // .equalTo(_id);
 
-    _csDetails = firebaseref.child('case_study').child(widget.csKey);
+    try{
+      _csDetails = firebaseref.child('case_study').child(widget.csKey);
+    }
+    catch(e){
+      print(e.toString());
+    }
     csDetails();
     studAnswes();
 

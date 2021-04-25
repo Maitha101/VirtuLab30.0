@@ -134,13 +134,17 @@ class _SolvedTSMessage extends State<SolvedTSMessage> {
         .orderByChild('status')
         .equalTo('solved');
 
-    firebaseref.child('tech_support').onValue.listen((event) {
-      var snapshot = event.snapshot;
-      setState() {
-        String value = snapshot.value['status'];
-        print(value);
-      }
-    });
+    try{
+      firebaseref.child('tech_support').onValue.listen((event) {
+        var snapshot = event.snapshot;
+        setState() {
+          String value = snapshot.value['status'];
+          print(value);
+        }
+      });
+    } catch(e){
+      print(e.toString());
+    }
   }
 
   @override

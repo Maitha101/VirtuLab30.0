@@ -22,10 +22,16 @@ class _CaseStudiesList extends State<CaseStudiesList> {
   void initState() {
     String cId_false = courseKey + "false";
     super.initState();
-    _caseStudyTitle = firebaseref
-        .child('case_study')
-        .orderByChild('cID_draft')
-        .equalTo(cId_false);
+    // exception handel
+    try{
+      _caseStudyTitle = firebaseref
+          .child('case_study')
+          .orderByChild('cID_draft')
+          .equalTo(cId_false);
+    }
+    catch(e){
+      print(e.toString());
+    }
   }
 
   @override

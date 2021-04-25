@@ -26,17 +26,31 @@ class _InstExperiments extends State<InstExperiments> {
     String cId_false = courseKey +
         "false"; //<< -- get submitted experiments with specefic course key
     super.initState();
-    dbRef = FirebaseDatabase.instance // <<-- get submitted experiments
-        .reference()
-        .child('experiment')
-        .orderByChild('cID_draft')
-        .equalTo(cId_false);
-    debugPrint(cId_false);
-    dbRefDraft = FirebaseDatabase.instance // <<-- get drafted experiments
-        .reference()
-        .child('experiment')
-        .orderByChild('cID_draft')
-        .equalTo(cId_true);
+
+    // exception handel
+    try {
+      dbRef = FirebaseDatabase.instance // <<-- get submitted experiments
+          .reference()
+          .child('experiment')
+          .orderByChild('cID_draft')
+          .equalTo(cId_false);
+      debugPrint(cId_false);
+    }
+    catch (e) {
+      print(e.toString());
+    }
+
+    try {
+      dbRefDraft = FirebaseDatabase.instance // <<-- get drafted experiments
+          .reference()
+          .child('experiment')
+          .orderByChild('cID_draft')
+          .equalTo(cId_true);
+    }
+
+    catch (e) {
+      print(e.toString());
+    }
   }
 
   Widget _buildExperimentList({Map experiment}) {

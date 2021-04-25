@@ -21,25 +21,17 @@ class _AdminAccounts extends State<AdminAccounts> {
   String _instID;
   String _description;
   int _studCount = 0;
-
+ // exception handel
   void initState() {
-    _courses = firebaseref.child('course').orderByChild('code');
-    // courseDetails();
-    // studCount(null);
+    super.initState();
+    try{
+      _courses = firebaseref.child('course').orderByChild('code');
+    }catch(e){
+      print(e.toString());
+    }
   }
 
-  courseDetails() async {
-    DataSnapshot snapshot = await _courses.once();
-    Map course = snapshot.value;
-    course['key'] = snapshot.key;
-    _name = course['name'];
-    _code = course['code'];
-    _instID = course['instID'];
 
-    DataSnapshot snap = await _courses.reference().child('studID').once();
-    Map stud = snap.value;
-    _studCount = stud.length;
-  }
 
   @override
   Widget build(BuildContext context) {

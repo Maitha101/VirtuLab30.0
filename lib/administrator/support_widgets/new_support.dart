@@ -92,16 +92,16 @@ class _NewTSMessage extends State<NewTSMessage> {
   }
 
   Query statusNew;
+  // exception handel
   initState() {
     super.initState();
-    // statusNew = firebaseref
-    //     .child('tech_support')
-    //     .child('status')
-    //     .equalTo('new')
-    //     .orderByChild('date');
-    // statusNew = firebaseref.child('tech_support').orderByChild('date');
-    statusNew =
-        firebaseref.child('tech_support').orderByChild('status').equalTo('new');
+
+   try{
+     statusNew =
+         firebaseref.child('tech_support').orderByChild('status').equalTo('new');
+   }catch(e){
+     print(e.toString());
+   }
   }
 
   @override

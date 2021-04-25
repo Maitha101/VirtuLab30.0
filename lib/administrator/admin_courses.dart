@@ -15,32 +15,23 @@ class AdminCourses extends StatefulWidget {
 
 class _AdminCourses extends State<AdminCourses> {
   Query _ref;
-  int _studCount = 0;
   DatabaseReference reference =
       FirebaseDatabase.instance.reference().child('course');
-
+  // exception handel
   @override
   void initState() {
     super.initState();
-    _ref = FirebaseDatabase.instance
-        .reference()
-        .child('course')
-        .orderByChild('code');
-    // studCount(null);
+   try{
+     _ref = FirebaseDatabase.instance
+         .reference()
+         .child('course')
+         .orderByChild('code');
+   }
+   catch(e){
+     print(e.toString());
+   }
   }
 
-  studCount(String key) async {
-    DataSnapshot snap = await firebaseref.child(key).child('studID').once();
-
-    Map stud = snap.value;
-
-    //setState(() {
-    // _studCount = stud.length;
-    //});
-  }
-
-// Map myData ;
-  // List getAllCourses = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,7 +86,6 @@ class _AdminCourses extends State<AdminCourses> {
   }
 
   _buildCourses({Map course}) {
-    studCount(course['key']);
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: SingleChildScrollView(

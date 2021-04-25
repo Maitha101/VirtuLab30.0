@@ -24,12 +24,17 @@ class _AdminSettings extends State<AdminSettings> {
   }
 
   getFullName() async {
-    DataSnapshot snapshot =
-        await firebaseref.child('admin').child(getCurrentID()).once();
-    Map admin = snapshot.value;
-    setState(() {
-      _fullName = admin['fname'] + ' ' + admin['lname'];
-    });
+    try{
+      DataSnapshot snapshot =
+      await firebaseref.child('admin').child(getCurrentID()).once();
+      Map admin = snapshot.value;
+      setState(() {
+        _fullName = admin['fname'] + ' ' + admin['lname'];
+      });
+    }
+    catch(e){
+      print(e.toString());
+    }
   }
 
   bool isSwitched = false;

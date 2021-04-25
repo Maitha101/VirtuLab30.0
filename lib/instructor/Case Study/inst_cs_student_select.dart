@@ -19,15 +19,22 @@ class _CsStudentSelect extends State<CsStudentSelect> {
   Query _studInfo;
   String fullName;
   String _studID = '1234567890';
+
+  // exception handel
   void initState() {
     super.initState();
-    _caseStudy = firebaseref
-        .child('case_study')
-        .child(widget.snapshotKey)
-        .child('studID')
-        .orderByChild('graded')
-        .equalTo('false');
-    _studInfo = firebaseref.child('student');
+    try{
+      _caseStudy = firebaseref
+          .child('case_study')
+          .child(widget.snapshotKey)
+          .child('studID')
+          .orderByChild('graded')
+          .equalTo('false');
+      _studInfo = firebaseref.child('student');
+    }
+    catch(e){
+      print(e.toString());
+    }
 
     studName(_studID);
   }

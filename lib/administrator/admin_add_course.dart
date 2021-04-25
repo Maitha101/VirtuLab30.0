@@ -14,24 +14,28 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
 
   String dropDownValue;
   String courseTitle;
-
   String name;
-  final _formKey = GlobalKey<FormState>();
 
+  // exception handel
   void getInstructor() async {
-    firebaseref
-        .child('instructor')
-        .orderByChild('fname')
-        .once()
-        .then((DataSnapshot snapshot) {
-      Map map = snapshot.value;
-      setState(() {
-        map.forEach((key, value) {
-          instructorList
-              .add(value['fname'] + " " + value['lname'] + " " + value['ID']);
+    try{
+      firebaseref
+          .child('instructor')
+          .orderByChild('fname')
+          .once()
+          .then((DataSnapshot snapshot) {
+        Map map = snapshot.value;
+        setState(() {
+          map.forEach((key, value) {
+            instructorList
+                .add(value['fname'] + " " + value['lname'] + " " + value['ID']);
+          });
         });
       });
-    });
+    }
+    catch(e){
+      print(e.toString());
+    }
   }
 
   @override

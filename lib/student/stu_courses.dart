@@ -21,17 +21,28 @@ class _StudentCourses extends State<StudentCourses> {
 
   initState() {
     super.initState();
-    _courses =
-        firebaseref.child('course').orderByChild('studID/$_id').equalTo(_id);
+    // exception handel
+    try{
+      _courses =
+          firebaseref.child('course').orderByChild('studID/$_id').equalTo(_id);
+    }
+    catch(e){
+      print(e.toString());
+    }
   }
 
   getInstName(String id) async {
-    DataSnapshot snapshot =
-        await firebaseref.child('instructor').child(id).once();
-    Map inst = snapshot.value;
-    setState(() {
-      _instName = inst['fname'] + ' ' + inst['lname'];
-    });
+    try{
+      DataSnapshot snapshot =
+      await firebaseref.child('instructor').child(id).once();
+      Map inst = snapshot.value;
+      setState(() {
+        _instName = inst['fname'] + ' ' + inst['lname'];
+      });
+    }
+    catch(e){
+      print(e.toString());
+    }
   }
 
   @override

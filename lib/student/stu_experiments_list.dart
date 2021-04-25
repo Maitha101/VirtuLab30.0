@@ -24,11 +24,17 @@ class _ExperimentsList extends State<ExperimentsList> {
   void initState() {
     debugPrint(courseKey);
     String cId_false = courseKey + "false";
-    dbRef = FirebaseDatabase.instance
-        .reference()
-        .child('experiment')
-        .orderByChild('cID_draft')
-        .equalTo(cId_false);
+    // exception hanel
+    try{
+      dbRef = FirebaseDatabase.instance
+          .reference()
+          .child('experiment')
+          .orderByChild('cID_draft')
+          .equalTo(cId_false);
+    }
+    catch(e){
+      print(e.toString());
+    }
     super.initState();
   }
 

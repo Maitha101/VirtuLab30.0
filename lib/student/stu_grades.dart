@@ -17,8 +17,14 @@ class _StudentGrades extends State<StudentGrades> {
   String _id = getCurrentID();
   initState() {
     super.initState();
-    _courses =
-        firebaseref.child('course').orderByChild('studID/$_id').equalTo(_id);
+    // exception handel
+    try{
+      _courses =
+          firebaseref.child('course').orderByChild('studID/$_id').equalTo(_id);
+    }
+    catch(e){
+      print(e.toString());
+    }
   }
 
   @override

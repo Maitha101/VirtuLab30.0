@@ -29,23 +29,28 @@ class _AdminEditCourseState extends State<AdminEditCourse> {
     _instIDController = TextEditingController();
     _ref = FirebaseDatabase.instance.reference().child('course');
     getCourseDetails();
-    getinstructor();
+    getInstructor();
   }
-
-  void getinstructor() async {
-    firebaseref
-        .child('instructor')
-        .orderByChild('fname')
-        .once()
-        .then((DataSnapshot snapshot) {
-      Map map = snapshot.value;
-      setState(() {
-        map.forEach((key, value) {
-          instructorList
-              .add(value['fname'] + " " + value['lname'] + " " + value['ID']);
+  // exception handel
+  void getInstructor() async {
+    try{
+      firebaseref
+          .child('instructor')
+          .orderByChild('fname')
+          .once()
+          .then((DataSnapshot snapshot) {
+        Map map = snapshot.value;
+        setState(() {
+          map.forEach((key, value) {
+            instructorList
+                .add(value['fname'] + " " + value['lname'] + " " + value['ID']);
+          });
         });
       });
-    });
+    }
+    catch(e){
+      print(e.toString());
+    }
   }
 
   @override

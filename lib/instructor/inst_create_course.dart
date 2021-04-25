@@ -21,6 +21,7 @@ _validator(String value) {
 }
 
 class _CreateCourse extends State<CreateCourse> {
+
   final dbRef = FirebaseDatabase.instance.reference().child('course');
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
@@ -32,13 +33,20 @@ class _CreateCourse extends State<CreateCourse> {
     super.initState();
     getInstName();
   }
+
+  // exception handel
   getInstName() async {
+    try{
       DataSnapshot snapshot =
-          await firebaseref.child('instructor').child(getCurrentID()).once();
+      await firebaseref.child('instructor').child(getCurrentID()).once();
       Map inst = snapshot.value;
       setState(() {
         _fullName = inst['fname'] + ' ' + inst['lname'];
       });
+    }
+    catch(e){
+      print(e.toString());
+    }
     }
 
   @override

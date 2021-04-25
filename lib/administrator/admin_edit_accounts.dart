@@ -28,18 +28,23 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
   TextEditingController _instController;
   final _formKey = GlobalKey<FormState>();
 
+  // exception handel
   getStudentList() {
-    DatabaseReference _data = firebaseref
-        .reference()
-        .child('course')
-        .child(widget.courseKey)
-        .child('studID');
-    _data.once().then((DataSnapshot snapshot) {
-      var keys = snapshot.value.keys;
-      setState(() {
-        studentKey.addAll(keys);
-      });
-    });
+   try{
+     DatabaseReference _data = firebaseref
+         .reference()
+         .child('course')
+         .child(widget.courseKey)
+         .child('studID');
+     _data.once().then((DataSnapshot snapshot) {
+       var keys = snapshot.value.keys;
+       setState(() {
+         studentKey.addAll(keys);
+       });
+     });
+   } catch(e){
+     e.toString();
+   }
     getStudentDetails();
   }
 
@@ -63,19 +68,24 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
     return studentName;
   }
 
+  // exception handel
   void getAllStudents() async {
-    firebaseref
-        .child('student')
-        .orderByChild('fname')
-        .once()
-        .then((DataSnapshot snapshot) {
-      Map map = snapshot.value;
-      setState(() {
-        map.forEach((key, value) {
-          allStudents.add(value['ID']);
+    try{
+      firebaseref
+          .child('student')
+          .orderByChild('fname')
+          .once()
+          .then((DataSnapshot snapshot) {
+        Map map = snapshot.value;
+        setState(() {
+          map.forEach((key, value) {
+            allStudents.add(value['ID']);
+          });
         });
       });
-    });
+    } catch(e){
+      e.toString();
+    }
   }
 
   @override
@@ -476,17 +486,6 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
                         .child(allStudents[index])
                         .set(allStudents[index])
                         .then((value) => {Navigator.pop(context)});
-                    ScaffoldMessenger.of(this.context).showSnackBar(
-                      SnackBar(
-                        duration: Duration(seconds: 1),
-                        content: CustomText(
-                          text: 'Student Added Successfully',
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
-                        backgroundColor: Colors.deepPurple, //change?
-                      ),
-                    );
                   },
                   child: Text('Add'))
             ],

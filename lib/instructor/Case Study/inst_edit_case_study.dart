@@ -35,13 +35,18 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
       question4Controller,
       question5Controller;
   //-----------------------------Functions--------------------------------------
-
+ // exception handel
   void initState() {
     super.initState();
-    dbRef = FirebaseDatabase.instance
-        .reference()
-        .child("case_study")
-        .child(widget.snapshotKey);
+    try{
+      dbRef = FirebaseDatabase.instance
+          .reference()
+          .child("case_study")
+          .child(widget.snapshotKey);
+    }
+    catch(e){
+      print(e.toString());
+    }
 
     titleController = TextEditingController();
     bodyController = TextEditingController();

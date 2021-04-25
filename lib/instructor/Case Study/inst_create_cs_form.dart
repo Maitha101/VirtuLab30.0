@@ -33,11 +33,19 @@ class CaseStudyFormState extends State<CaseStudyForm> {
   final question3Controller = TextEditingController();
   final question4Controller = TextEditingController();
   final question5Controller = TextEditingController();
-  //-----------------------------Functions--------------------------------------
+  //-------
+  // ----------------------Functions--------------------------------------
+
+  // exception handel
   @override
   void initState() {
     super.initState();
-    dbRef = FirebaseDatabase.instance.reference().child("case_study");
+    try{
+      dbRef = FirebaseDatabase.instance.reference().child("case_study");
+    }
+    catch(e){
+      print(e.toString());
+    }
   }
 
   _datePicker(BuildContext context) async {

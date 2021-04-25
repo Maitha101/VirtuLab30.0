@@ -25,12 +25,23 @@ class _CourseGrades extends State<CourseGrades> {
   initState() {
     String cId_false = widget.courseID + 'false';
     super.initState();
-    _csGrade = firebaseref
-        .child('case_study')
-        .orderByChild('cID_draft')
-        .equalTo(cId_false);
-    _studGrade =
-        firebaseref.child('case_study').child('studID').child(getCurrentID());
+    // exception handel
+    try{
+      _csGrade = firebaseref
+          .child('case_study')
+          .orderByChild('cID_draft')
+          .equalTo(cId_false);
+    }
+    catch(e){
+      print(e.toString());
+    }
+    try{
+      _studGrade =
+          firebaseref.child('case_study').child('studID').child(getCurrentID());
+    }
+    catch(e){
+      print(e.toString());
+    }
   }
 
   @override

@@ -27,10 +27,16 @@ class _InstCourseSelectState extends State<InstCourseSelect> {
       _progressController =
           false; // can be used when waiting for firebase stuff
     });
-    dbRef = firebaseref
-        .child('course')
-        .orderByChild('instID')
-        .equalTo(getCurrentID());
+
+    try{
+      dbRef = firebaseref
+          .child('course')
+          .orderByChild('instID')
+          .equalTo(getCurrentID());
+    }
+    catch(e){
+      print(e.toString());
+    }
   }
 
   Widget _buildCourseList({Map course}) {

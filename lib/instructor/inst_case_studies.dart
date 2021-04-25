@@ -25,16 +25,28 @@ class _InstCaseStudies extends State<InstCaseStudies> {
     String cId_true = courseKey + "true";
     String cId_false = courseKey + "false";
     super.initState();
-    dbRef = FirebaseDatabase.instance
-        .reference()
-        .child('case_study')
-        .orderByChild('cID_draft')
-        .equalTo(cId_false);
-    dbRefDraft = FirebaseDatabase.instance
-        .reference()
-        .child('case_study')
-        .orderByChild('cID_draft')
-        .equalTo(cId_true);
+    // exception handel
+    try{
+      dbRef = FirebaseDatabase.instance
+          .reference()
+          .child('case_study')
+          .orderByChild('cID_draft')
+          .equalTo(cId_false);
+    }
+    catch(e){
+      print(e.toString());
+    }
+
+    try{
+      dbRefDraft = FirebaseDatabase.instance
+          .reference()
+          .child('case_study')
+          .orderByChild('cID_draft')
+          .equalTo(cId_true);
+    }
+    catch(e){
+      print(e.toString());
+    }
   }
 
   Widget _buildCaseStudyList({Map caseStudy}) {

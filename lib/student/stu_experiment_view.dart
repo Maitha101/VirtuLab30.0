@@ -60,7 +60,13 @@ class _ExperimentView extends State<ExperimentView> {
   //--------------------------------------------------------------------------
   @override
   void initState() {
-    dbref = firebaseref.child('experiment').child(widget.expKey).child('steps');
+    // exception handel
+    try{
+      dbref = firebaseref.child('experiment').child(widget.expKey).child('steps');
+    }
+    catch(e){
+      print(e.toString());
+    }
     //getExperimentData();
     setState(() {});
     super.initState();

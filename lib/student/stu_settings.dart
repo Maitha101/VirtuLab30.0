@@ -20,20 +20,31 @@ class _StudentSettings extends State<StudentSettings> {
   String _fullName = 'Retrieving..';
   initState() {
     super.initState();
-    _studentInfo = firebaseref
-        .child('student')
-        .orderByChild('email')
-        .equalTo(getCurrentUserEmail());
+    // exception handel
+    try{
+      _studentInfo = firebaseref
+          .child('student')
+          .orderByChild('email')
+          .equalTo(getCurrentUserEmail());
+    }
+    catch(e){
+      print(e.toString());
+    }
     getFullName();
   }
 
   getFullName() async {
-    DataSnapshot snapshot =
-        await firebaseref.child('student').child(getCurrentID()).once();
-    Map student = snapshot.value;
-    setState(() {
-      _fullName = student['fname'] + ' ' + student['lname'];
-    });
+    try{
+      DataSnapshot snapshot =
+      await firebaseref.child('student').child(getCurrentID()).once();
+      Map student = snapshot.value;
+      setState(() {
+        _fullName = student['fname'] + ' ' + student['lname'];
+      });
+    }
+    catch(e){
+      print(e.toString());
+    }
     
   }
 
