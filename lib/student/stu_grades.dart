@@ -53,8 +53,8 @@ class _StudentGrades extends State<StudentGrades> {
     return Column(
       children: [
         Card(
-          elevation: 10,
-          shadowColor: Colors.deepPurple,
+          // elevation: 10,
+          // shadowColor: Colors.deepPurple,
           child: InkWell(
             onTap: () => Navigator.push(
               context,
