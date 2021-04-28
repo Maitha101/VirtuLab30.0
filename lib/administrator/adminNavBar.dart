@@ -12,7 +12,6 @@ class AdminNavBar extends StatelessWidget{
       home: AdminNavBarTab(),
     );
   }
-  
 }
 
 class AdminNavBarTab extends StatefulWidget {

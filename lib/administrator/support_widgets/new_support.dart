@@ -13,80 +13,88 @@ class NewTSMessage extends StatefulWidget {
 
 class _NewTSMessage extends State<NewTSMessage> {
   _newMessages({Map message}) {
-    return Card(
-      child: InkWell(
-        onTap: null, // show full message
-        child: Padding(
-          padding: EdgeInsets.all(10.0),
-          // const EdgeInsets.fromLTRB(15, 0, 0, 0),
-          child: Container(
-            margin: EdgeInsets.symmetric(vertical: 5),
-            // padding: EdgeInsets.all(10),
-            // height: 120,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-              child: ExpansionTile(
-                // expandedCrossAxisAlignment: CrossAxisAlignment.center,
-                tilePadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                title: Text(
-                  message['subject'],
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      // height: 1,
-                      color: Colors.deepPurple),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 3,horizontal: 8),
+      child: Card(
+
+        shadowColor: Colors.deepPurple,
+        elevation: 10,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        child: InkWell(
+          onTap: null, // show full message
+          child: Padding(
+            padding: EdgeInsets.all(10.0),
+            // const EdgeInsets.fromLTRB(15, 0, 0, 0),
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 5),
+              // padding: EdgeInsets.all(10),
+              // height: 120,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: ExpansionTile(
+                  // expandedCrossAxisAlignment: CrossAxisAlignment.center,
+                  tilePadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  title: Text(
+                    message['subject'],
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        // height: 1,
+                        color: Colors.deepPurple),
+                  ),
+                  subtitle: Text(
+                    'From: ' + message['senderID'],
+                    style: TextStyle(color: Colors.grey,),
+                  ),
+                  leading: Icon(
+                    Icons.account_circle,
+                  ), // color: Colors.deepPurple,),
+                  children: [
+                    Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Container(
+                                    padding: EdgeInsets.all(10),
+                                    child: Text(
+                                      message['date'],
+                                      style: TextStyle(color: Colors.grey),
+                                      textAlign: TextAlign.right,
+                                    )),
+                              ]),
+                              SizedBox(height:20),
+                          Text(message['message']),
+                          Divider(
+                            thickness: 1,
+                          ),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(
+                                    'Mark as Solved'), //, style:TextStyle(color: Colors.lightGreen)),
+                                IconButton(
+                                  iconSize: 30,
+                                  icon: Icon(Icons.check_box,
+                                      color: Colors.lightGreen),
+                                  onPressed: () {
+                                    // message.keys.;
+                                    firebaseref
+                                        .child('tech_support')
+                                        .child(message['key'])
+                                        .update({'status': 'solved'});
+                                  },
+                                ),
+                              ])
+                        ])
+                  ],
                 ),
-                subtitle: Text(
-                  'From: ' + message['senderID'],
-                  style: TextStyle(color: Colors.grey,),
-                ),
-                leading: Icon(
-                  Icons.account_circle,
-                ), // color: Colors.deepPurple,),
-                children: [
-                  Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Container(
-                                  padding: EdgeInsets.all(10),
-                                  child: Text(
-                                    message['date'],
-                                    style: TextStyle(color: Colors.grey),
-                                    textAlign: TextAlign.right,
-                                  )),
-                            ]),
-                            SizedBox(height:20),
-                        Text(message['message']),
-                        Divider(
-                          thickness: 1,
-                        ),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Text(
-                                  'Mark as Solved'), //, style:TextStyle(color: Colors.lightGreen)),
-                              IconButton(
-                                iconSize: 30,
-                                icon: Icon(Icons.check_box,
-                                    color: Colors.lightGreen),
-                                onPressed: () {
-                                  // message.keys.;
-                                  firebaseref
-                                      .child('tech_support')
-                                      .child(message['key'])
-                                      .update({'status': 'solved'});
-                                },
-                              ),
-                            ])
-                      ])
-                ],
               ),
             ),
           ),
         ),
+
       ),
     );
   }

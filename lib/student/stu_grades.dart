@@ -52,61 +52,65 @@ class _StudentGrades extends State<StudentGrades> {
   _courseList({Map courseList}) {
     return Column(
       children: [
-        Card(
-          elevation: 10,
-          shadowColor: Colors.deepPurple,
-          child: InkWell(
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (BuildContext context) => CourseGrades(
-                  courseName: courseList['name'],
-                  courseID: courseList['key'],
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Card(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            elevation: 10,
+            shadowColor: Colors.deepPurple,
+            child: InkWell(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) => CourseGrades(
+                    courseName: courseList['name'],
+                    courseID: courseList['key'],
+                  ),
                 ),
               ),
-            ),
-            child: Container(
-              margin: EdgeInsets.symmetric(vertical: 10),
-              color: Colors.white,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.grading,
-                            ),
-                            SizedBox(width: 20),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  courseList['name'],
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      height: 2,
-                                      color: Colors.deepPurple),
-                                ),
-                                Text(
-                                  'Instructor: ' + courseList['instname'],
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Icon(Icons.arrow_forward_ios_rounded),
-                      ],
+              child: Container(
+                margin: EdgeInsets.symmetric(vertical: 10),
+                color: Colors.white,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.grading,
+                              ),
+                              SizedBox(width: 20),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    courseList['name'],
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        height: 2,
+                                        color: Colors.deepPurple),
+                                  ),
+                                  Text(
+                                    'Instructor: ' + courseList['instname'],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Icon(Icons.arrow_forward_ios_rounded),
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 5),
-                ],
+                    SizedBox(height: 5),
+                  ],
+                ),
               ),
             ),
           ),

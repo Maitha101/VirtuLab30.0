@@ -51,51 +51,50 @@ class _InstCaseStudies extends State<InstCaseStudies> {
 
   Widget _buildCaseStudyList({Map caseStudy}) {
     return InkWell(
-        child: Container(
-          margin: EdgeInsets.symmetric(vertical: 10),
-          padding: EdgeInsets.fromLTRB(10, 25, 10, 25),
-          // height: 90,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
-                spreadRadius: 2,
-                blurRadius: 5,
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 3,horizontal: 8),
+          child: Card(
+            elevation: 10,
+            shadowColor: Colors.deepPurple,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10)),
+            child: Container(
+              padding: EdgeInsets.fromLTRB(10, 25, 10, 25),
+              // height: 90,
+
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(
-                    caseStudy['draft'] == 'false'
-                        ? Icons.book_outlined
-                        : Icons.drafts_outlined,
-                    color: Colors.deepPurple,
+                  Row(
+                    children: [
+                      Icon(
+                        caseStudy['draft'] == 'false'
+                            ? Icons.book_outlined
+                            : Icons.drafts_outlined,
+                        color: Colors.deepPurple,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Flexible(
+                        child: Text(
+                          caseStudy['title'],
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black87),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                    ],
                   ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Flexible(
-                    child: Text(
-                      caseStudy['title'],
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black87),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
+                  SizedBox(height: 10),
                 ],
               ),
-              SizedBox(height: 10),
-            ],
+            ),
           ),
         ),
         onTap: () {

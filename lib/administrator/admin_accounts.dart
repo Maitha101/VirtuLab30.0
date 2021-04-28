@@ -83,60 +83,68 @@ class _AdminAccounts extends State<AdminAccounts> {
                   instName: course['instname'],
                 )));
       },
-      child: Container(
-        // height: MediaQuery.of(context).size.height * .54,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 3,horizontal: 8),
+        child: Card(
+          elevation: 10,
+          shadowColor: Colors.deepPurple,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10)),
           child: Container(
-            decoration: BoxDecoration(
-                color: Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(10)),
+            // height: MediaQuery.of(context).size.height * .54,
             child: Padding(
-              padding: const EdgeInsets.all(15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomText(
-                          text: course['name'],
-                          fontSize: 19,
-                          color: Colors.deepPurple,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4),
-                          child: CustomText(
-                            fontSize: 16,
-                            text: course['instname'],
-                          ),
-                        ),
-                        CustomText(
-                          text: "ID: " + course['instID'],
-                          fontSize: 16,
-                          color: Colors.grey,
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(width: 5),
-                  Row(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10)),
+                child: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      IconButton(
-                        icon: Icon(
-                          Icons.arrow_forward_ios,
-                          size: 30,
-                          color: Colors.grey,
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomText(
+                              text: course['name'],
+                              fontSize: 19,
+                              color: Colors.deepPurple,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 4),
+                              child: CustomText(
+                                fontSize: 16,
+                                text: course['instname'],
+                              ),
+                            ),
+                            CustomText(
+                              text: "ID: " + course['instID'],
+                              fontSize: 16,
+                              color: Colors.grey,
+                            )
+                          ],
                         ),
-                        onPressed: () {
+                      ),
+                      SizedBox(width: 5),
+                      Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              Icons.arrow_forward_ios,
+                              size: 30,
+                              color: Colors.deepPurple,
+                            ),
+                            onPressed: () {
 
-                        },
+                            },
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
+                ),
               ),
             ),
           ),

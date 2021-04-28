@@ -6,7 +6,6 @@ import 'package:virtulab/functions/auth.dart';
 import 'package:virtulab/functions/database.dart';
 import 'package:virtulab/instructor/inst_create_course.dart';
 import 'package:virtulab/instructor/inst_report.dart';
-import 'package:virtulab/instructor/instructorNavBar.dart';
 import 'inst_create_course.dart';
 
 class InstCourseSelect extends StatefulWidget {
@@ -21,13 +20,11 @@ class _InstCourseSelectState extends State<InstCourseSelect> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
     setState(() {
-      // dbRef = FirebaseDatabase.instance.reference().child('course');
       _progressController =
           false; // can be used when waiting for firebase stuff
     });
-
+// exception handel
     try{
       dbRef = firebaseref
           .child('course')
@@ -43,46 +40,56 @@ class _InstCourseSelectState extends State<InstCourseSelect> {
     return _progressController
         ? CircularProgressIndicator()
         : InkWell(
-            child: Container(
-              margin: EdgeInsets.symmetric(vertical: 10),
-              padding: EdgeInsets.all(10),
-              height: 130,
-              color: Colors.white,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 3,horizontal: 8),
+              child: Card(
+                elevation: 10,
+                shadowColor: Colors.deepPurple,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)
+                ),
+                child: Container(
+                  margin: EdgeInsets.symmetric(vertical: 10),
+                  padding: EdgeInsets.all(10),
+                  height: 130,
+                  color: Colors.white,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Row(
+                        children: [
+                          Text(
+                            course['name'],
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black87),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            course['code'],
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.deepPurple),
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 10),
                       Text(
-                        course['name'],
+                        'instructor: ' + course['instname'], //'instructor name',
+                        //course['description'],
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
-                            color: Colors.black87),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        course['code'],
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.deepPurple),
+                            color: Colors.black54),
                       )
                     ],
                   ),
-                  SizedBox(height: 10),
-                  Text(
-                    'instructor: ' + course['instname'], //'instructor name',
-                    //course['description'],
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black54),
-                  )
-                ],
+                ),
               ),
             ),
             onTap: () {

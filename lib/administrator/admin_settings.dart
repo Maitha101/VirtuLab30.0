@@ -133,100 +133,110 @@ class _AdminSettings extends State<AdminSettings> {
               SizedBox(
                 height: 20,
               ),
-              Card(
-                // elevation: 5,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => ChangePassword()),
-                    );
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.all(15.0),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 20),
-                          child: Icon(Icons.edit),
-                        ),
-                        Text(
-                          'Change Password',
-                          style: TextStyle(fontSize: 18),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Card(
-                // elevation: 5,
-                child: InkWell(
-                  onTap: () {},
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 20),
-                              child: Icon(Icons.notifications_off),
-                            ),
-                            Text(
-                              'Silence Notifications',
-                              style: TextStyle(fontSize: 18),
-                            ),
-                          ],
-                        ),
-                        // SizedBox(
-                        //   width: 40,
-                        // ),
-
-                        // Container(
-                        //   decoration: BoxDecoration(
-                        //       color: Colors.grey.shade300,
-                        //       borderRadius: BorderRadius.circular(50)),
-                        //   child:
-                        Switch(
-                            value: isSwitched,
-                            // activeColor: Colors.amber,
-                            // activeTrackColor: Colors.amber,
-                            onChanged: (value) {
-                              setState(() {
-                                isSwitched = value;
-                              });
-                            }),
-                        // ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Card(
-                // elevation: 5,
-                child: InkWell(
-                  onTap: () {
-                    signOut(context);
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.all(15.0),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 20),
-                          child: Icon(
-                            Icons.exit_to_app,
-                            color: Colors.red,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4,horizontal: 8),
+                child: Card(
+                  elevation: 10,
+                  shadowColor: Colors.deepPurple,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => ChangePassword()),
+                      );
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 20),
+                            child: Icon(Icons.edit),
                           ),
-                        ),
-                        Text(
-                          'Log Out',
-                          style: TextStyle(fontSize: 18, color: Colors.red),
-                        )
-                      ],
+                          Text(
+                            'Change Password',
+                            style: TextStyle(fontSize: 18),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4,horizontal: 8),
+                child: Card(
+                  elevation: 10,
+                  shadowColor: Colors.deepPurple,
+                  child: InkWell(
+                    onTap: () {},
+                    child: Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 20),
+                                child: Icon(Icons.notifications_off),
+                              ),
+                              Text(
+                                'Silence Notifications',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ],
+                          ),
+                          // SizedBox(
+                          //   width: 40,
+                          // ),
+
+                          // Container(
+                          //   decoration: BoxDecoration(
+                          //       color: Colors.grey.shade300,
+                          //       borderRadius: BorderRadius.circular(50)),
+                          //   child:
+                          Switch(
+                              value: isSwitched,
+                              onChanged: (value) {
+                                setState(() {
+                                  isSwitched = value;
+                                });
+                              }),
+                          // ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4,horizontal: 8),
+                child: Card(
+                  elevation: 10,
+                  shadowColor: Colors.deepPurple,
+                  child: InkWell(
+                    onTap: () {
+                      signOut(context);
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 20),
+                            child: Icon(
+                              Icons.exit_to_app,
+                              color: Colors.red,
+                            ),
+                          ),
+                          Text(
+                            'Log Out',
+                            style: TextStyle(fontSize: 18, color: Colors.red),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),

@@ -55,51 +55,49 @@ class _InstExperiments extends State<InstExperiments> {
 
   Widget _buildExperimentList({Map experiment}) {
     return InkWell(
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
-                spreadRadius: 2,
-                blurRadius: 5,
-              ),
-            ],
-          ),
-          margin: EdgeInsets.symmetric(vertical: 5),
-          padding: EdgeInsets.fromLTRB(10, 25, 10, 25),
-          // height: 90,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 3,horizontal: 8),
+          child: Card(
+            elevation: 10,
+            shadowColor: Colors.deepPurple,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10)),
+            child: Container(
+              padding: EdgeInsets.fromLTRB(10, 25, 10, 25),
+              // height: 90,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(
-                    experiment['draft'] == 'false'
-                        ? Icons.science_outlined
-                        : Icons.drafts_outlined,
-                    color: Colors.deepPurple,
+                  Row(
+                    children: [
+                      Icon(
+                        experiment['draft'] == 'false'
+                            ? Icons.science_outlined
+                            : Icons.drafts_outlined,
+                        color: Colors.deepPurple,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Flexible(
+                        child: Text(
+                          experiment['title'],
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black87),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                    ],
                   ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Flexible(
-                    child: Text(
-                      experiment['title'],
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black87),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
+                  SizedBox(height: 10),
                 ],
               ),
-              SizedBox(height: 10),
-            ],
+            ),
           ),
         ),
         onTap: () {

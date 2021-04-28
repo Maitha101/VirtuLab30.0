@@ -163,7 +163,6 @@ loginNavigation() {
 // ...................................................SIGN OUT................................................
 
 void signOut(context) {
-  
 
   showDialog(
       context: context,

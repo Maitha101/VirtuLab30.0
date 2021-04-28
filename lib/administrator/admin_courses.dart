@@ -87,12 +87,15 @@ class _AdminCourses extends State<AdminCourses> {
 
   _buildCourses({Map course}) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(vertical: 3,horizontal:10),
+      child: Card(
+        elevation: 10,
+        shadowColor: Colors.deepPurple,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10)),
         child: Container(
           // padding: EdgeInsets.symmetric(vertical: 15),
           decoration: BoxDecoration(
-              color: Colors.grey.shade200,
               borderRadius: BorderRadius.circular(10)),
           child: Padding(
             padding: const EdgeInsets.all(15),
