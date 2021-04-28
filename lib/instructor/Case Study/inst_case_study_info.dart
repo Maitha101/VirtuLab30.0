@@ -12,7 +12,8 @@ class CaseStudyDetail extends StatefulWidget {
 class _CaseStudyDetailState extends State<CaseStudyDetail> {
   var title;
   var count = 0;
-  TextStyle _fieldInfo = TextStyle(fontWeight: FontWeight.bold,fontSize: 16, color: Colors.deepPurple);
+  TextStyle _fieldInfo = TextStyle(
+      fontWeight: FontWeight.bold, fontSize: 16, color: Colors.deepPurple);
   TextEditingController titleController,
       bodyController,
       discrController,
@@ -28,13 +29,12 @@ class _CaseStudyDetailState extends State<CaseStudyDetail> {
   // exception handel
   void initState() {
     super.initState();
-    try{
+    try {
       dbRef = FirebaseDatabase.instance
           .reference()
           .child('case_study')
           .child(widget.snapshotKey);
-    }
-    catch(e){
+    } catch (e) {
       print(e.toString());
     }
 
@@ -108,13 +108,19 @@ class _CaseStudyDetailState extends State<CaseStudyDetail> {
           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
           child: ListView(
             children: [
-              Text('Title', style: _fieldInfo,),
+              Text(
+                'Title',
+                style: _fieldInfo,
+              ),
               TextFormField(
                 readOnly: true,
                 controller: titleController,
               ),
-              SizedBox(height:30),
-              Text('Description', style: _fieldInfo,),
+              SizedBox(height: 30),
+              Text(
+                'Description',
+                style: _fieldInfo,
+              ),
               TextFormField(
                 readOnly: true,
                 controller: discrController,
@@ -134,7 +140,10 @@ class _CaseStudyDetailState extends State<CaseStudyDetail> {
               SizedBox(
                 height: 20,
               ),
-              Text('Body', style: _fieldInfo,),
+              Text(
+                'Body',
+                style: _fieldInfo,
+              ),
               TextFormField(
                 readOnly: true,
                 controller: bodyController,
@@ -147,10 +156,7 @@ class _CaseStudyDetailState extends State<CaseStudyDetail> {
               SizedBox(
                 height: 20,
               ),
-              Text(
-                'Questions',
-                style: _fieldInfo
-              ),
+              Text('Questions', style: _fieldInfo),
               SizedBox(
                 height: 10,
               ),
@@ -199,7 +205,10 @@ class _CaseStudyDetailState extends State<CaseStudyDetail> {
               SizedBox(
                 height: 10,
               ),
-              Text('Grade', style: _fieldInfo,),
+              Text(
+                'Grade',
+                style: _fieldInfo,
+              ),
               TextFormField(
                 readOnly: true,
                 controller: gradeController,
@@ -208,7 +217,10 @@ class _CaseStudyDetailState extends State<CaseStudyDetail> {
               SizedBox(
                 height: 30,
               ),
-              Text('Deadline', style: _fieldInfo,),
+              Text(
+                'Deadline',
+                style: _fieldInfo,
+              ),
               Container(
                 height: 40,
                 child: TextFormField(
@@ -221,7 +233,8 @@ class _CaseStudyDetailState extends State<CaseStudyDetail> {
               SizedBox(height: 15),
               ElevatedButton(
                 onLongPress: () {
-                  dbRef.remove().whenComplete(() => Navigator.pop(context));
+                  dbRef.remove().whenComplete(() =>
+                      Navigator.of(context).popUntil((route) => route.isFirst));
                   ScaffoldMessenger.of(this.context).showSnackBar(
                     SnackBar(
                       duration: Duration(seconds: 2),
