@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
@@ -25,11 +27,15 @@ class ActivityStream extends StatefulWidget {
 class _ActivityStream extends State<ActivityStream> {
   Query _courseTitle;
   String _id = getCurrentID();
+  List checkData ;
+  bool check = false ;
   @override
   void initState() {
     super.initState();
-    // _courseTitle =
-    //     firebaseref.child('course').orderByChild('studID/$_id').equalTo(_id); //
+
+    _courseTitle =
+        firebaseref.child('course').orderByChild('studID/$_id').equalTo(_id); //
+
   }
 
   @override
@@ -40,7 +46,7 @@ class _ActivityStream extends State<ActivityStream> {
         title: Text('Activity Stream'),
         backgroundColor: Colors.deepPurple,
       ),
-      body: FirebaseAnimatedList(
+      body:  FirebaseAnimatedList(
         query: firebaseref
             .child('course')
             .orderByChild('studID/$_id')
@@ -50,6 +56,7 @@ class _ActivityStream extends State<ActivityStream> {
             Animation<double> animation, int index) {
           Map _courses = snapshot.value;
           _courses['key'] = snapshot.key;
+          print(_courses.length);
           return _streamList(list: _courses);
         },
       ),
@@ -63,6 +70,10 @@ class _ActivityStream extends State<ActivityStream> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Card(
+            shadowColor: Colors.deepPurple,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15)
+            ),
             elevation: 10,
             child: InkWell(
               onTap: () {},
@@ -119,7 +130,6 @@ class _ActivityStream extends State<ActivityStream> {
                                     width:
                                         MediaQuery.of(context).size.width * .7,
                                     child: FirebaseAnimatedList(
-                                        reverse: true,
                                         query: firebaseref
                                             .child('course')
                                             .child(list['key'])
@@ -154,7 +164,6 @@ class _ActivityStream extends State<ActivityStream> {
                                     width:
                                         MediaQuery.of(context).size.width * .7,
                                     child: FirebaseAnimatedList(
-                                        reverse: true,
                                         query: firebaseref
                                             .child('course')
                                             .child(list['key'])

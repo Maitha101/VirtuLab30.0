@@ -16,11 +16,7 @@ class _AdminAccounts extends State<AdminAccounts> {
   List myCourse = [];
 
   Query _courses;
-  String _name;
-  String _code;
-  String _instID;
-  String _description;
-  int _studCount = 0;
+
  // exception handel
   void initState() {
     super.initState();
@@ -30,8 +26,6 @@ class _AdminAccounts extends State<AdminAccounts> {
       print(e.toString());
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {

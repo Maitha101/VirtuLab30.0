@@ -320,6 +320,8 @@ class _CaseStudyView extends State<CaseStudyView> {
                                                         .child('studID')
                                                         .child(getCurrentID())
                                                         .set({
+                                                      'grade' : "not_graded",
+                                                      getCurrentID(): getCurrentID(),
                                                       "answer1":
                                                           question1Controller
                                                               .text,

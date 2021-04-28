@@ -3,14 +3,15 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:virtulab/functions/auth.dart';
 import 'package:virtulab/functions/database.dart';
-import 'package:virtulab/student/stu_course_contents.dart';
-
+import 'package:virtulab/widgets/custom_text.dart';
 import '../functions/auth.dart';
 
 class CourseGrades extends StatefulWidget {
   final String courseName;
   final String courseID;
+
   CourseGrades({this.courseName, this.courseID});
+
   @override
   State<StatefulWidget> createState() {
     return _CourseGrades();
@@ -18,28 +19,25 @@ class CourseGrades extends StatefulWidget {
 }
 
 class _CourseGrades extends State<CourseGrades> {
+  List total = [];
   Query _csGrade;
-  Query _studGrade;
   String _grade;
+  String myID = getCurrentID();
+  double totalGrade = 0;
+
+  bool check = false;
 
   initState() {
     String cId_false = widget.courseID + 'false';
     super.initState();
     // exception handel
-    try{
+    print(myID);
+    try {
       _csGrade = firebaseref
           .child('case_study')
           .orderByChild('cID_draft')
           .equalTo(cId_false);
-    }
-    catch(e){
-      print(e.toString());
-    }
-    try{
-      _studGrade =
-          firebaseref.child('case_study').child('studID').child(getCurrentID());
-    }
-    catch(e){
+    } catch (e) {
       print(e.toString());
     }
   }
@@ -92,7 +90,30 @@ class _CourseGrades extends State<CourseGrades> {
                     )),
                   ),
                   Align(
-                    child: Container(
+                    child: check == false
+                        ? Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.yellowAccent,
+                          borderRadius: BorderRadius.circular(30)
+                      ),
+                      width: 180,
+                            height: 60,
+                            child: TextButton(
+                            onPressed: () {
+                              setState(() {
+                                getTotalGrade();
+                                check = true;
+                              });
+                            },
+                            child: CustomText(
+                              text: "Get Total",
+                              fontSize: 20,
+                            )),
+                          ),
+                        )
+                        : Container(
                       height: 60,
                       width: 160,
                       margin: EdgeInsets.fromLTRB(40, 0, 40, 10),
@@ -101,13 +122,13 @@ class _CourseGrades extends State<CourseGrades> {
                         borderRadius:
                             new BorderRadius.all(Radius.elliptical(50, 50)),
                       ),
-                      child: Center(
-                          child: Text(
-                        'Pending',
-                        style: TextStyle(
-                          fontSize: 23,
-                        ),
-                      )), //Temp data
+                      child:Center(
+                              child: Text(
+                              "$totalGrade",
+                              style: TextStyle(
+                                fontSize: 23,
+                              ),
+                            )), //Temp data
                     ),
                   ),
                   Divider(thickness: 2),
@@ -135,16 +156,70 @@ class _CourseGrades extends State<CourseGrades> {
                           height: 2,
                           color: Colors.deepPurple),
                     ),
-                    trailing: Text(
-                        gradesList['studID'][getCurrentID()]['grade'] == null
-                            ? "-" + "/" + gradesList['total_grade']
-                            : gradesList['studID'][getCurrentID()]['grade'] +
-                                "/" +
-                                gradesList['total_grade']),
+                    trailing: Container(
+                      height: 35,
+                      width: 70,
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(top: 3.5,left: 5),
+                              height: 30,
+                              width: 30,
+                              child: FirebaseAnimatedList(
+                                  query: firebaseref
+                                      .child('case_study')
+                                      .child(gradesList['key'])
+                                      .child('studID')
+                                      .orderByChild(myID)
+                                      .equalTo(myID),
+                                  itemBuilder: (BuildContext context,
+                                      snapshot,
+                                      Animation<double> animation,
+                                      int index) {
+                                    Map _myGrade = snapshot.value;
+                                    _myGrade['key'] = snapshot.key;
+                                    return myGrade(myGrade: _myGrade);
+                                  })),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text("/" + gradesList['total_grade'],style: TextStyle(fontSize: 19),),
+                        ],
+                      ),
+                    ),
                   ),
                   Divider(thickness: 2),
-                ]))
+                ])),
           ]))
     ]);
   }
+
+  myGrade({Map myGrade}) {
+    total.add(myGrade['grade'] == 'not_graded' ? "0" : myGrade['grade']);
+    print(total);
+    return Container(
+      child: CustomText(
+        text: myGrade['grade'] == "not_graded" ? "---" : myGrade['grade'],
+        fontSize: 20,
+      ),
+    );
+  }
+
+  getTotalGrade() {
+    for (int x = 0; x < total.length; x++) {
+      totalGrade += double.parse(total[x]);
+      print(totalGrade);
+      print(total.length);
+    }
+    total.clear();
+    return totalGrade.toString();
+  }
 }
+
+// Text(
+// gradesList['studID'][getCurrentID()]['grade'] == null
+// ? "-" + "/" + gradesList['total_grade']
+// : gradesList['studID'][getCurrentID()]['grade'] +
+// "/" +
+// gradesList['total_grade']),
+// )
