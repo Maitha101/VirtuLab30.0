@@ -55,9 +55,6 @@ class _InstSettings extends State<InstSettings> {
             children: [
               Column(
                 children: [
-                  SizedBox(
-                    height: 10,
-                  ),
                   Container(
                       // margin: EdgeInsets.all(value),
                       clipBehavior: Clip.antiAlias,

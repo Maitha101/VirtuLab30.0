@@ -66,9 +66,6 @@ class _StudentSettings extends State<StudentSettings> {
             children: [
               Column(
                 children: [
-                  SizedBox(
-                    height: 10,
-                  ),
                   Container(
                       // margin: EdgeInsets.all(value),
                       clipBehavior: Clip.antiAlias,

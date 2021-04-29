@@ -40,7 +40,7 @@ class _SignUp extends State<SignUp> {
       return '* Required';
     }
     //length
-    if (id.length != 10 && id.length != 6 && id.length != 4) {
+    if (id.length != 10 && id.length != 6 ) {
       return 'Invalid ID';
     }
 

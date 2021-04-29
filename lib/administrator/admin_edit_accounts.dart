@@ -35,10 +35,15 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
          .child(widget.courseKey)
          .child('studID');
      _data.once().then((DataSnapshot snapshot) {
-       var keys = snapshot.value.keys;
-       setState(() {
-         studentKey.addAll(keys);
-       });
+      try{
+        var keys = snapshot.value.keys;
+        setState(() {
+          studentKey.addAll(keys);
+        });
+      }catch(e){
+        print(e.toString());
+      }
+
      });
    } catch(e){
      e.toString();
@@ -189,17 +194,19 @@ class _AdminEditAccountsState extends State<AdminEditAccounts> {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 )),
             Padding(
-              padding: const EdgeInsets.only(top: 20, left: 25, right: 25),
+              padding: const EdgeInsets.only( left: 25, right: 25),
               child: Container(
                 height: MediaQuery.of(context).size.height * .58,
                 child: studentKey.length == 0
                     ? Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset("assets/images/empty_placeholder.png"),
+                          Container(
+                            height: 250,
+                              width: 250,
+                              child: Image.asset("assets/images/empty_placeholder.png")),
                           CustomText(
                             text: " No Student Registered In This Course!",
-                            fontSize: 21,
+                            fontSize: 19,
                             fontWeight: FontWeight.bold,
                           )
                         ],

@@ -29,6 +29,7 @@ class _ActivityStream extends State<ActivityStream> {
   String _id = getCurrentID();
   List checkData ;
   bool check = false ;
+  Map checkCourses = {};
   @override
   void initState() {
     super.initState();
@@ -36,6 +37,23 @@ class _ActivityStream extends State<ActivityStream> {
     _courseTitle =
         firebaseref.child('course').orderByChild('studID/$_id').equalTo(_id); //
 
+   try{
+     _courseTitle.once().then((DataSnapshot snapshot) => {
+     if(snapshot.value == null){
+       check = false
+     }else{
+       check = true
+     }
+   });}
+   catch(e){}
+    setState(() {
+      Timer(Duration(seconds: 0), () {
+        setState(() {
+          print(check);
+        });
+      });
+      //
+    });
   }
 
   @override
@@ -46,7 +64,22 @@ class _ActivityStream extends State<ActivityStream> {
         title: Text('Activity Stream'),
         backgroundColor: Colors.deepPurple,
       ),
-      body:  FirebaseAnimatedList(
+      body: check == false ? Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+                height: 250,
+                width: 250,
+                child: Image.asset("assets/images/empty_placeholder.png")),
+            CustomText(
+              text: " No Student Registered In This Course!",
+              fontSize: 19,
+              fontWeight: FontWeight.bold,
+            )
+          ],
+        ),
+      ) : FirebaseAnimatedList(
         query: firebaseref
             .child('course')
             .orderByChild('studID/$_id')
@@ -56,7 +89,6 @@ class _ActivityStream extends State<ActivityStream> {
             Animation<double> animation, int index) {
           Map _courses = snapshot.value;
           _courses['key'] = snapshot.key;
-          print(_courses.length);
           return _streamList(list: _courses);
         },
       ),
@@ -65,6 +97,7 @@ class _ActivityStream extends State<ActivityStream> {
   // activity stream
 
   Widget _streamList({Map list}) {
+
     return Column(
       children: [
         Padding(

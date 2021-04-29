@@ -31,7 +31,6 @@ class _CourseGrades extends State<CourseGrades> {
     String cId_false = widget.courseID + 'false';
     super.initState();
     // exception handel
-    print(myID);
     try {
       _csGrade = firebaseref
           .child('case_study')
