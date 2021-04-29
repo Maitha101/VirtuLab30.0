@@ -46,21 +46,21 @@ class _InstReport extends State<InstReport> {
         .child('case_study')
         .orderByChild('course_id')
         .equalTo(courseKey);
-    _query.once().then((DataSnapshot snapshot) => {
-      if(snapshot.value == null){
-        check = false
-      }else{
-        check = true
-      }
-    });
-    setState(() {
-      Timer(Duration(seconds: 0), () {
-        setState(() {
-          print(check);
-        });
-      });
-      //
-    });
+    // _query.once().then((DataSnapshot snapshot) => {
+    //   if(snapshot.value == null){
+    //     check = false
+    //   }else{
+    //     check = true
+    //   }
+    // });
+    // setState(() {
+    //   Timer(Duration(seconds: 1), () {
+    //     setState(() {
+    //       print(check);
+    //     });
+    //   });
+    //   //
+    // });
   }
   @override
   Widget build(BuildContext context) {
@@ -70,9 +70,7 @@ class _InstReport extends State<InstReport> {
           title: Text('Report Summary'),
           backgroundColor: Colors.deepPurple,
         ),
-        body: check == false ? CustomPlaceHolder(
-          message: "You Didn`t Added Any Case Studies yet!\n                 Please Add Some",
-        ):Container(
+        body:Container(
           child: FirebaseAnimatedList(
               query: firebaseref
                   .child('case_study')
