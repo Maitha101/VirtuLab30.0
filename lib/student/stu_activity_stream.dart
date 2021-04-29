@@ -64,22 +64,7 @@ class _ActivityStream extends State<ActivityStream> {
         title: Text('Activity Stream'),
         backgroundColor: Colors.deepPurple,
       ),
-      body: check == false ? Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-                height: 250,
-                width: 250,
-                child: Image.asset("assets/images/empty_placeholder.png")),
-            CustomText(
-              text: " No Student Registered In This Course!",
-              fontSize: 19,
-              fontWeight: FontWeight.bold,
-            )
-          ],
-        ),
-      ) : FirebaseAnimatedList(
+      body: FirebaseAnimatedList(
         query: firebaseref
             .child('course')
             .orderByChild('studID/$_id')
