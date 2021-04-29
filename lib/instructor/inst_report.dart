@@ -1,10 +1,14 @@
+import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator_nullsafe/circle/circular_percent_indicator.dart';
 import 'package:percent_indicator_nullsafe/linear/linear_percent_indicator.dart';
 import 'package:virtulab/functions/database.dart';
+import 'package:virtulab/widgets/custom_placeholder.dart';
 import 'package:virtulab/widgets/custom_text.dart';
 import 'instructorNavBar.dart';
 
@@ -32,18 +36,32 @@ class InstReport extends StatefulWidget {
 }
 
 class _InstReport extends State<InstReport> {
-  List caseStudy = [
-    "Case Study 1",
-    "Case Study 2",
-    "Case Study 3",
-    "Case Study 4",
-    "Case Study 5",
-    "Case Study 6",
-    "Case Study 7",
-  ];
-
-  List degree = [.75, .6, .9, .5, .8, .3, .4];
-
+  Query _query ;
+  bool check = false ;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _query = firebaseref
+        .child('case_study')
+        .orderByChild('course_id')
+        .equalTo(courseKey);
+    _query.once().then((DataSnapshot snapshot) => {
+      if(snapshot.value == null){
+        check = false
+      }else{
+        check = true
+      }
+    });
+    setState(() {
+      Timer(Duration(seconds: 0), () {
+        setState(() {
+          print(check);
+        });
+      });
+      //
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +70,9 @@ class _InstReport extends State<InstReport> {
           title: Text('Report Summary'),
           backgroundColor: Colors.deepPurple,
         ),
-        body: Container(
+        body: check == false ? CustomPlaceHolder(
+          message: "You Didn`t Added Any Case Studies yet!\n                 Please Add Some",
+        ):Container(
           child: FirebaseAnimatedList(
               query: firebaseref
                   .child('case_study')

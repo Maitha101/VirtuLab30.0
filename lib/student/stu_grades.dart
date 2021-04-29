@@ -1,9 +1,13 @@
+import 'dart:async';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:virtulab/functions/auth.dart';
 import 'package:virtulab/functions/database.dart';
 import 'package:virtulab/student/stu_course_grades.dart';
+import 'package:virtulab/widgets/custom_placeholder.dart';
+import 'package:virtulab/widgets/custom_text.dart';
 
 class StudentGrades extends StatefulWidget {
   @override
@@ -15,16 +19,32 @@ class StudentGrades extends StatefulWidget {
 class _StudentGrades extends State<StudentGrades> {
   Query _courses;
   String _id = getCurrentID();
+  bool check;
   initState() {
     super.initState();
     // exception handel
     try{
       _courses =
           firebaseref.child('course').orderByChild('studID/$_id').equalTo(_id);
+      _courses.once().then((DataSnapshot snapshot) => {
+        if(snapshot.value == null){
+          check = false
+        }else{
+          check = true
+        }
+      });
     }
     catch(e){
       print(e.toString());
     }
+    setState(() {
+      Timer(Duration(seconds: 0), () {
+        setState(() {
+          print(check);
+        });
+      });
+      //
+    });
   }
 
   @override
@@ -35,7 +55,9 @@ class _StudentGrades extends State<StudentGrades> {
         title: Text('Grades'),
         backgroundColor: Colors.deepPurple,
       ),
-      body: FirebaseAnimatedList(
+      body: check == false ? CustomPlaceHolder(
+        message: "You Have No Grades Yet!",
+      ):FirebaseAnimatedList(
         query: _courses,
         defaultChild: Center(child: CircularProgressIndicator()),
         itemBuilder: (BuildContext context, snapshot,
