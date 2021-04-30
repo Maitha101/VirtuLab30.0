@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -18,10 +17,6 @@ TextStyle _textStyle = TextStyle(
   fontSize: 18,
   fontWeight: FontWeight.bold,
 );
-
-// InputDecoration _inputDecor = InputDecoration(
-//   border: OutlineInputBorder(),
-// );
 
 class _ContactSupport extends State<ContactSupport> {
   final _subjectController = TextEditingController();
@@ -67,11 +62,11 @@ class _ContactSupport extends State<ContactSupport> {
     String formattedDate = DateFormat('dd/MM/yyyy - hh:mm a').format(date);
     String status = 'new';
     firebaseref.child('tech_support').push().set({
-      'senderID': getCurrentID(), //'someones id',//id.toString(),
+      'senderID': getCurrentID(),
       'senderName': senderName,
       'subject': subject,
       'message': message,
-      'date': formattedDate, //date.toString(),
+      'date': formattedDate,
       'status': status,
     });
   }
@@ -140,7 +135,7 @@ class _ContactSupport extends State<ContactSupport> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text('Message successfully sent'),
-                              backgroundColor: Colors.deepPurple, //change?
+                              backgroundColor: Colors.deepPurple,
                             ),
                           );
                           Navigator.pop(context);
@@ -148,7 +143,6 @@ class _ContactSupport extends State<ContactSupport> {
                       },
                       child: Text(
                         'Send',
-                        // style: textStyle(),
                       ),
                     ),
                   ),

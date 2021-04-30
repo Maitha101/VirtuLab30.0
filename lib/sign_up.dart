@@ -1,11 +1,7 @@
-import 'dart:io';
-
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:virtulab/functions/database.dart';
 import 'package:flutter_password_strength/flutter_password_strength.dart';
-
 import 'functions/auth.dart';
 
 class SignUp extends StatefulWidget {
@@ -27,20 +23,12 @@ class _SignUp extends State<SignUp> {
 
   //...................................... Validate ID ..........................................
   _validateID(String id) {
-    //id exists?
-    // firebaseref.child('student').equalTo(id).once().then((snap) {
-    //   print(snap);
-    //   if (snap != null) {
-    //     return 'User already exists';
-    //   }
-    // });
-
     //empty
     if (id.isEmpty) {
       return '* Required';
     }
     //length
-    if (id.length != 10 && id.length != 6 ) {
+    if (id.length != 10 && id.length != 6) {
       return 'Invalid ID';
     }
 
@@ -68,16 +56,6 @@ class _SignUp extends State<SignUp> {
 
     RegExp studEmail = RegExp('<$_idController>/@iau.edu.sa/'); //wrong
     RegExp instEmail = RegExp('[^A-Za-z0-9_].{3,}/@iau.edu.sa/'); //wrong
-
-    // if inst email
-    // if (_idController.toString().length == 6 && !instEmail.hasMatch(email)) {
-    //   return 'not inst';
-    // }
-
-    //if stud email
-    // if (_idController.toString().length ==10 && !studEmail.hasMatch(email)){
-    //   return 'not stud';
-    // }
 
     //valid email
     bool _valid = EmailValidator.validate(email);
@@ -142,8 +120,6 @@ class _SignUp extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // title: 'Sign Up',
-      // home: Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text('VirtuLab'),
@@ -244,14 +220,9 @@ class _SignUp extends State<SignUp> {
               Container(
                 width: 275,
                 child: TextFormField(
-                  //onChanged: , //when user leaves this textfield
-                  //onFieldSubmitted: , //when user presses submit button
                   maxLines: 1,
                   minLines: 1,
                   validator: (value) => _validatePass(value),
-                  // inputFormatters: [
-                  //   FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]')),
-                  // ],
                   obscureText: _obscurePass,
                   controller: _passController,
                   decoration: InputDecoration(
@@ -274,12 +245,9 @@ class _SignUp extends State<SignUp> {
               Container(
                 width: 275,
                 child: TextFormField(
-                  //onChanged: , //when user leaves this textfield
-                  //onFieldSubmitted: , //when user presses submit button
                   maxLines: 1,
                   minLines: 1,
                   validator: (value) {
-                    //=> _validateConfirmPass(value),
                     if (value != _passController.text) {
                       return 'Password does not match';
                     }
@@ -306,9 +274,6 @@ class _SignUp extends State<SignUp> {
                 width: 275,
                 child: FlutterPasswordStrength(
                   password: _passController.text,
-
-                  // strengthColors: 0.0 ~ 0.24 : red, 0.25~0.49 : yellow, 0.50~0.74 : blue, 0.75 ~1.0 : green,
-                  // duration: milliseconds: 1,
                   strengthCallback: (strength) {
                     debugPrint(strength.toString());
                   },
@@ -333,17 +298,6 @@ class _SignUp extends State<SignUp> {
                           _passController.text,
                           context,
                         );
-
-                        // } on HttpException catch (error) {
-                        //   var errorMessage = 'Sign up Failed';
-                        //   if (error.message.contains('EMAIL_EXISTS')){
-                        //     errorMessage = 'This email is already in use';
-                        //   }
-                        //   _showError(errorMessage);
-                        // } catch (error) {
-                        //   var errorMessage = 'An error occurred. Try again later';
-                        //   _showError(errorMessage);
-                        // }
                       }
                     },
                     child: Text('Sign Up')),
@@ -368,7 +322,7 @@ class _SignUp extends State<SignUp> {
                       style: TextStyle(color: Colors.blue),
                     )),
               ),
-            ], //listview children
+            ],
           ),
         ),
       ),

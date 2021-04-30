@@ -10,7 +10,6 @@ class CsStudentAnswers extends StatefulWidget {
   CsStudentAnswers({this.csKey, this.studKey});
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _CsStudentAnswers();
   }
 }
@@ -51,23 +50,19 @@ class _CsStudentAnswers extends State<CsStudentAnswers> {
     debugPrint(widget.studKey);
 
     // exception handel
-    try{
+    try {
       _studAns = firebaseref
           .child('case_study')
           .child(widget.csKey)
           .child('studID')
           .child(widget.studKey);
-    }
-    catch(e){
+    } catch (e) {
       print(e.toString());
     }
-    // .orderByChild('studID/$_id')
-    // .equalTo(_id);
 
-    try{
+    try {
       _csDetails = firebaseref.child('case_study').child(widget.csKey);
-    }
-    catch(e){
+    } catch (e) {
       print(e.toString());
     }
     csDetails();
@@ -132,7 +127,6 @@ class _CsStudentAnswers extends State<CsStudentAnswers> {
             child: Form(
               key: _gradeForm,
               child: Column(
-                // mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
@@ -177,7 +171,6 @@ class _CsStudentAnswers extends State<CsStudentAnswers> {
                     ],
                   ),
                   Divider(color: Colors.grey),
-                  // Text(_ans1, style: _answerStyle),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -192,7 +185,6 @@ class _CsStudentAnswers extends State<CsStudentAnswers> {
                     ],
                   ),
                   Divider(color: Colors.grey),
-                  // Text(_ans2, style: _answerStyle),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -207,7 +199,6 @@ class _CsStudentAnswers extends State<CsStudentAnswers> {
                     ],
                   ),
                   Divider(color: Colors.grey),
-                  // Text(_ans3, style: _answerStyle),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -222,7 +213,6 @@ class _CsStudentAnswers extends State<CsStudentAnswers> {
                     ],
                   ),
                   Divider(color: Colors.grey),
-                  // Text(_ans4, style: _answerStyle),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -237,13 +227,7 @@ class _CsStudentAnswers extends State<CsStudentAnswers> {
                     ],
                   ),
                   Divider(color: Colors.grey),
-                  // Text(_ans5, style: _answerStyle),
-                  // SizedBox(
-                  //   height: 20,
-                  // ),
                   Container(
-                    // decoration:
-                    //     BoxDecoration(border: Border.all(color: Colors.grey),borderRadius: BorderRadius.all(Radius.circular(10))),
                     child: Padding(
                       padding: EdgeInsets.all(10),
                       child: Column(
@@ -288,80 +272,74 @@ class _CsStudentAnswers extends State<CsStudentAnswers> {
                       ),
                     ),
                   ),
-
                   Divider(color: Colors.grey),
-                  Column(
-                      // crossAxisAlignment: CrossAxisAlignment.start,
+                  Column(children: [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                      child: Text(
+                        'Grade',
+                        style: _questionStyle,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                          child: Text(
-                            'Grade',
-                            style: _questionStyle,
+                        Container(
+                          width: 70,
+                          child: TextFormField(
+                            textAlign: TextAlign.center,
+                            controller: _gradeController,
+                            validator: (value) => _validateGrade(value),
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'[0-9]'))
+                            ],
+                            decoration:
+                                InputDecoration(border: OutlineInputBorder()),
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 70,
-                              child: TextFormField(
-                                textAlign: TextAlign.center,
-                                controller: _gradeController,
-                                validator: (value) => _validateGrade(value),
-                                keyboardType: TextInputType.number,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                      RegExp(r'[0-9]'))
-                                ],
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder()),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
-                              child:
-                                  Text('/ $_totalGrade', style: _answerStyle),
-                            ),
-                          ],
-                        ),
                         Padding(
-                          padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                          child: Container(
-                            height: 50,
-                            width: 150,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                if (_gradeForm.currentState.validate()) {
-                                  firebaseref
-                                      .child('case_study')
-                                      .child(widget.csKey)
-                                      .child('studID')
-                                      .child(widget.studKey)
-                                      .child('grade')
-                                      .set(_gradeController.text);
-                                  firebaseref
-                                      .child('case_study')
-                                      .child(widget.csKey)
-                                      .child('studID')
-                                      .child(widget.studKey)
-                                      .update({'graded': 'true'});
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content:
-                                          Text('Grade Submitted Successfully'),
-                                      backgroundColor:
-                                          Colors.deepPurple, //change?
-                                    ),
-                                  );
-                                  Navigator.of(context).pop();
-                                }
-                              },
-                              child: Text('Upload Grade'),
-                            ),
-                          ),
+                          padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                          child: Text('/ $_totalGrade', style: _answerStyle),
                         ),
-                      ]),
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                      child: Container(
+                        height: 50,
+                        width: 150,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            if (_gradeForm.currentState.validate()) {
+                              firebaseref
+                                  .child('case_study')
+                                  .child(widget.csKey)
+                                  .child('studID')
+                                  .child(widget.studKey)
+                                  .child('grade')
+                                  .set(_gradeController.text);
+                              firebaseref
+                                  .child('case_study')
+                                  .child(widget.csKey)
+                                  .child('studID')
+                                  .child(widget.studKey)
+                                  .update({'graded': 'true'});
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Grade Submitted Successfully'),
+                                  backgroundColor: Colors.deepPurple,
+                                ),
+                              );
+                              Navigator.of(context).pop();
+                            }
+                          },
+                          child: Text('Upload Grade'),
+                        ),
+                      ),
+                    ),
+                  ]),
                 ],
               ),
             ),

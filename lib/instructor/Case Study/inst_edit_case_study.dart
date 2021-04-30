@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:virtulab/instructor/inst_report.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class CaseStudyEditForm extends StatefulWidget {
   final String snapshotKey;
@@ -35,16 +34,15 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
       question4Controller,
       question5Controller;
   //-----------------------------Functions--------------------------------------
- // exception handel
+  // exception handel
   void initState() {
     super.initState();
-    try{
+    try {
       dbRef = FirebaseDatabase.instance
           .reference()
           .child("case_study")
           .child(widget.snapshotKey);
-    }
-    catch(e){
+    } catch (e) {
       print(e.toString());
     }
 
@@ -110,43 +108,6 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
       });
   }
 
-  _showDeleteDialog() {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Delete Case Study'),
-            content: Text('are you sure you want to delete the Case Study?'),
-            actions: [
-              ElevatedButton(
-                onPressed: () {
-                  dbRef.remove().whenComplete(() => Navigator.pop(context));
-                },
-                child: Text('Delete'),
-                style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18))),
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.red[700])),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text('Cancel'),
-                style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18))),
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.grey)),
-              )
-            ],
-          );
-        });
-  }
-
 // CASE STUDY FORM -- START --
   @override
   Widget build(BuildContext context) {
@@ -171,7 +132,10 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
                 ),
                 child: ListView(
                   children: <Widget>[
-                    Text('Title', style: _fieldInfo,),
+                    Text(
+                      'Title',
+                      style: _fieldInfo,
+                    ),
                     TextFormField(
                       validator: (v) => v.isEmpty ? "Enter title" : null,
                       controller: titleController,
@@ -179,8 +143,11 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
                         hintText: 'Enter the Case Study title here',
                       ),
                     ),
-                    SizedBox(height:30),
-                    Text('Description', style: _fieldInfo,),
+                    SizedBox(height: 30),
+                    Text(
+                      'Description',
+                      style: _fieldInfo,
+                    ),
                     TextFormField(
                       controller: discrController,
                       validator: (v) => v.isEmpty ? "enter description" : null,
@@ -200,7 +167,10 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
                     SizedBox(
                       height: 20,
                     ),
-                    Text('Body', style: _fieldInfo,),
+                    Text(
+                      'Body',
+                      style: _fieldInfo,
+                    ),
                     TextFormField(
                       validator: (v) => v.isEmpty ? "enter question" : null,
                       controller: bodyController,
@@ -213,11 +183,7 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
                     SizedBox(
                       height: 20,
                     ),
-                    Text(
-                      'Questions',
-                      style: _fieldInfo
-                      ),
-                    
+                    Text('Questions', style: _fieldInfo),
                     SizedBox(
                       height: 10,
                     ),
@@ -266,7 +232,10 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
                     SizedBox(
                       height: 10,
                     ),
-                    Text('Grade', style: _fieldInfo,),
+                    Text(
+                      'Grade',
+                      style: _fieldInfo,
+                    ),
                     TextFormField(
                       validator: (v) => v.isEmpty ? "Grade" : null,
                       controller: gradeController,
@@ -278,7 +247,10 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
                     SizedBox(
                       height: 30,
                     ),
-                    Text('Deadline', style: _fieldInfo,),
+                    Text(
+                      'Deadline',
+                      style: _fieldInfo,
+                    ),
                     CheckboxListTile(
                       title: Text('No Deadline'),
                       controlAffinity: ListTileControlAffinity.leading,
@@ -289,8 +261,6 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
                         });
                       },
                     ),
-
-                    //SizedBox(height: 15),
                     if (!dateCheckBoxValue)
                       Container(
                         height: 40,
@@ -299,34 +269,10 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
                           controller: deadlineController,
                           keyboardType: TextInputType.datetime,
                           decoration: InputDecoration(
-                            //may use date picker instead ..
                             hintText: 'Deadline: -DD/MM/YYY-',
                           ),
                         ),
                       ),
-                    // Column(
-                    //   children: [
-                    //     Container(
-                    //       padding: EdgeInsets.all(15),
-                    //       decoration: BoxDecoration(
-                    //         borderRadius: BorderRadius.circular(3),
-                    //           border: Border.all(color: Colors.grey)),
-                    //       child: Text(
-                    //         'Deadline:  ' +
-                    //             '${_deadline.toLocal()}'.split(' ')[0],
-                    //       ),
-                    //     ),
-                    //     SizedBox(height: 10),
-                    //     Container(
-                    //       height: 45,
-                    //       width: 170,
-                    //       child: ElevatedButton(
-                    //         onPressed: () => _datePicker(context),
-                    //         child: Text('Select date'),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                     SizedBox(height: 15),
                     Container(
                       child: Row(
@@ -346,8 +292,7 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
                                     duration: Duration(seconds: 2),
                                     content: Text(
                                         'Case Study Submitted Succesfully'),
-                                    backgroundColor:
-                                        Colors.deepPurple, //change?
+                                    backgroundColor: Colors.deepPurple,
                                   ),
                                 );
                               }
@@ -378,8 +323,7 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
                                     duration: Duration(seconds: 2),
                                     content:
                                         Text('Case Study Updated Sucesfully'),
-                                    backgroundColor:
-                                        Colors.deepPurple, //change?
+                                    backgroundColor: Colors.deepPurple,
                                   ),
                                 );
                               }
@@ -406,7 +350,7 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
                                   duration: Duration(seconds: 2),
                                   content:
                                       Text('Case Study deleted Succesfully'),
-                                  backgroundColor: Colors.deepPurple, //change?
+                                  backgroundColor: Colors.deepPurple,
                                 ),
                               );
                             },
@@ -416,7 +360,7 @@ class CaseStudyEditFormState extends State<CaseStudyEditForm> {
                                   duration: Duration(seconds: 1),
                                   content: Text(
                                       'Hold the Delete button to delete the case study'),
-                                  backgroundColor: Colors.deepPurple, //change?
+                                  backgroundColor: Colors.deepPurple,
                                 ),
                               );
                             },

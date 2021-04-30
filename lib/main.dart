@@ -1,11 +1,8 @@
-
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:virtulab/student/stu_caseStudies_list.dart';
-import 'package:virtulab/student/stu_experiments_list.dart';
 import './sign_up.dart';
 import 'administrator/adminNavBar.dart';
 import 'forgot_password.dart';
@@ -13,7 +10,6 @@ import 'functions/auth.dart';
 import 'student/stu_activity_stream.dart';
 import 'student/stu_course_register.dart';
 import 'instructor/inst_report.dart';
-import 'tempnav.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,7 +34,6 @@ class _VirtuLabState extends State<VirtuLab> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     userCheck();
   }
@@ -52,16 +47,7 @@ class _VirtuLabState extends State<VirtuLab> {
         '/student': (context) => MainStudent(), //student
         '/stu_course': (context) => StuCourseRegister(), //student course select
         '/instructor': (context) => MainInstructor(), //instructor
-        '/admin': (context) => AdminNavBar(), //MainAdmin(), //admin
-        '/temp': (context) => TempNaV(), //temporary navigation
-        // '/course_page': (context) => StudentCoursePage(),
-        // coursesPage[0].route: (context) => Scaffold(
-        //     appBar: AppBar(title: Text(coursesPage[0].title)),),  //first route
-        // coursesPage[1].route: (context) => Scaffold(
-        //     appBar: AppBar(title: Text(coursesPage[1].title)),),
-        '/experiment_list': (context) => ExperimentsList(),
-        '/caseStudy_list': (context) => CaseStudiesList(),
-        '/login': (context) => Homepage(),
+        '/admin': (context) => AdminNavBar(), //admin
         '/forgotPass': (context) => ForgotPassword(),
       },
       title: 'Login',
@@ -166,12 +152,8 @@ class _Homepage extends State<Homepage> {
                     minLines: 1,
                     validator: (value) => _validateEmail(value),
                     keyboardType: TextInputType.emailAddress,
-                    // inputFormatters: [
-                    // FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                    // ],
                     decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Email'),
+                        border: OutlineInputBorder(), labelText: 'Email'),
                   ),
                 ),
 
@@ -205,7 +187,9 @@ class _Homepage extends State<Homepage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TextButton(
-                      onPressed: () { Navigator.pushNamed(context, '/forgotPass');},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/forgotPass');
+                      },
                       child: Text('Forgot Password?'),
                     ),
                   ],
@@ -218,13 +202,7 @@ class _Homepage extends State<Homepage> {
                   width: 150,
                   height: 50,
                   child: ElevatedButton(
-                      onPressed: () =>
-                          // Navigator.push(
-                          // context,
-                          // MaterialPageRoute(
-                          //     builder: (BuildContext context) => TempNaV())),
-
-                          {
+                      onPressed: () => {
                             if (_loginForm.currentState.validate())
                               {
                                 userLogin(_emailController.text,
@@ -263,4 +241,3 @@ class _Homepage extends State<Homepage> {
     );
   }
 }
-

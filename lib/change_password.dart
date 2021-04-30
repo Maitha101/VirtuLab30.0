@@ -2,9 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:virtulab/functions/auth.dart';
 import 'package:virtulab/widgets/custom_text.dart';
-
 import 'functions/database.dart';
-// import 'package:virtulab/widgets/custom_text_from_field.dart';
 
 class ChangePassword extends StatefulWidget {
   State<StatefulWidget> createState() {
@@ -34,7 +32,6 @@ class _ChangePassword extends State<ChangePassword> {
       await user.reauthenticateWithCredential(creds);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'wrong-password') {
-        // return 'bad bo';
         showDialog(
           context: context,
           builder: (cxt) => AlertDialog(
@@ -106,30 +103,6 @@ class _ChangePassword extends State<ChangePassword> {
                 SizedBox(
                   height: 20,
                 ),
-                // CustomText(
-                //   fontSize: 18,
-                //   text: "Current Password",
-                //   fontWeight: FontWeight.w600,
-                // ),
-                // Padding(
-                //   padding: const EdgeInsets.only(top: 10, bottom: 30),
-                //   child: TextFormField(
-                //     controller: _currentPassController,
-                //     validator: (value) => _validateCurrent(value),
-                //     obscureText: _obscurePass,
-                //     decoration: InputDecoration(
-                //       border: OutlineInputBorder(),
-                //       labelText: "Current password",
-                //       suffixIcon: IconButton(
-                //         onPressed: _toggle,
-                //         icon: Icon(_obscurePass
-                //             ? Icons.visibility_off
-                //             : Icons.visibility),
-                //       ),
-                //     ),
-                //     // onChange: (v) {},
-                //   ),
-                // ),
                 CustomText(
                   fontSize: 18,
                   text: "New Password",
@@ -150,10 +123,7 @@ class _ChangePassword extends State<ChangePassword> {
                               ? Icons.visibility_off
                               : Icons.visibility),
                         ),
-                      )
-
-                      // onChange: (v) {},
-                      ),
+                      )),
                 ),
                 CustomText(
                   fontSize: 18,
@@ -179,9 +149,7 @@ class _ChangePassword extends State<ChangePassword> {
                               ? Icons.visibility_off
                               : Icons.visibility),
                         ),
-                      )
-                      // onChange: (v) {},
-                      ),
+                      )),
                 ),
                 SizedBox(
                   height: 20,
@@ -214,12 +182,13 @@ class _ChangePassword extends State<ChangePassword> {
                                       SnackBar(
                                         content: Text(
                                             'Password changed successfully'),
-                                        backgroundColor:
-                                            Colors.deepPurple, //change?
+                                        backgroundColor: Colors.deepPurple,
                                       ),
                                     );
                                   }),
-                                  TextButton(child: Text('Cancel'), onPressed: ()=> Navigator.of(cxt).pop()),
+                              TextButton(
+                                  child: Text('Cancel'),
+                                  onPressed: () => Navigator.of(cxt).pop()),
                             ],
                           ),
                         );

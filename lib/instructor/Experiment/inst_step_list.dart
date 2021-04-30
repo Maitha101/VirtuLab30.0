@@ -1,7 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
-import 'package:virtulab/instructor/inst_experiments.dart';
 import 'inst_step_info.dart';
 
 // THIS SCREEN LISTS SUBMITTED EXP STEPS FOR READING AND DELETION OF EXP !!!
@@ -82,30 +81,6 @@ class _InstExperimentsStep extends State<InstExperimentsStep> {
         });
   }
 
-  _showDeleteDialog() {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Delete Experiment'),
-            content: Text('are you sure you want to delete the experiment?'),
-            actions: [
-              ElevatedButton(
-                  onPressed: () {
-                    dbrefrence.remove().whenComplete(() => Navigator.of(context)
-                        .popUntil((route) => route.isFirst));
-                  },
-                  child: Text('Delete')),
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text('Cancel'))
-            ],
-          );
-        });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,7 +102,7 @@ class _InstExperimentsStep extends State<InstExperimentsStep> {
                       SnackBar(
                         duration: Duration(seconds: 2),
                         content: Text('Experiment deleted Sucesfully'),
-                        backgroundColor: Colors.deepPurple, //change?
+                        backgroundColor: Colors.deepPurple, 
                       ),
                     );
                   },
@@ -137,7 +112,7 @@ class _InstExperimentsStep extends State<InstExperimentsStep> {
                         duration: Duration(seconds: 1),
                         content: Text(
                             'Hold the Delete button to delete the Experiment'),
-                        backgroundColor: Colors.red[700], //change?
+                        backgroundColor: Colors.red[700], 
                       ),
                     );
                   },

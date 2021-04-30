@@ -9,7 +9,6 @@ class CsStudentSelect extends StatefulWidget {
   CsStudentSelect({this.snapshotKey});
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _CsStudentSelect();
   }
 }
@@ -47,7 +46,6 @@ class _CsStudentSelect extends State<CsStudentSelect> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -61,7 +59,6 @@ class _CsStudentSelect extends State<CsStudentSelect> {
               Animation<double> animation, int index) {
             Map _cs = snapshot.value;
             _cs['key'] = snapshot.key;
-            // _studID = snapshot.key;
             return studentList(studList: _cs);
           }),
     );
@@ -90,7 +87,6 @@ class _CsStudentSelect extends State<CsStudentSelect> {
                   Text('Student ID',
                       style: TextStyle(
                         fontSize: 16,
-                        // fontWeight: FontWeight.bold,
                       )),
                   Text(studList['key'],
                       style: TextStyle(
@@ -100,7 +96,6 @@ class _CsStudentSelect extends State<CsStudentSelect> {
                   Icon(Icons.arrow_forward_ios)
                 ],
               ),
-              // Text('name: '+ fullName)
             ],
           ),
         ),

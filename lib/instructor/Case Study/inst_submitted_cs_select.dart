@@ -15,7 +15,7 @@ class _SubmittedCsSelect extends State<SubmittedCsSelect> {
   
 
   TextStyle _txtStyle = TextStyle(
-      fontSize: 16, fontWeight: FontWeight.w600,);//color: Colors.deepPurple);
+      fontSize: 16, fontWeight: FontWeight.w600,);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,6 @@ class _SubmittedCsSelect extends State<SubmittedCsSelect> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          // margin: EdgeInsets.symmetric(vertical: 10),
           padding: EdgeInsets.all(10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

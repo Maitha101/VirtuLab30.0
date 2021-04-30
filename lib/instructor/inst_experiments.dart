@@ -64,7 +64,6 @@ class _InstExperiments extends State<InstExperiments> {
                 borderRadius: BorderRadius.circular(10)),
             child: Container(
               padding: EdgeInsets.fromLTRB(10, 25, 10, 25),
-              // height: 90,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,

@@ -18,7 +18,6 @@ class _InstCourseSelectState extends State<InstCourseSelect> {
   Query dbRef;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     setState(() {
       _progressController =
@@ -80,8 +79,7 @@ class _InstCourseSelectState extends State<InstCourseSelect> {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        'instructor: ' + course['instname'], //'instructor name',
-                        //course['description'],
+                        'instructor: ' + course['instname'],
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -96,8 +94,7 @@ class _InstCourseSelectState extends State<InstCourseSelect> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  //MainInstructor()
-                  //InstructorNavBar()
+                
                   builder: (BuildContext context) => MainInstructor(
                     cKey: course['key'],
                   ),

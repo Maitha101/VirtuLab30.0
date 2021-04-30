@@ -13,26 +13,23 @@ class InstSettings extends StatefulWidget {
 }
 
 class _InstSettings extends State<InstSettings> {
-  // String _studID = currentUser();
-  // Query _instInfo;
   String _fullName = 'Retrieving..';
   initState() {
     super.initState();
-    // _instInfo =
-    //     firebaseref.child('instructor').child(_studID).orderByChild(_studID);
+
     getFullName();
   }
+
   // exception handel
   getFullName() async {
-    try{
+    try {
       DataSnapshot snapshot =
-      await firebaseref.child('instructor').child(getCurrentID()).once();
+          await firebaseref.child('instructor').child(getCurrentID()).once();
       Map inst = snapshot.value;
       setState(() {
         _fullName = inst['fname'] + ' ' + inst['lname'];
       });
-    }
-    catch(e){
+    } catch (e) {
       print(e.toString());
     }
   }
@@ -50,13 +47,11 @@ class _InstSettings extends State<InstSettings> {
         child: Container(
           color: Colors.grey.shade100,
           width: double.infinity,
-          // height: MediaQuery.of(context).size.height * .38,
           child: ListView(
             children: [
               Column(
                 children: [
                   Container(
-                      // margin: EdgeInsets.all(value),
                       clipBehavior: Clip.antiAlias,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50)),
@@ -65,12 +60,7 @@ class _InstSettings extends State<InstSettings> {
                       child: Icon(
                         Icons.account_circle_sharp,
                         size: 100,
-                      )
-                      // Image.asset(
-                      //   "assets/images/profile_pic.png",
-                      //   fit: BoxFit.fill,
-                      // ),
-                      ),
+                      )),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 5),
                     child: Row(
@@ -84,7 +74,7 @@ class _InstSettings extends State<InstSettings> {
                           width: 10,
                         ),
                         Text(
-                          _fullName, //"Maitha",
+                          _fullName,
                           style: TextStyle(fontSize: 20),
                         ),
                       ],
@@ -101,7 +91,7 @@ class _InstSettings extends State<InstSettings> {
                         width: 10,
                       ),
                       Text(
-                        getCurrentUserEmail(), //"maitha@gmail.com",
+                        getCurrentUserEmail(),
                         style: TextStyle(fontSize: 20),
                       ),
                     ],
@@ -120,7 +110,7 @@ class _InstSettings extends State<InstSettings> {
                         width: 15,
                       ),
                       Text(
-                        getCurrentID(), //"101010",
+                        getCurrentID(),
                         style: TextStyle(fontSize: 20),
                       ),
                     ],
@@ -131,16 +121,17 @@ class _InstSettings extends State<InstSettings> {
                 height: 20,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 3,horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 8),
                 child: Card(
-                   elevation: 10,
+                  elevation: 10,
                   shadowColor: Colors.deepPurple,
                   child: InkWell(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (BuildContext context) => ChangePassword()),
+                            builder: (BuildContext context) =>
+                                ChangePassword()),
                       );
                     },
                     child: Padding(
@@ -162,7 +153,7 @@ class _InstSettings extends State<InstSettings> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 3,horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 8),
                 child: Card(
                   elevation: 10,
                   shadowColor: Colors.deepPurple,
@@ -183,25 +174,13 @@ class _InstSettings extends State<InstSettings> {
                               style: TextStyle(fontSize: 18),
                             ),
                           ]),
-
-                          // SizedBox(
-                          //   width: 40,
-                          // ),
-                          // Container(
-                          //   decoration: BoxDecoration(
-                          //       color: Colors.grey.shade300,
-                          //       borderRadius: BorderRadius.circular(50)),
-                          //   child:
                           Switch(
                               value: isSwitched,
-                              // activeColor: Colors.deepPurple,
-                              // activeTrackColor: Colors.deepPurpleAccent,
                               onChanged: (value) {
                                 setState(() {
                                   isSwitched = value;
                                 });
                               }),
-                          // ),
                         ],
                       ),
                     ),
@@ -209,17 +188,17 @@ class _InstSettings extends State<InstSettings> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 3),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 child: Card(
                   elevation: 10,
                   shadowColor: Colors.deepPurple,
-                  // elevation: 5,
                   child: InkWell(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (BuildContext context) => ContactSupport()),
+                            builder: (BuildContext context) =>
+                                ContactSupport()),
                       );
                     },
                     child: Padding(
@@ -241,11 +220,10 @@ class _InstSettings extends State<InstSettings> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 3,horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 8),
                 child: Card(
                   elevation: 10,
                   shadowColor: Colors.deepPurple,
-                  // elevation: 5,
                   child: InkWell(
                     onTap: () {
                       signOut(context);

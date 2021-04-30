@@ -6,7 +6,6 @@ import 'package:virtulab/functions/database.dart';
 class SolvedTSMessage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _SolvedTSMessage();
   }
 }
@@ -17,33 +16,27 @@ class _SolvedTSMessage extends State<SolvedTSMessage> {
       return Center(child: Text('No Messages'));
     } else {
       return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 3,horizontal: 8),
+        padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 8),
         child: Card(
-          // color: Colors.grey[200],
           elevation: 10,
           shadowColor: Colors.deepPurple,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           child: InkWell(
             onTap: null, // show full message
             child: Padding(
               padding: EdgeInsets.all(10.0),
-              // const EdgeInsets.fromLTRB(15, 0, 0, 0),
               child: Container(
                 margin: EdgeInsets.symmetric(vertical: 5),
-                // padding: EdgeInsets.all(10),
-                // height: 120,
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: ExpansionTile(
-                    // expandedCrossAxisAlignment: CrossAxisAlignment.center,
                     tilePadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                     title: Text(
                       message['subject'],
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          // height: 1,
                           color: Colors.deepPurple),
                     ),
                     subtitle: Text(
@@ -52,7 +45,7 @@ class _SolvedTSMessage extends State<SolvedTSMessage> {
                     ),
                     leading: Icon(
                       Icons.account_circle,
-                    ), // color: Colors.deepPurple,),
+                    ),
                     children: [
                       Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,7 +68,8 @@ class _SolvedTSMessage extends State<SolvedTSMessage> {
                               thickness: 1,
                             ),
                             Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Column(
                                     children: [
@@ -101,10 +95,8 @@ class _SolvedTSMessage extends State<SolvedTSMessage> {
                                     children: [
                                       Row(
                                         children: [
-                                          Text(
-                                              'Mark as New'), //, style:TextStyle(color: Colors.lightGreen)),
+                                          Text('Mark as New'),
                                           IconButton(
-                                            // iconSize: 30,
                                             icon: Icon(Icons.logout,
                                                 color: Colors.blue),
                                             onPressed: () {
@@ -134,14 +126,13 @@ class _SolvedTSMessage extends State<SolvedTSMessage> {
   Query statusSolved;
   initState() {
     super.initState();
-    // statusSolved = firebaseref.child('tech_support').child('status').equalTo('solved').orderByChild('date');
-    // statusSolved = firebaseref.child('tech_support').orderByChild('date');
+
     statusSolved = firebaseref
         .child('tech_support')
         .orderByChild('status')
         .equalTo('solved');
 
-    try{
+    try {
       firebaseref.child('tech_support').onValue.listen((event) {
         var snapshot = event.snapshot;
         setState() {
@@ -149,14 +140,13 @@ class _SolvedTSMessage extends State<SolvedTSMessage> {
           print(value);
         }
       });
-    } catch(e){
+    } catch (e) {
       print(e.toString());
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return FirebaseAnimatedList(
         query: statusSolved,
         sort: (a, b) {
@@ -175,11 +165,6 @@ class _SolvedTSMessage extends State<SolvedTSMessage> {
             return _solvedMessages(message: _message);
           }
         });
-    //   ],
-    // );
   }
 
-  _emptyQuery() {
-    return Center(child: Text('No Messages'));
-  }
 }

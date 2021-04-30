@@ -2,7 +2,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:virtulab/functions/database.dart';
-import 'package:virtulab/instructor/inst_experiments.dart';
 import 'inst_step_edit.dart';
 import 'inst_step_form.dart';
 import 'package:virtulab/instructor/inst_report.dart';
@@ -113,51 +112,6 @@ class _InstExperimentsStepList extends State<InstExperimentsStepList> {
     );
   }
 
-  _showDeleteDialog() {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Delete Experiment'),
-            content: Text('are you sure you want to delete the experiment?'),
-            actions: [
-              ElevatedButton(
-                onPressed: () {
-                  dbrefrence.remove();
-                  Navigator.of(context).pop();
-                  ScaffoldMessenger.of(this.context).showSnackBar(
-                    SnackBar(
-                      content: Text('Experiment deleted Sucesfully'),
-                      backgroundColor: Colors.deepPurple, //change?
-                    ),
-                  );
-                  Navigator.of(context).pop();
-                },
-                child: Text('Delete'),
-                style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18))),
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.red[700])),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text('Cancel'),
-                style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18))),
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.grey)),
-              )
-            ],
-          );
-        });
-  }
-
   _showStepDeleteDialog({Map step}) {
     showDialog(
         context: context,
@@ -224,7 +178,7 @@ class _InstExperimentsStepList extends State<InstExperimentsStepList> {
                           SnackBar(
                             duration: Duration(seconds: 2),
                             content: Text('Experiment Submitted Sucesfully'),
-                            backgroundColor: Colors.deepPurple, //change?
+                            backgroundColor: Colors.deepPurple,
                           ),
                         );
                       },
@@ -255,7 +209,7 @@ class _InstExperimentsStepList extends State<InstExperimentsStepList> {
                           SnackBar(
                             duration: Duration(seconds: 2),
                             content: Text('Experiment Saved Sucesfully'),
-                            backgroundColor: Colors.deepPurple, //change?
+                            backgroundColor: Colors.deepPurple,
                           ),
                         );
                       },
@@ -313,7 +267,7 @@ class _InstExperimentsStepList extends State<InstExperimentsStepList> {
                         SnackBar(
                           duration: Duration(seconds: 2),
                           content: Text('Experiment deleted Sucesfully'),
-                          backgroundColor: Colors.deepPurple, //change?
+                          backgroundColor: Colors.deepPurple,
                         ),
                       );
                     },
@@ -323,7 +277,7 @@ class _InstExperimentsStepList extends State<InstExperimentsStepList> {
                           duration: Duration(seconds: 1),
                           content: Text(
                               'Hold the Delete button to delete the Experiment'),
-                          backgroundColor: Colors.red[700], //change?
+                          backgroundColor: Colors.red[700],
                         ),
                       );
                     },

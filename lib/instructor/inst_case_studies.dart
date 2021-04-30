@@ -1,7 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
-import 'Case Study/inst_case_study_info.dart';
 import 'Case Study/inst_edit_case_study.dart';
 import 'Case Study/inst_create_cs.dart';
 import 'Case Study/inst_submitted_cs_select.dart';
@@ -60,7 +59,6 @@ class _InstCaseStudies extends State<InstCaseStudies> {
                 borderRadius: BorderRadius.circular(10)),
             child: Container(
               padding: EdgeInsets.fromLTRB(10, 25, 10, 25),
-              // height: 90,
 
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

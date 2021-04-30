@@ -24,15 +24,14 @@ class _AdminSettings extends State<AdminSettings> {
   }
 
   getFullName() async {
-    try{
+    try {
       DataSnapshot snapshot =
-      await firebaseref.child('admin').child(getCurrentID()).once();
+          await firebaseref.child('admin').child(getCurrentID()).once();
       Map admin = snapshot.value;
       setState(() {
         _fullName = admin['fname'] + ' ' + admin['lname'];
       });
-    }
-    catch(e){
+    } catch (e) {
       print(e.toString());
     }
   }
@@ -66,8 +65,7 @@ class _AdminSettings extends State<AdminSettings> {
                       child: Icon(
                         Icons.account_circle_sharp,
                         size: 100,
-                      )
-                      ),
+                      )),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 5),
                     child: Row(
@@ -81,7 +79,7 @@ class _AdminSettings extends State<AdminSettings> {
                           width: 10,
                         ),
                         Text(
-                          _fullName, //"Maitha",
+                          _fullName,
                           style: TextStyle(fontSize: 20),
                         ),
                       ],
@@ -98,7 +96,7 @@ class _AdminSettings extends State<AdminSettings> {
                         width: 10,
                       ),
                       Text(
-                        getCurrentUserEmail(), //"maitha@gmail.com",
+                        getCurrentUserEmail(),
                         style: TextStyle(fontSize: 20),
                       ),
                     ],
@@ -117,7 +115,7 @@ class _AdminSettings extends State<AdminSettings> {
                         width: 15,
                       ),
                       Text(
-                        getCurrentID(), //"101010",
+                        getCurrentID(),
                         style: TextStyle(fontSize: 20),
                       ),
                     ],
@@ -128,7 +126,7 @@ class _AdminSettings extends State<AdminSettings> {
                 height: 20,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4,horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 child: Card(
                   elevation: 10,
                   shadowColor: Colors.deepPurple,
@@ -137,7 +135,8 @@ class _AdminSettings extends State<AdminSettings> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (BuildContext context) => ChangePassword()),
+                            builder: (BuildContext context) =>
+                                ChangePassword()),
                       );
                     },
                     child: Padding(
@@ -159,7 +158,7 @@ class _AdminSettings extends State<AdminSettings> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4,horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 child: Card(
                   elevation: 10,
                   shadowColor: Colors.deepPurple,
@@ -189,7 +188,6 @@ class _AdminSettings extends State<AdminSettings> {
                                   isSwitched = value;
                                 });
                               }),
-                          // ),
                         ],
                       ),
                     ),
@@ -197,7 +195,7 @@ class _AdminSettings extends State<AdminSettings> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4,horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 child: Card(
                   elevation: 10,
                   shadowColor: Colors.deepPurple,

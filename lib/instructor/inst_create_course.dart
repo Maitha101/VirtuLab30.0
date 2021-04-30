@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,7 +8,6 @@ import '../functions/database.dart';
 class CreateCourse extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _CreateCourse();
   }
 }
@@ -21,7 +19,6 @@ _validator(String value) {
 }
 
 class _CreateCourse extends State<CreateCourse> {
-
   final dbRef = FirebaseDatabase.instance.reference().child('course');
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
@@ -29,25 +26,24 @@ class _CreateCourse extends State<CreateCourse> {
   final _descController = TextEditingController();
   String _fullName = '';
 
-  initState(){
+  initState() {
     super.initState();
     getInstName();
   }
 
   // exception handel
   getInstName() async {
-    try{
+    try {
       DataSnapshot snapshot =
-      await firebaseref.child('instructor').child(getCurrentID()).once();
+          await firebaseref.child('instructor').child(getCurrentID()).once();
       Map inst = snapshot.value;
       setState(() {
         _fullName = inst['fname'] + ' ' + inst['lname'];
       });
-    }
-    catch(e){
+    } catch (e) {
       print(e.toString());
     }
-    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,19 +92,6 @@ class _CreateCourse extends State<CreateCourse> {
                                 ),
                               ),
                             ),
-                            // Flexible(
-                            //   child: Padding(
-                            //     padding: EdgeInsets.all(2.0),
-                            //     child: TextFormField(
-                            //       validator: (value) => _validator(value),
-                            //       decoration: InputDecoration(
-                            //         border: OutlineInputBorder(),
-                            //         labelText: 'Description',
-                            //       ),
-                            //       controller: _descController,
-                            //     ),
-                            //   ),
-                            // ),
                             Flexible(
                               child: Padding(
                                 padding: EdgeInsets.all(2.0),
@@ -130,7 +113,6 @@ class _CreateCourse extends State<CreateCourse> {
                                         'instID': getCurrentID(),
                                         'instname': _fullName,
                                         'code': _codeController.text,
-                                        // 'description': _descController.text,
                                       });
                                       _nameController.clear();
                                       _codeController.clear();
@@ -153,4 +135,3 @@ class _CreateCourse extends State<CreateCourse> {
     );
   }
 }
-

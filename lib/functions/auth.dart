@@ -1,14 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:virtulab/administrator/adminNavBar.dart';
 import 'package:virtulab/instructor/inst_course_select.dart';
 import 'package:virtulab/student/stu_activity_stream.dart';
-
 import '../main.dart';
-import '../tempnav.dart';
 import 'database.dart';
 // ...................................................SIGN UP................................................
 
@@ -81,29 +78,6 @@ userSignup(String id, String fname, String lname, String email, String pass,
   );
 }
 
-// Future<bool> checkIDExists(String id) async {
-//   DataSnapshot snapshot;
-//   if (id.length == 6) {
-//     snapshot = await firebaseref
-//         .child('instructor')
-//         .orderByChild('ID')
-//         .equalTo(id)
-//         .once();
-//     return snapshot.key.isEmpty;
-//   } else if (id.length == 10) {
-//     snapshot = await firebaseref
-//         .child('student')
-//         .orderByChild('ID')
-//         .equalTo(id)
-//         .once();
-//     return snapshot.key.isEmpty;
-//   } else if (id.length == 4) {
-//     snapshot =
-//         await firebaseref.child('admin').orderByChild('ID').equalTo(id).once();
-//     return snapshot.key.isEmpty;
-//   }
-// }
-
 // ...................................................LOGIN................................................
 userLogin(String email, String pass, context) async {
   // Auth authUser = new Auth();
@@ -118,7 +92,8 @@ userLogin(String email, String pass, context) async {
     _perf.setString("user", auth.currentUser.uid);
     var location = loginNavigation();
 
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: ( context )=> location), (route) => false);
+    Navigator.pushAndRemoveUntil(context,
+        MaterialPageRoute(builder: (context) => location), (route) => false);
     return user;
   } on FirebaseAuthException catch (e) {
     if (e.code == 'user-not-found') {
@@ -148,22 +123,19 @@ userLogin(String email, String pass, context) async {
 }
 
 loginNavigation() {
- User user = auth.currentUser;
+  User user = auth.currentUser;
   String id = user.displayName;
   if (id.length == 6) {
     return InstCourseSelect();
   } else if (id.length == 10) {
     return MainStudent();
   } else if (id.length == 4) {
-    return AdminNavBar();//MainAdmin();
-  } else {
-    return TempNaV();
+    return AdminNavBar(); //MainAdmin();
   }
 }
 // ...................................................SIGN OUT................................................
 
 void signOut(context) {
-
   showDialog(
       context: context,
       builder: (cxt) => AlertDialog(
@@ -173,11 +145,15 @@ void signOut(context) {
                 TextButton(
                     child: Text('Yes'),
                     onPressed: () async {
-                      SharedPreferences _perf = await SharedPreferences.getInstance();
+                      SharedPreferences _perf =
+                          await SharedPreferences.getInstance();
                       Navigator.of(cxt).pop(); // closes alert dialog
                       auth.signOut();
                       await _perf.remove('user');
-                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>VirtuLab()), (route) => false);
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => VirtuLab()),
+                          (route) => false);
                       // takes to previos page
                     }),
                 TextButton(
@@ -227,9 +203,6 @@ getUserFullName() async {
     print(snapshot.key);
     return name;
   });
-  // name = snap.value;
-  // fullName = name['fname'].toString();
-  //   return fullName;
 }
 
 getUserType(String id) {

@@ -67,35 +67,6 @@ class _CaseStudyDetailState extends State<CaseStudyDetail> {
     question5Controller.text = caseStudyinfo['question5'];
   }
 
-  _showDeleteDialog() {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Delete Case Study'),
-            content: Text('are you sure you want to delete the Case Study?'),
-            actions: [
-              ElevatedButton(
-                  onPressed: () {
-                    dbRef.remove().whenComplete(() => Navigator.pop(context));
-                    ScaffoldMessenger.of(this.context).showSnackBar(
-                      SnackBar(
-                        content: Text('Experiment deleted Sucesfully'),
-                        backgroundColor: Colors.deepPurple, //change?
-                      ),
-                    );
-                  },
-                  child: Text('Delete')),
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text('Cancel'))
-            ],
-          );
-        });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -239,7 +210,7 @@ class _CaseStudyDetailState extends State<CaseStudyDetail> {
                     SnackBar(
                       duration: Duration(seconds: 2),
                       content: Text('Case Study deleted Sucesfully'),
-                      backgroundColor: Colors.deepPurple, //change?
+                      backgroundColor: Colors.deepPurple,
                     ),
                   );
                 },
@@ -249,7 +220,7 @@ class _CaseStudyDetailState extends State<CaseStudyDetail> {
                       duration: Duration(seconds: 1),
                       content: Text(
                           'Hold the Delete button to delete the case study'),
-                      backgroundColor: Colors.deepPurple, //change?
+                      backgroundColor: Colors.deepPurple,
                     ),
                   );
                 },

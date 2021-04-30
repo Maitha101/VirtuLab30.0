@@ -6,7 +6,6 @@ import 'package:virtulab/functions/database.dart';
 class NewTSMessage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _NewTSMessage();
   }
 }
@@ -14,9 +13,8 @@ class NewTSMessage extends StatefulWidget {
 class _NewTSMessage extends State<NewTSMessage> {
   _newMessages({Map message}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 3,horizontal: 8),
+      padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 8),
       child: Card(
-
         shadowColor: Colors.deepPurple,
         elevation: 10,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -24,31 +22,28 @@ class _NewTSMessage extends State<NewTSMessage> {
           onTap: null, // show full message
           child: Padding(
             padding: EdgeInsets.all(10.0),
-            // const EdgeInsets.fromLTRB(15, 0, 0, 0),
             child: Container(
               margin: EdgeInsets.symmetric(vertical: 5),
-              // padding: EdgeInsets.all(10),
-              // height: 120,
               child: Padding(
                 padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: ExpansionTile(
-                  // expandedCrossAxisAlignment: CrossAxisAlignment.center,
                   tilePadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                   title: Text(
                     message['subject'],
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        // height: 1,
                         color: Colors.deepPurple),
                   ),
                   subtitle: Text(
                     'From: ' + message['senderID'],
-                    style: TextStyle(color: Colors.grey,),
+                    style: TextStyle(
+                      color: Colors.grey,
+                    ),
                   ),
                   leading: Icon(
                     Icons.account_circle,
-                  ), // color: Colors.deepPurple,),
+                  ),
                   children: [
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +59,7 @@ class _NewTSMessage extends State<NewTSMessage> {
                                       textAlign: TextAlign.right,
                                     )),
                               ]),
-                              SizedBox(height:20),
+                          SizedBox(height: 20),
                           Text(message['message']),
                           Divider(
                             thickness: 1,
@@ -72,8 +67,7 @@ class _NewTSMessage extends State<NewTSMessage> {
                           Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Text(
-                                    'Mark as Solved'), //, style:TextStyle(color: Colors.lightGreen)),
+                                Text('Mark as Solved'),
                                 IconButton(
                                   iconSize: 30,
                                   icon: Icon(Icons.check_box,
@@ -94,33 +88,35 @@ class _NewTSMessage extends State<NewTSMessage> {
             ),
           ),
         ),
-
       ),
     );
   }
 
   Query statusNew;
-  // exception handel
+  // exception handle
   initState() {
     super.initState();
 
-   try{
-     statusNew =
-         firebaseref.child('tech_support').orderByChild('status').equalTo('new');
-   }catch(e){
-     print(e.toString());
-   }
+    try {
+      statusNew = firebaseref
+          .child('tech_support')
+          .orderByChild('status')
+          .equalTo('new');
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return FirebaseAnimatedList(
         query: statusNew,
         sort: (a, b) {
-          return a.value['date'].toString().compareTo(b.value['date'].toString());
+          return a.value['date']
+              .toString()
+              .compareTo(b.value['date'].toString());
         },
-        defaultChild: Center(child:CircularProgressIndicator()),
+        defaultChild: Center(child: CircularProgressIndicator()),
         itemBuilder: (BuildContext context, DataSnapshot snapshot,
             Animation<double> animation, int index) {
           Map _message = snapshot.value;
@@ -133,7 +129,5 @@ class _NewTSMessage extends State<NewTSMessage> {
             return _newMessages(message: _message);
           }
         });
-    //   ],
-    // );
   }
 }
