@@ -1,9 +1,6 @@
-// import 'dart:js';
-// import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flappy_search_bar/flappy_search_bar.dart'; //search bar
 import 'package:virtulab/functions/auth.dart';
 import 'package:virtulab/functions/database.dart';
 import '../functions/database.dart';
@@ -19,18 +16,14 @@ class _StuCourseRegister extends State<StuCourseRegister> {
   Query allCourses;
   Query instName;
   bool _progressController = true;
-  //String _name = 'Retrieving..';
-  //String _instID;
+
   void initState() {
     super.initState();
     setState(() {
-      // allCourses = firebaseref.child('course').orderByChild('name');
-      // instName = firebaseref.child('instructor').orderByChild('ID');
       _progressController = false;
     });
     allCourses = firebaseref.child('course').orderByChild('name');
-    instName = firebaseref.child('instructor'); //.orderByChild('ID');
-    //getInstName(_instID); // is ok only when async?
+    instName = firebaseref.child('instructor');
   }
 
   registerStudent(String courseKey) {
@@ -41,15 +34,6 @@ class _StuCourseRegister extends State<StuCourseRegister> {
         .child(getCurrentID())
         .set(getCurrentID());
   }
-
-  // getInstName(String id) async {
-  //   DataSnapshot snapshot =
-  //       await firebaseref.child('instructor').child(id).once();
-  //   Map inst = snapshot.value;
-  //   setState(() {
-  //     _name = inst['fname'] + ' ' + inst['lname'];
-  //   });
-  // }
 
   confirmation(String key) {
     showDialog(
@@ -66,7 +50,7 @@ class _StuCourseRegister extends State<StuCourseRegister> {
                 ScaffoldMessenger.of(this.context).showSnackBar(
                   SnackBar(
                     content: Text('Registered to course successfully'),
-                    backgroundColor: Colors.deepPurple, //change?
+                    backgroundColor: Colors.deepPurple,
                   ),
                 );
                 Navigator.pop(this.context); // takes to previos page
@@ -88,15 +72,11 @@ class _StuCourseRegister extends State<StuCourseRegister> {
         child: Container(
           margin: EdgeInsets.symmetric(vertical: 10),
           padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-          // height: 70,
           color: Colors.white,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              // children: [
               Text(
                 courseList['name'],
                 style: TextStyle(
@@ -107,13 +87,9 @@ class _StuCourseRegister extends State<StuCourseRegister> {
               SizedBox(height: 5),
               Text('Code: ' + courseList['code'],
                   style: TextStyle(fontSize: 16, color: Colors.grey)),
-              // ],
-              // ),
               SizedBox(height: 5),
               Text(
-                'Instructor: ' +
-                    courseList[
-                        'instname'], //getInstName(courseList['instID']).toString(),
+                'Instructor: ' + courseList['instname'],
                 style: TextStyle(
                   fontSize: 16,
                 ),
@@ -134,7 +110,6 @@ class _StuCourseRegister extends State<StuCourseRegister> {
         backgroundColor: Colors.deepPurple,
       ),
       body: SafeArea(
-        // child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: FirebaseAnimatedList(
@@ -144,13 +119,10 @@ class _StuCourseRegister extends State<StuCourseRegister> {
                 Animation<double> animation, int index) {
               Map _courses = snapshot.value;
               _courses['key'] = snapshot.key;
-
-              // _courses['instID'] = _name;
-              return courseList(courseList: _courses); //, instName: _instName);
+              return courseList(courseList: _courses);
             },
           ),
         ),
-        // ),
       ),
     );
   }

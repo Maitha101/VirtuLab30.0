@@ -44,7 +44,6 @@ _showAlertDialog(BuildContext context) {
   // show the dialog
   showDialog(
     context: context,
-    // barrierDismissible: false,
     builder: (BuildContext context) {
       return alert;
     },
@@ -57,17 +56,16 @@ class _ExperimentView extends State<ExperimentView> {
   Map experData;
   String stepn;
   StepModel stepModel;
-  //--------------------------------------------------------------------------
+
   @override
   void initState() {
     // exception handel
-    try{
-      dbref = firebaseref.child('experiment').child(widget.expKey).child('steps');
-    }
-    catch(e){
+    try {
+      dbref =
+          firebaseref.child('experiment').child(widget.expKey).child('steps');
+    } catch (e) {
       print(e.toString());
     }
-    //getExperimentData();
     setState(() {});
     super.initState();
   }
@@ -161,14 +159,13 @@ class _ExperimentTileState extends State<ExperimentTile> {
   String optionSelected = "";
   @override
   Widget build(BuildContext context) {
-    return 
-    Padding(
+    return Padding(
       padding: EdgeInsets.all(10),
-          child: Container(
+      child: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height:10),
+            SizedBox(height: 10),
             Text(
               "Step: " + widget.stepModel.stepNumber,
               style: TextStyle(
@@ -223,8 +220,7 @@ class _ExperimentTileState extends State<ExperimentTile> {
                   }
                 }
               },
-              child: 
-              ExperimentOptionTile(
+              child: ExperimentOptionTile(
                 correctAnswer: widget.stepModel.correctOption,
                 optionName: widget.stepModel.option1,
                 option: "a",

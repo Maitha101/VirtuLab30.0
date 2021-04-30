@@ -1,11 +1,9 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:virtulab/change_password.dart';
-
 import '../contact_support.dart';
 import '../functions/auth.dart';
 import '../functions/database.dart';
-// import './studentNavBar.dart';
 
 class StudentSettings extends StatefulWidget {
   @override
@@ -15,37 +13,33 @@ class StudentSettings extends StatefulWidget {
 }
 
 class _StudentSettings extends State<StudentSettings> {
-  // String _studID = currentUser();
   Query _studentInfo;
   String _fullName = 'Retrieving..';
   initState() {
     super.initState();
     // exception handel
-    try{
+    try {
       _studentInfo = firebaseref
           .child('student')
           .orderByChild('email')
           .equalTo(getCurrentUserEmail());
-    }
-    catch(e){
+    } catch (e) {
       print(e.toString());
     }
     getFullName();
   }
 
   getFullName() async {
-    try{
+    try {
       DataSnapshot snapshot =
-      await firebaseref.child('student').child(getCurrentID()).once();
+          await firebaseref.child('student').child(getCurrentID()).once();
       Map student = snapshot.value;
       setState(() {
         _fullName = student['fname'] + ' ' + student['lname'];
       });
-    }
-    catch(e){
+    } catch (e) {
       print(e.toString());
     }
-    
   }
 
   bool isSwitched = false;
@@ -61,13 +55,11 @@ class _StudentSettings extends State<StudentSettings> {
         child: Container(
           color: Colors.grey.shade100,
           width: double.infinity,
-          // height: MediaQuery.of(context).size.height * .38,
           child: ListView(
             children: [
               Column(
                 children: [
                   Container(
-                      // margin: EdgeInsets.all(value),
                       clipBehavior: Clip.antiAlias,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50)),
@@ -76,12 +68,7 @@ class _StudentSettings extends State<StudentSettings> {
                       child: Icon(
                         Icons.account_circle_sharp,
                         size: 100,
-                      )
-                      // Image.asset(
-                      //   "assets/images/profile_pic.png",
-                      //   fit: BoxFit.fill,
-                      // ),
-                      ),
+                      )),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 5),
                     child: Row(
@@ -96,8 +83,6 @@ class _StudentSettings extends State<StudentSettings> {
                         ),
                         Text(
                           _fullName,
-                          // getUserFullName()
-                          //     .toString(), //profile['fname'] + ' ' + profile['lname'],//"Maitha",
                           style: TextStyle(fontSize: 20),
                         ),
                       ],
@@ -114,7 +99,7 @@ class _StudentSettings extends State<StudentSettings> {
                         width: 10,
                       ),
                       Text(
-                        getCurrentUserEmail(), //"maitha@gmail.com",
+                        getCurrentUserEmail(),
                         style: TextStyle(fontSize: 20),
                       ),
                     ],
@@ -133,7 +118,7 @@ class _StudentSettings extends State<StudentSettings> {
                         width: 15,
                       ),
                       Text(
-                        getCurrentID(), //"101010",
+                        getCurrentID(),
                         style: TextStyle(fontSize: 20),
                       ),
                     ],
@@ -144,7 +129,7 @@ class _StudentSettings extends State<StudentSettings> {
                 height: 20,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 3,horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 8),
                 child: Card(
                   elevation: 10,
                   shadowColor: Colors.deepPurple,
@@ -153,7 +138,8 @@ class _StudentSettings extends State<StudentSettings> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (BuildContext context) => ChangePassword()),
+                            builder: (BuildContext context) =>
+                                ChangePassword()),
                       );
                     },
                     child: Padding(
@@ -175,7 +161,7 @@ class _StudentSettings extends State<StudentSettings> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 3,horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 8),
                 child: Card(
                   elevation: 10,
                   shadowColor: Colors.deepPurple,
@@ -198,14 +184,6 @@ class _StudentSettings extends State<StudentSettings> {
                               ),
                             ],
                           ),
-                          // SizedBox(
-                          //   width: 40,
-                          // ),
-                          // Container(
-                          //   decoration: BoxDecoration(
-                          //       color: Colors.grey.shade300,
-                          //       borderRadius: BorderRadius.circular(50)),
-                          //   child:
                           Switch(
                               value: isSwitched,
                               activeColor: Colors.deepPurple,
@@ -215,7 +193,6 @@ class _StudentSettings extends State<StudentSettings> {
                                   isSwitched = value;
                                 });
                               }),
-                          // ),
                         ],
                       ),
                     ),
@@ -223,7 +200,7 @@ class _StudentSettings extends State<StudentSettings> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 3,horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 8),
                 child: Card(
                   elevation: 10,
                   shadowColor: Colors.deepPurple,
@@ -232,7 +209,8 @@ class _StudentSettings extends State<StudentSettings> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (BuildContext context) => ContactSupport()),
+                            builder: (BuildContext context) =>
+                                ContactSupport()),
                       );
                     },
                     child: Padding(
@@ -254,7 +232,7 @@ class _StudentSettings extends State<StudentSettings> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 3,horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 8),
                 child: Card(
                   elevation: 10,
                   shadowColor: Colors.deepPurple,

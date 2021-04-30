@@ -22,25 +22,23 @@ class _StudentCourses extends State<StudentCourses> {
   initState() {
     super.initState();
     // exception handel
-    try{
+    try {
       _courses =
           firebaseref.child('course').orderByChild('studID/$_id').equalTo(_id);
-    }
-    catch(e){
+    } catch (e) {
       print(e.toString());
     }
   }
 
   getInstName(String id) async {
-    try{
+    try {
       DataSnapshot snapshot =
-      await firebaseref.child('instructor').child(id).once();
+          await firebaseref.child('instructor').child(id).once();
       Map inst = snapshot.value;
       setState(() {
         _instName = inst['fname'] + ' ' + inst['lname'];
       });
-    }
-    catch(e){
+    } catch (e) {
       print(e.toString());
     }
   }
@@ -61,8 +59,6 @@ class _StudentCourses extends State<StudentCourses> {
             Animation<double> animation, int index) {
           Map _courses = snapshot.value;
           _courses['key'] = snapshot.key;
-          // _courses['instID'] = getInstName(_courses['instID']);
-
           return _courseList(courseList: _courses);
         },
       ),
@@ -70,7 +66,6 @@ class _StudentCourses extends State<StudentCourses> {
   }
 
   Widget _courseList({Map courseList}) {
-    // _instID = courseList['instID'];
     print(courseList.length);
     if (courseList.isEmpty) {
       return Center(child: Text('You are not registered to any course'));
@@ -78,9 +73,10 @@ class _StudentCourses extends State<StudentCourses> {
       return Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 8),
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
             child: Card(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
               elevation: 10,
               shadowColor: Colors.deepPurple,
               child: InkWell(
@@ -88,7 +84,7 @@ class _StudentCourses extends State<StudentCourses> {
                   context,
                   MaterialPageRoute(
                     builder: (BuildContext context) => StudentCourseContents(
-                        cKey: courseList['key'], //<<-- was missing
+                        cKey: courseList['key'],
                         courseName: courseList['name']),
                   ),
                 ),

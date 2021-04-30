@@ -1,14 +1,8 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
-//import 'package:virtulab/functions/Student/class_experiment_list.dart';
-//import 'package:virtulab/functions/class_experiment.dart';
-//import 'package:virtulab/functions/database.dart';
-//import 'package:virtulab/student/stu_caseStudies_list.dart';
-//import 'package:virtulab/student/stu_course_contents.dart';
 import 'package:virtulab/student/stu_experiment_view.dart';
 import 'stu_course_contents.dart';
-// import './studentNavBar.dart';
 
 class ExperimentsList extends StatefulWidget {
   @override
@@ -25,14 +19,13 @@ class _ExperimentsList extends State<ExperimentsList> {
     debugPrint(courseKey);
     String cId_false = courseKey + "false";
     // exception hanel
-    try{
+    try {
       dbRef = FirebaseDatabase.instance
           .reference()
           .child('experiment')
           .orderByChild('cID_draft')
           .equalTo(cId_false);
-    }
-    catch(e){
+    } catch (e) {
       print(e.toString());
     }
     super.initState();
@@ -43,11 +36,10 @@ class _ExperimentsList extends State<ExperimentsList> {
       children: [
         Card(
           child: InkWell(
-            onTap: () {}, // Navigate when tapped
+            onTap: () {},
             child: Container(
               margin: EdgeInsets.symmetric(vertical: 10),
               color: Colors.white,
-              // padding: const EdgeInsets.all(25.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,10 +50,7 @@ class _ExperimentsList extends State<ExperimentsList> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // Column(
-                        //   children: [
                         Icon(Icons.thermostat_rounded),
-
                         SizedBox(width: 15),
                         Flexible(
                           child: Column(
@@ -75,13 +64,10 @@ class _ExperimentsList extends State<ExperimentsList> {
                                     height: 2,
                                     color: Colors.deepPurple),
                               ),
-                              // Text('attempted: true ?'),
                             ],
                           ),
                         ),
-
                         SizedBox(width: 15),
-                        // ],),
                         ElevatedButton(
                           onPressed: () => {
                             Navigator.push(
@@ -98,14 +84,7 @@ class _ExperimentsList extends State<ExperimentsList> {
                           style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
                                   Colors.amber)),
-                          // color: Colors.amber,
                         ),
-
-                        //   ],
-                        // ),
-                        // SizedBox(
-                        //   width: 90,
-                        // ),
                       ],
                     ),
                   ),

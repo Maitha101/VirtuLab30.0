@@ -91,44 +91,43 @@ class _CourseGrades extends State<CourseGrades> {
                   Align(
                     child: check == false
                         ? Padding(
-                          padding: const EdgeInsets.all(15),
-                          child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.yellowAccent,
-                          borderRadius: BorderRadius.circular(30)
-                      ),
-                      width: 180,
-                            height: 60,
-                            child: TextButton(
-                            onPressed: () {
-                              setState(() {
-                                getTotalGrade();
-                                check = true;
-                              });
-                            },
-                            child: CustomText(
-                              text: "Get Total",
-                              fontSize: 20,
-                            )),
-                          ),
-                        )
+                            padding: const EdgeInsets.all(15),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.yellowAccent,
+                                  borderRadius: BorderRadius.circular(30)),
+                              width: 180,
+                              height: 60,
+                              child: TextButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      getTotalGrade();
+                                      check = true;
+                                    });
+                                  },
+                                  child: CustomText(
+                                    text: "Get Total",
+                                    fontSize: 20,
+                                  )),
+                            ),
+                          )
                         : Container(
-                      height: 60,
-                      width: 160,
-                      margin: EdgeInsets.fromLTRB(40, 0, 40, 10),
-                      decoration: new BoxDecoration(
-                        color: Colors.blue[50],
-                        borderRadius:
-                            new BorderRadius.all(Radius.elliptical(50, 50)),
-                      ),
-                      child:Center(
-                              child: Text(
+                            height: 60,
+                            width: 160,
+                            margin: EdgeInsets.fromLTRB(40, 0, 40, 10),
+                            decoration: new BoxDecoration(
+                              color: Colors.blue[50],
+                              borderRadius: new BorderRadius.all(
+                                  Radius.elliptical(50, 50)),
+                            ),
+                            child: Center(
+                                child: Text(
                               "$totalGrade",
                               style: TextStyle(
                                 fontSize: 23,
                               ),
-                            )), //Temp data
-                    ),
+                            )),
+                          ),
                   ),
                   Divider(thickness: 2),
                 ]))
@@ -161,7 +160,7 @@ class _CourseGrades extends State<CourseGrades> {
                       child: Row(
                         children: [
                           Container(
-                            padding: EdgeInsets.only(top: 3.5,left: 5),
+                              padding: EdgeInsets.only(top: 3.5, left: 5),
                               height: 30,
                               width: 30,
                               child: FirebaseAnimatedList(
@@ -171,10 +170,8 @@ class _CourseGrades extends State<CourseGrades> {
                                       .child('studID')
                                       .orderByChild(myID)
                                       .equalTo(myID),
-                                  itemBuilder: (BuildContext context,
-                                      snapshot,
-                                      Animation<double> animation,
-                                      int index) {
+                                  itemBuilder: (BuildContext context, snapshot,
+                                      Animation<double> animation, int index) {
                                     Map _myGrade = snapshot.value;
                                     _myGrade['key'] = snapshot.key;
                                     return myGrade(myGrade: _myGrade);
@@ -182,7 +179,10 @@ class _CourseGrades extends State<CourseGrades> {
                           SizedBox(
                             width: 5,
                           ),
-                          Text("/" + gradesList['total_grade'],style: TextStyle(fontSize: 19),),
+                          Text(
+                            "/" + gradesList['total_grade'],
+                            style: TextStyle(fontSize: 19),
+                          ),
                         ],
                       ),
                     ),
@@ -214,11 +214,3 @@ class _CourseGrades extends State<CourseGrades> {
     return totalGrade.toString();
   }
 }
-
-// Text(
-// gradesList['studID'][getCurrentID()]['grade'] == null
-// ? "-" + "/" + gradesList['total_grade']
-// : gradesList['studID'][getCurrentID()]['grade'] +
-// "/" +
-// gradesList['total_grade']),
-// )

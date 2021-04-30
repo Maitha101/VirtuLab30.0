@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +7,9 @@ import 'package:virtulab/functions/database.dart';
 import 'package:virtulab/widgets/custom_text.dart';
 import 'studentNavBar.dart';
 
-//activity
 class MainStudent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // StudentNavBar();
     return MaterialApp(title: 'Student', home: StudentNavBar());
   }
 }
@@ -27,8 +24,8 @@ class ActivityStream extends StatefulWidget {
 class _ActivityStream extends State<ActivityStream> {
   Query _courseTitle;
   String _id = getCurrentID();
-  List checkData ;
-  bool check = false ;
+  List checkData;
+  bool check = false;
   Map checkCourses = {};
   @override
   void initState() {
@@ -36,23 +33,18 @@ class _ActivityStream extends State<ActivityStream> {
 
     _courseTitle =
         firebaseref.child('course').orderByChild('studID/$_id').equalTo(_id); //
-
-   try{
-     _courseTitle.once().then((DataSnapshot snapshot) => {
-     if(snapshot.value == null){
-       check = false
-     }else{
-       check = true
-     }
-   });}
-   catch(e){}
+// exception handle
+    try {
+      _courseTitle.once().then((DataSnapshot snapshot) => {
+            if (snapshot.value == null) {check = false} else {check = true}
+          });
+    } catch (e) {}
     setState(() {
       Timer(Duration(seconds: 0), () {
         setState(() {
           print(check);
         });
       });
-      //
     });
   }
 
@@ -79,19 +71,16 @@ class _ActivityStream extends State<ActivityStream> {
       ),
     );
   }
-  // activity stream
 
   Widget _streamList({Map list}) {
-
     return Column(
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Card(
             shadowColor: Colors.deepPurple,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15)
-            ),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             elevation: 10,
             child: InkWell(
               onTap: () {},
@@ -216,6 +205,7 @@ class _ActivityStream extends State<ActivityStream> {
     );
   }
 
+//case study notifications
   caseStudyList({Map caseStudy, int index}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -225,14 +215,13 @@ class _ActivityStream extends State<ActivityStream> {
           child: CustomText(
             text: caseStudy['csName'] + " Added Successfully!!",
             fontSize: 16,
-
-            // color: index == 0 ? Colors.deepOrange : Colors.green,
           ),
         )
       ],
     );
   }
 
+//experiments notifications
   experimentList({Map experiment}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

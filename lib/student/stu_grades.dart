@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,6 @@ import 'package:virtulab/functions/auth.dart';
 import 'package:virtulab/functions/database.dart';
 import 'package:virtulab/student/stu_course_grades.dart';
 import 'package:virtulab/widgets/custom_placeholder.dart';
-import 'package:virtulab/widgets/custom_text.dart';
 
 class StudentGrades extends StatefulWidget {
   @override
@@ -23,18 +21,13 @@ class _StudentGrades extends State<StudentGrades> {
   initState() {
     super.initState();
     // exception handel
-    try{
+    try {
       _courses =
           firebaseref.child('course').orderByChild('studID/$_id').equalTo(_id);
       _courses.once().then((DataSnapshot snapshot) => {
-        if(snapshot.value == null){
-          check = false
-        }else{
-          check = true
-        }
-      });
-    }
-    catch(e){
+            if (snapshot.value == null) {check = false} else {check = true}
+          });
+    } catch (e) {
       print(e.toString());
     }
     setState(() {
@@ -43,7 +36,6 @@ class _StudentGrades extends State<StudentGrades> {
           print(check);
         });
       });
-      //
     });
   }
 
@@ -55,19 +47,21 @@ class _StudentGrades extends State<StudentGrades> {
         title: Text('Grades'),
         backgroundColor: Colors.deepPurple,
       ),
-      body: check == false ? CustomPlaceHolder(
-        message: "You Have No Grades Yet!",
-      ):FirebaseAnimatedList(
-        query: _courses,
-        defaultChild: Center(child: CircularProgressIndicator()),
-        itemBuilder: (BuildContext context, snapshot,
-            Animation<double> animation, int index) {
-          Map _courses = snapshot.value;
-          _courses['key'] = snapshot.key;
+      body: check == false
+          ? CustomPlaceHolder(
+              message: "You Have No Grades Yet!",
+            )
+          : FirebaseAnimatedList(
+              query: _courses,
+              defaultChild: Center(child: CircularProgressIndicator()),
+              itemBuilder: (BuildContext context, snapshot,
+                  Animation<double> animation, int index) {
+                Map _courses = snapshot.value;
+                _courses['key'] = snapshot.key;
 
-          return _courseList(courseList: _courses);
-        },
-      ),
+                return _courseList(courseList: _courses);
+              },
+            ),
     );
   }
 
@@ -77,7 +71,8 @@ class _StudentGrades extends State<StudentGrades> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Card(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             elevation: 10,
             shadowColor: Colors.deepPurple,
             child: InkWell(

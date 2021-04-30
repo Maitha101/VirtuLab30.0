@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:virtulab/functions/database.dart';
 import 'package:virtulab/student/stu_case_study_view.dart';
 import 'stu_course_contents.dart';
-// import './studentNavBar.dart';
-
-//bool submitted = false;
 
 class CaseStudiesList extends StatefulWidget {
   @override
@@ -23,13 +20,12 @@ class _CaseStudiesList extends State<CaseStudiesList> {
     String cId_false = courseKey + "false";
     super.initState();
     // exception handel
-    try{
+    try {
       _caseStudyTitle = firebaseref
           .child('case_study')
           .orderByChild('cID_draft')
           .equalTo(cId_false);
-    }
-    catch(e){
+    } catch (e) {
       print(e.toString());
     }
   }
@@ -70,11 +66,7 @@ class _CaseStudiesList extends State<CaseStudiesList> {
                 children: [
                   Padding(
                     padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                    child:
-                        // Row(
-
-                        //   children: [
-                        Row(
+                    child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -97,7 +89,7 @@ class _CaseStudiesList extends State<CaseStudiesList> {
                             ],
                           ),
                         ),
-                        SizedBox(width:15),
+                        SizedBox(width: 15),
                         ElevatedButton(
                             onPressed: () => {
                                   Navigator.push(
@@ -117,9 +109,6 @@ class _CaseStudiesList extends State<CaseStudiesList> {
                                         Colors.amber))),
                       ],
                     ),
-
-                    //   ],
-                    // ),
                   ),
                   SizedBox(height: 5),
                 ],
