@@ -13,13 +13,12 @@ class _AdminSupport extends State<AdminSupport> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,//3,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           bottom: TabBar(
             tabs: [
-              Tab(child: Text('New')),//icon: Icon(Icons.)),
-              // Tab(child: Text('Opened')), //eehhh??
+              Tab(child: Text('New')),
               Tab(child: Text('Solved')),
               
             ],
@@ -29,10 +28,8 @@ class _AdminSupport extends State<AdminSupport> {
           backgroundColor: Colors.deepPurple,
         ),
         body: 
-        // Center(child: Text('tech support'),),
         TabBarView(children: [
           Tab( child: NewTSMessage()),
-          // Tab( child: Text('opened .. might delete this tab')),
           Tab( child: SolvedTSMessage()),
         ],),
       ),

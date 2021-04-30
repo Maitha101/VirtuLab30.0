@@ -3,7 +3,6 @@ import 'admin_support.dart';
 import 'admin_courses.dart';
 import 'admin_accounts.dart';
 import 'admin_settings.dart';
-// import 'admin_main.dart'; 
 
 class AdminNavBar extends StatelessWidget{
   @override
@@ -21,14 +20,8 @@ class AdminNavBarTab extends StatefulWidget {
   }
 }
 
-//  getIndex (int i){
-//   int index = i;
-//   return index;
-// }
-
 class _AdminNavBarTab extends State<AdminNavBarTab> {
   int _barIndex = 0;
-  // int _barIndex = sendIndex(); // sendIndex() is from admin_main.dart
   List<Widget> _selectedBarItem = <Widget>[
     AdminSupport(), //0
     AdminAccounts(), //1

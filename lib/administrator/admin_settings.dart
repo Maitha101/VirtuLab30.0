@@ -50,7 +50,6 @@ class _AdminSettings extends State<AdminSettings> {
         child: Container(
           color: Colors.grey.shade100,
           width: double.infinity,
-          // height: MediaQuery.of(context).size.height * .38,
           child: ListView(
             children: [
               Column(
@@ -59,7 +58,6 @@ class _AdminSettings extends State<AdminSettings> {
                     height: 10,
                   ),
                   Container(
-                      // margin: EdgeInsets.all(value),
                       clipBehavior: Clip.antiAlias,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50)),
@@ -69,10 +67,6 @@ class _AdminSettings extends State<AdminSettings> {
                         Icons.account_circle_sharp,
                         size: 100,
                       )
-                      // Image.asset(
-                      //   "assets/images/profile_pic.png",
-                      //   fit: BoxFit.fill,
-                      // ),
                       ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 5),
@@ -188,15 +182,6 @@ class _AdminSettings extends State<AdminSettings> {
                               ),
                             ],
                           ),
-                          // SizedBox(
-                          //   width: 40,
-                          // ),
-
-                          // Container(
-                          //   decoration: BoxDecoration(
-                          //       color: Colors.grey.shade300,
-                          //       borderRadius: BorderRadius.circular(50)),
-                          //   child:
                           Switch(
                               value: isSwitched,
                               onChanged: (value) {

@@ -3,7 +3,6 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:virtulab/administrator/admin_add_course.dart';
 import 'package:virtulab/administrator/admin_edit_courses.dart';
-import 'package:virtulab/functions/database.dart';
 import 'package:virtulab/widgets/custom_text.dart';
 
 class AdminCourses extends StatefulWidget {
